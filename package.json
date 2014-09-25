@@ -1,0 +1,15 @@
+{
+    "name": "fly-me-to-the-moon",
+    "version": "0.0.1",
+    "description": "Fly Me To The Moon is built with Celsium, the open-source WebGL virtual globe and map engine.",
+    "homepage": "",
+    "license": "Apache-2.0",
+    "repository": {
+        "type": "git",
+        "url": ""
+    },
+    "devDependencies": {
+        "express": "4.4.4",
+        "request": "2.36.0",
+    }
+}
