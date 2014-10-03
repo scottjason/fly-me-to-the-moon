@@ -9,7 +9,6 @@
       width: 100%;
       height: 100px;
       background-color: #000;
-      /*background-color: #161616;*/
       z-index: 1000;
       color: #fff;
       font-size: 2em;
@@ -17,7 +16,7 @@
   }
   #cesiumContainer {
       position: absolute;
-      top: 100px;
+      top: 65px;
       left: 0;
       height: 100%;
       width: 100%;
@@ -35,7 +34,7 @@
       overflow: hidden;
   }
   a#siteTitle {
-      margin-top: 32px;
+      margin-top: 28px;
       color: #fff;
       font-size: 2.5em;
       font-family: 'Gafata', sans-serif;
@@ -44,7 +43,7 @@
   }
   a.navRightText {
       color: #90abce;
-      font-size: 1.9em;
+      font-size: 1.4em;
       font-family: 'Gafata', sans-serif;
       text-decoration: none;
   }
