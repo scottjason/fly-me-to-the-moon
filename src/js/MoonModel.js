@@ -105,7 +105,6 @@ document.addEventListener('keyup', function( e ) {
     }
   // changes movement speed based on the distance of the camera to the surface of the ellipsoid.
     var ellipsoid = scene.globe.ellipsoid;
-    console.log( ellipsoid )
     // var cameraHeight = this.ellipsoid.cartesianToCartographic( this.camera.position ).height;
     return
     var moveRate = cameraHeight / 100.0;
