@@ -18,18 +18,21 @@ MoonControl.prototype = {
     document.getElementById( "anywhereOnEarth" ).addEventListener("click", this.anywhereOnEarth.bind( this ), false );
   },
   takeMeHome : function() {
+    this.MoonView.stopGlobe();
     this.TakeMeHome.initialize( this.MoonView.scene );
   },
   takeControl : function() {
+    this.MoonView.stopGlobe();
     this.MoonView.renderInstructions();
     this.TakeOver.initialize( this.MoonView.viewer, this.MoonView.clock, this.MoonView.scene, this.MoonView.canvas );
   },
   sayGoodBye : function() {
+    this.MoonView.stopGlobe();
     console.log( "flying to the moon now")
   },
   anywhereOnEarth : function() {
-
-}
+    this.MoonView.stopGlobe();
+  }
 }
 var controller = new MoonControl();
 

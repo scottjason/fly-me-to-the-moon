@@ -9,7 +9,7 @@ MoonView.prototype = {
     this.container = 'cesiumContainer';
     this.options = {
         animation: false,
-        homeButton: false,
+        homeButton: true,
         sceneModePicker: false,
         selectionIndicator: false,
         baseLayerPicker: false,
@@ -20,13 +20,29 @@ MoonView.prototype = {
     this.viewer = new Cesium.Viewer( this.container, this.options );
     this.clock = this.viewer.clock;
     this.scene = this.viewer.scene;
-    this.canvas = this.scene.canvas
+    this.canvas = this.scene.canvas;
+    this.spinGlobe( 0.45 );
     callback();
   },
-  flyToMoon : function(){
+  spinGlobe : function( setRate ){
+    var viewer = this.viewer;
+    var scene = this.scene;
+    var clock = this.clock;
+    var previousTime = Date.now();
 
-  },
-  readyOrbit : function(){
+    this.listener = function( clock ) {
+    var spinRate = setRate;
+    var currentTime = Date.now();
+    var delta = ( currentTime - previousTime ) / 1000;
+    previousTime = currentTime;
+    viewer.scene.camera.rotate( Cesium.Cartesian3.UNIT_Z, -spinRate * delta );
+  }
+    viewer.clock.onTick.addEventListener( this.listener );
+},
+  stopGlobe : function() {
+    if ( this.listener ) {
+   this.viewer.clock.onTick.removeEventListener(this.listener);
+}
   },
   renderInstructions : function() {
     $( "#giveInstructions" ).html( "'U' moves up | 'D' moves down | 'L' moves left | 'R' moves right | 'B' moves backward | 'F' moves forward" )
