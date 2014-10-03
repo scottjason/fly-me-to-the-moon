@@ -56,10 +56,9 @@ MoonModel.prototype = {
     flags.looking = false;
     }, Cesium.ScreenSpaceEventType.LEFT_UP );
 
-    // this.setKeyCodes();
+    this.bindActionListeners( flags );
   },
-  setKeyCodes : function() {
-  function getFlagForKeyCode( keyCode ) {
+  getFlagForKeyCode : function( keyCode ) {
     switch ( keyCode ) {
     case 'F'.charCodeAt( 0 ):
         return 'moveForward';
@@ -75,26 +74,24 @@ MoonModel.prototype = {
         return 'moveLeft';
     default:
         return undefined;
-      }
     }
-    // this.bindActionListeners( keycode, getFlagForKeyCode );
   },
-  bindActionListeners : function( keycode, getFlagForKeyCode ) {
+  bindActionListeners : function( flags ) {
     document.addEventListener('keydown', function( e ) {
-      var flagName = getFlagForKeyCode( e.keyCode );
+      var flagName = this.getFlagForKeyCode( e.keyCode );
       if ( typeof flagName !== 'undefined' ) {
-       this.flags[flagName] = true;
+       flags[flagName] = true;
      }
     }, false );
 
 document.addEventListener('keyup', function( e ) {
-    var flagName = getFlagForKeyCode( e.keyCode );
+    var flagName = this.getFlagForKeyCode( e.keyCode );
     if ( typeof flagName !== 'undefined' ) {
-        this.flags[flagName] = false;
+        flags[flagName] = false;
       }
     }, false );
 
-    this.setCamera();
+    // this.setCamera();
   },
   setCamera : function() {
     this.viewer.clock.onTick.addEventListener(function( clock ) {
