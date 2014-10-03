@@ -1,15 +1,17 @@
 {
     "name": "fly-me-to-the-moon",
+    "author": "Scott Jason",
     "version": "0.0.1",
-    "description": "Fly Me To The Moon is built with Celsium, the open-source WebGL virtual globe and map engine.",
-    "homepage": "",
+    "description": "A simple JavaScript starter app for creating apps with Cesium, the open-source WebGL virtual globe and map engine.",
     "license": "Apache-2.0",
     "repository": {
         "type": "git",
-        "url": ""
+        "url": "https://github.com/scottjason/fly-me-to-the-moon.git"
     },
     "devDependencies": {
         "express": "4.4.4",
+        "compression": "1.0.8",
         "request": "2.36.0",
+        "yargs": "1.2.6"
     }
 }
