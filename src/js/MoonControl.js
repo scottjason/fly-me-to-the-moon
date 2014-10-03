@@ -8,9 +8,12 @@ MoonControl.prototype = {
   initialize : function( UserControl, MoonView ) {
     this.UserControl = UserControl;
     this.MoonView = MoonView;
-    this.MoonView.initialize( this.earthReady.bind( this ) );
+    this.MoonView.initialize( this.bindListeners.bind( this ) );
   },
-  earthReady : function() {
+  bindListeners : function() {
+    document.getElementById( "takeControl" ).addEventListener("click", this.takeControl.bind( this ), false );
+  },
+  takeControl : function() {
     this.UserControl.initialize( this.MoonView.viewer, this.MoonView.clock, this.MoonView.scene, this.MoonView.canvas );
   },
   userSelect : function() {

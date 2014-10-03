@@ -16,9 +16,9 @@
   }
   #cesiumContainer {
       position: absolute;
-      top: 65px;
+      top: 95px;
       left: 0;
-      height: 100%;
+      height: 90%;
       width: 100%;
       margin: 0;
       overflow: hidden;
