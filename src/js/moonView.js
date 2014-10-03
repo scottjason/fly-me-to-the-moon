@@ -27,6 +27,9 @@ MoonView.prototype = {
 
   },
   readyOrbit : function(){
+  },
+  renderInstructions : function() {
+    $( "#giveInstructions" ).html( "'U' moves up | 'D' moves down | 'L' moves left | 'R' moves right | 'B' moves backward | 'F' moves forward" )
   }
 }
 
