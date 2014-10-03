@@ -10,6 +10,8 @@ TakeMeHome.prototype = {
     this.flyHome();
   },
   flyHome : function() {
+    // remove instructions
+    $( "#giveInstructions" ).hide();
     var scene = this.scene;
     function flyToLocation() {
       Sandcastle.declare( flyToLocation );
