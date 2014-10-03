@@ -25,12 +25,10 @@ MoonModel.prototype = {
     this.scene.screenSpaceCameraController.enableZoom = false;
     this.scene.screenSpaceCameraController.enableTilt = false;
     this.scene.screenSpaceCameraController.enableLook = false;
-    // this.setFlags();
+    this.setFlags( canvas );
   },
-  setFlags : function() {
-    this.startMousePosition;
-    this.mousePosition;
-    this.flags = {
+  setFlags : function( canvas ) {
+    var flags = {
       looking : false,
       moveForward : false,
       moveBackward : false,
@@ -39,23 +37,23 @@ MoonModel.prototype = {
       moveLeft : false,
       moveRight : false
      }
-     // this.setActionHandler();
+     this.setActionHandler( canvas, flags );
   },
-  setActionHandler : function() {
-     this.handler = new Cesium.ScreenSpaceEventHandler( this.canvas );
+  setActionHandler : function( canvas, flags ) {
+     this.handler = new Cesium.ScreenSpaceEventHandler( canvas );
 
     this.handler.setInputAction(function( movement ) {
-    this.flags.looking = true;
-    this.mousePosition = startMousePosition = Cesium.Cartesian3.clone( movement.position );
+    flags.looking = true;
+    mousePosition = startMousePosition = Cesium.Cartesian3.clone( movement.position );
     },
       Cesium.ScreenSpaceEventType.LEFT_DOWN );
 
     this.handler.setInputAction(function( movement ) {
-    this.mousePositimovement.endPosition;
+    mousePosition = movement.endPosition;
     }, Cesium.ScreenSpaceEventType.MOUSE_MOVE );
 
     this.handler.setInputAction(function( position ) {
-    this.flags.looking = false;
+    flags.looking = false;
     }, Cesium.ScreenSpaceEventType.LEFT_UP );
 
     // this.setKeyCodes();
