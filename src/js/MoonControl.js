@@ -11,7 +11,7 @@ MoonControl.prototype = {
     this.View.initialize( this.earthReady.bind( this ) );
   },
   earthReady : function() {
-    this.Model.initialize( this.View.viewer, this.View.clock, this.View.scene, this.View.canvas, this.exploreEarth );
+    this.Model.initialize( this.View.viewer, this.View.clock, this.View.scene, this.View.canvas, this.exploreEarth.bind( this ) );
   },
   exploreEarth : function() {
 
