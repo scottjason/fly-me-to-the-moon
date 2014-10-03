@@ -5,8 +5,9 @@ function MoonControl() {
 };
 
 MoonControl.prototype = {
-  initialize : function( UserControl, MoonView ) {
-    this.UserControl = UserControl;
+  initialize : function( TakeOver, TakeMeHome, MoonView ) {
+    this.TakeOver = TakeOver;
+    this.TakeMeHome = TakeMeHome;
     this.MoonView = MoonView;
     this.MoonView.initialize( this.bindListeners.bind( this ) );
   },
@@ -17,10 +18,10 @@ MoonControl.prototype = {
     document.getElementById( "anywhereOnEarth" ).addEventListener("click", this.anywhereOnEarth.bind( this ), false );
   },
   takeMeHome : function() {
-    console.log( "take me home")
+    this.TakeMeHome.initialize();
   },
   takeControl : function() {
-    this.UserControl.initialize( this.MoonView.viewer, this.MoonView.clock, this.MoonView.scene, this.MoonView.canvas );
+    this.TakeOver.initialize( this.MoonView.viewer, this.MoonView.clock, this.MoonView.scene, this.MoonView.canvas );
   },
   sayGoodBye : function() {
     console.log( "flying to the moon now")
