@@ -1,10 +1,10 @@
-function TakeControl() {
-  if (!( this instanceof TakeControl )) {
-    return new TakeControl();
+function TakeOver() {
+  if (!( this instanceof TakeOver )) {
+    return new TakeOver();
   }
 }
 
-TakeControl.prototype = {
+TakeOver.prototype = {
   initialize : function( viewer, clock, scene, canvas ){
     this.clock = clock;
     this.canvas = canvas;
@@ -144,4 +144,4 @@ TakeControl.prototype = {
  }
 };
 
-var UserControl = new TakeControl();
+var takeOver = new TakeOver();

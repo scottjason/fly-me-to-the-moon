@@ -1,3 +1,3 @@
 $( document ).ready(function(){
-    controller.initialize( UserControl, MoonView );
+    controller.initialize( takeOver, takeMeHome, moonView );
 });
