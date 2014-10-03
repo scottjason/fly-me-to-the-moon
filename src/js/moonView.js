@@ -21,10 +21,9 @@ MoonView.prototype = {
     this.clock = this.viewer.clock;
     this.scene = this.viewer.scene;
     this.canvas = this.scene.canvas;
-    // this.spinGlobe()
     callback();
   },
-  spinGlobe : function(){
+  spinGlobe : function( status ){
     var viewer = this.viewer;
     var scene = this.scene;
     var clock = this.clock;
@@ -41,7 +40,7 @@ MoonView.prototype = {
     }
       rotate();
       function referenceFrame( scene, time ) {
-        if ( document.status === null) { clock.multiplier = 1.0 }
+        if ( document.status === null) { scene.preRender.removeEventListener( referenceFrame ) }
         if ( scene.mode !== Cesium.SceneMode.SCENE3D ) { return; }
         var icrfToFixed = Cesium.Transforms.computeIcrfToFixedMatrix( time );
         if ( Cesium.defined( icrfToFixed )) {
