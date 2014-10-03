@@ -8,15 +8,25 @@ MoonControl.prototype = {
   initialize : function( UserControl, MoonView ) {
     this.UserControl = UserControl;
     this.MoonView = MoonView;
-    this.MoonView.initialize( this.earthReady.bind( this ) );
+    this.MoonView.initialize( this.bindListeners.bind( this ) );
   },
-  earthReady : function() {
+  bindListeners : function() {
+    document.getElementById( "takeMeHome" ).addEventListener("click", this.takeMeHome.bind( this ), false );
+    document.getElementById( "takeControl" ).addEventListener("click", this.takeControl.bind( this ), false );
+    document.getElementById( "toTheMoon" ).addEventListener("click", this.sayGoodBye.bind( this ), false );
+    document.getElementById( "anywhereOnEarth" ).addEventListener("click", this.anywhereOnEarth.bind( this ), false );
+  },
+  takeMeHome : function() {
+    console.log( "take me home")
+  },
+  takeControl : function() {
     this.UserControl.initialize( this.MoonView.viewer, this.MoonView.clock, this.MoonView.scene, this.MoonView.canvas );
   },
-  userSelect : function() {
-
-  },
   sayGoodBye : function() {
+    console.log( "flying to the moon now")
+  },
+  anywhereOnEarth : function() {
+    console.log( "anywhere on earth" )
   }
 }
 
