@@ -11,10 +11,10 @@ MoonControl.prototype = {
     this.View.initialize( this.earthReady.bind( this ) );
   },
   earthReady : function() {
-    this.Model.initialize( this.View.viewer, this.View.clock, this.View.scene, this.View.canvas, this.exploreEarth.bind( this ) );
+    this.Model.initialize( this.View.viewer, this.View.clock, this.View.scene, this.View.canvas );
   },
-  exploreEarth : function() {
-
+  userSelect : function() {
+    this.Model.userControl();
   },
   sayGoodBye : function() {
   }
