@@ -26,7 +26,14 @@ a#siteTitle {
 }
 
 a.navRightText {
-  color:#86b1cc!important;
+  color:#86b1cc !important;
   font-size:1.2em;
   text-decoration:none
+}
+
+#userLocation {
+  margin-top: 18px;
+  white-space: nowrap;
+  margin-left: 7%;
+  color: #2e5291;
 }
