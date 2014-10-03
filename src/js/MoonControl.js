@@ -11,16 +11,22 @@ MoonControl.prototype = {
     this.MoonView.initialize( this.bindListeners.bind( this ) );
   },
   bindListeners : function() {
+    document.getElementById( "takeMeHome" ).addEventListener("click", this.takeMeHome.bind( this ), false );
     document.getElementById( "takeControl" ).addEventListener("click", this.takeControl.bind( this ), false );
+    document.getElementById( "toTheMoon" ).addEventListener("click", this.sayGoodBye.bind( this ), false );
+    document.getElementById( "anywhereOnEarth" ).addEventListener("click", this.anywhereOnEarth.bind( this ), false );
+  },
+  takeMeHome : function() {
+    console.log( "take me home")
   },
   takeControl : function() {
-    console.log( this )
     this.UserControl.initialize( this.MoonView.viewer, this.MoonView.clock, this.MoonView.scene, this.MoonView.canvas );
   },
-  userSelect : function() {
-
-  },
   sayGoodBye : function() {
+    console.log( "flying to the moon now")
+  },
+  anywhereOnEarth : function() {
+    console.log( "anywhere on earth" )
   }
 }
 
