@@ -11,6 +11,7 @@ MoonModel.prototype = {
     this.scene = scene;
     this.canvas = canvas;
     this.callback = callback;
+    console.log( this.clock, this.viewer, this.scene, this.canvas, this.callback )
   }
 }
 
