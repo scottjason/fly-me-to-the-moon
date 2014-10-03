@@ -21,14 +21,15 @@ MoonControl.prototype = {
     this.TakeMeHome.initialize( this.MoonView.scene );
   },
   takeControl : function() {
+    this.MoonView.renderInstructions();
     this.TakeOver.initialize( this.MoonView.viewer, this.MoonView.clock, this.MoonView.scene, this.MoonView.canvas );
   },
   sayGoodBye : function() {
     console.log( "flying to the moon now")
   },
   anywhereOnEarth : function() {
-    console.log( "anywhere on earth" )
-  }
-}
 
+}
+}
 var controller = new MoonControl();
+
