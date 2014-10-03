@@ -18,7 +18,7 @@ MoonControl.prototype = {
     document.getElementById( "anywhereOnEarth" ).addEventListener("click", this.anywhereOnEarth.bind( this ), false );
   },
   takeMeHome : function() {
-    this.TakeMeHome.initialize( this.MoonView.viewer, this.MoonView.clock, this.MoonView.scene );
+    this.TakeMeHome.initialize( this.MoonView.scene );
   },
   takeControl : function() {
     this.TakeOver.initialize( this.MoonView.viewer, this.MoonView.clock, this.MoonView.scene, this.MoonView.canvas );
