@@ -5,10 +5,12 @@ function MoonModel() {
 };
 
 MoonModel.prototype = {
-  initialize : function( clock, viewer, callbackExplore ){
-    this.callback = callbackExplore;
+  initialize : function( clock, viewer, scene, canvas, callback ){
     this.clock = clock;
     this.viewer = viewer;
+    this.scene = scene;
+    this.canvas = canvas;
+    this.callback = callback;
   }
 }
 

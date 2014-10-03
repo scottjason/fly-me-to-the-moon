@@ -19,9 +19,11 @@ MoonView.prototype = {
      }
      this.renderGlobe( controller );
   },
-  renderGlobe : function( callback ){
+  renderGlobe : function( controller ){
     this.viewer = new Cesium.Viewer( this.container, this.options );
     this.clock = this.viewer.clock;
+    this.scene = this.viewer.scene;
+    this.canvas = this.scene.canvas
     controller.earthReady();
   },
   flyToMoon : function(){
