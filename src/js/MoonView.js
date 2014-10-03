@@ -4,6 +4,39 @@ function MoonView() {
   }
 };
 
+MoonView.prototype = {
+  initialize: function(){
+    this.container = 'cesiumContainer';
+    this.options = {
+        animation: false,
+        homeButton: false,
+        sceneModePicker: false,
+        selectionIndicator: false,
+        baseLayerPicker: false,
+        timeline: false,
+        navigationHelpButton: false,
+        navigationInstructionsInitiallyVisible: false
+     }
+     this.renderGlobe();
+  },
+  renderGlobe: function(){
+    this.viewer = new Cesium.Viewer( this.container, this.options );
+    this.clock = this.viewer.clock;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 // MoonFlyer.SpaceView = {
 //    initialize : function( controller ){
 //      var container = 'cesiumContainer';
@@ -32,4 +65,4 @@ function MoonView() {
 //   }
 // }
 
-var view = new MoonView();
+var View = new MoonView();

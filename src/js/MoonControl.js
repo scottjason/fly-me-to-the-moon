@@ -5,17 +5,11 @@ function MoonControl() {
 };
 
 MoonControl.prototype = {
-  initialize: function( model, view ) {
-    this.model = model;
-    this.view = view;
-    console.log( model, view );
-    // alert("controller works")
-
-
-  // this.model = model;
-  // this.view = view;
-  // this.view.initialize();
-}
+  initialize: function( Model, View ) {
+    this.Model = Model;
+    this.View = View;
+    this.View.initialize();
+  }
 }
 
 // MoonFly.Controller.prototype.earthReady = function() {
@@ -30,5 +24,5 @@ MoonControl.prototype = {
 
 // }
 
-var moonFly = new MoonControl();
+var controller = new MoonControl();
 

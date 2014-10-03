@@ -1,3 +1,3 @@
 $( document ).ready(function(){
-    moonFly.initialize( model, view );
+    controller.initialize( Model, View );
 });
