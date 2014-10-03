@@ -8,19 +8,16 @@ MoonControl.prototype = {
   initialize : function( Model, View ) {
     this.Model = Model;
     this.View = View;
-    this.View.initialize( this.earthReady );
+    this.View.initialize( this );
   },
   earthReady : function() {
-    console.log( "earth Ready");
-    console.log( this.View.viewer );
+    this.Model.initialize( this.View.viewer, this.View.clock, this.View.scene, this.View.canvas, this.exploreEarth );
   },
   exploreEarth : function() {
 
   },
   sayGoodBye : function() {
-    // this.view.readyOrbit();
   }
 }
 
 var controller = new MoonControl();
-
