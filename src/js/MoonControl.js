@@ -5,16 +5,16 @@ function MoonControl() {
 };
 
 MoonControl.prototype = {
-  initialize : function( User, View ) {
-    this.User = User;
-    this.View = View;
-    this.View.initialize( this.earthReady.bind( this ) );
+  initialize : function( UserControl, MoonView ) {
+    this.UserControl = UserControl;
+    this.MoonView = MoonView;
+    this.MoonView.initialize( this.earthReady.bind( this ) );
   },
   earthReady : function() {
-    this.User.initialize( this.View.viewer, this.View.clock, this.View.scene, this.View.canvas );
+    this.UserControl.initialize( this.MoonView.viewer, this.MoonView.clock, this.MoonView.scene, this.MoonView.canvas );
   },
   userSelect : function() {
-    this.User.userControl();
+
   },
   sayGoodBye : function() {
   }

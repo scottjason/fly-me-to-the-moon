@@ -30,4 +30,4 @@ MoonView.prototype = {
   }
 }
 
-var View = new MoonView();
+var MoonView = new MoonView();

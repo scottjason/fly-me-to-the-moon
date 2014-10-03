@@ -1,19 +1,19 @@
-function UserTakeOver() {
-  if (!( this instanceof UserTakeOver )) {
-    return new UserTakeOver();
+function TakeControl() {
+  if (!( this instanceof TakeControl )) {
+    return new TakeControl();
   }
 }
 
-UserTakeOver.prototype = {
+TakeControl.prototype = {
   initialize : function( viewer, clock, scene, canvas ){
     this.clock = clock;
     this.canvas = canvas;
     this.viewer = viewer;
     this.scene = viewer.scene;
     this.camera = scene.camera;
-    this.userControl( canvas );
+    this.setCanvas( canvas );
   },
-  userControl : function( canvas ) {
+  setCanvas : function( canvas ) {
     canvas.setAttribute('tabindex', '0');
     canvas.onclick = function() {
       canvas.focus();
@@ -144,4 +144,4 @@ UserTakeOver.prototype = {
  }
 };
 
-var User = new UserTakeOver();
+var UserControl = new TakeControl();
