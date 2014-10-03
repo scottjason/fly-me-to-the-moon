@@ -5,29 +5,28 @@ function MoonModel() {
 }
 
 MoonModel.prototype = {
-  initialize : function( clock, viewer, scene, canvas ){
+  initialize : function( viewer, clock, scene, canvas ){
     this.clock = clock;
     this.viewer = viewer;
-    this.scene = scene;
-    this.userControl( canvas );
+    this.camera = scene.camera;
+    this.userControl( canvas, scene );
   },
-  userControl : function( canvas ) {
+  userControl : function( canvas, scene ) {
     canvas.setAttribute('tabindex', '0');
     canvas.onclick = function() {
       canvas.focus();
   };
-    this.disableHandlers( canvas );
+    this.disableHandlers( canvas, scene );
   },
-  disableHandlers : function( canvas ) {
-    this.ellipsoid = this.scene.globe.ellipsoid;
-    this.scene.screenSpaceCameraController.enableRotate = false;
-    this.scene.screenSpaceCameraController.enableTranslate = false;
-    this.scene.screenSpaceCameraController.enableZoom = false;
-    this.scene.screenSpaceCameraController.enableTilt = false;
-    this.scene.screenSpaceCameraController.enableLook = false;
-    this.setFlags( canvas );
+  disableHandlers : function( canvas, scene ) {
+    scene.screenSpaceCameraController.enableRotate = false;
+    scene.screenSpaceCameraController.enableTranslate = false;
+    scene.screenSpaceCameraController.enableZoom = false;
+    scene.screenSpaceCameraController.enableTilt = false;
+    scene.screenSpaceCameraController.enableLook = false;
+    this.setFlags( canvas, scene );
   },
-  setFlags : function( canvas ) {
+  setFlags : function( canvas, scene ) {
     var flags = {
       looking : false,
       moveForward : false,
@@ -37,12 +36,12 @@ MoonModel.prototype = {
       moveLeft : false,
       moveRight : false
      }
-     this.setActionHandler( canvas, flags );
+     this.setActionHandler( canvas, flags, scene );
   },
-  setActionHandler : function( canvas, flags ) {
-     this.handler = new Cesium.ScreenSpaceEventHandler( canvas );
+  setActionHandler : function( canvas, flags, scene ) {
 
-    this.handler.setInputAction(function( movement ) {
+     this.handler = new Cesium.ScreenSpaceEventHandler( canvas );
+     this.handler.setInputAction(function( movement ) {
     flags.looking = true;
     mousePosition = startMousePosition = Cesium.Cartesian3.clone( movement.position );
     },
@@ -56,7 +55,7 @@ MoonModel.prototype = {
     flags.looking = false;
     }, Cesium.ScreenSpaceEventType.LEFT_UP );
 
-    this.bindActionListeners( flags );
+    this.bindActionListeners( canvas, flags, scene );
   },
   getFlagForKeyCode : function( keyCode ) {
     switch ( keyCode ) {
@@ -76,7 +75,7 @@ MoonModel.prototype = {
         return undefined;
     }
   },
-  bindActionListeners : function( flags ) {
+  bindActionListeners : function( canvas, flags, scene ) {
     document.addEventListener('keydown', function( e ) {
       var flagName = this.getFlagForKeyCode( e.keyCode );
       if ( typeof flagName !== 'undefined' ) {
@@ -90,15 +89,12 @@ document.addEventListener('keyup', function( e ) {
         flags[flagName] = false;
       }
     }, false );
-
-    // this.setCamera();
+    this.setCamera( canvas, flags, scene );
   },
-  setCamera : function() {
+  setCamera : function( canvas, flags, scene ) {
     this.viewer.clock.onTick.addEventListener(function( clock ) {
-    this.camera = this.scene.camera;
-
-    if ( this.flags.looking ) {
-        var width = this.canvas.clientWidth;
+    if ( flags.looking ) {
+        var width = canvas.clientWidth;
         var height = canvas.clientHeight;
         var x = ( this.mousePosition.x - this.startMousePosition.x ) / width;
         var y = -( this.mousePosition.y - this.startMousePosition.y ) / height;
@@ -108,25 +104,28 @@ document.addEventListener('keyup', function( e ) {
         this.camera.lookUp( y * lookFactor );
     }
   // changes movement speed based on the distance of the camera to the surface of the ellipsoid.
-    var cameraHeight = this.ellipsoid.cartesianToCartographic( this.camera.position ).height;
+    var ellipsoid = scene.globe.ellipsoid;
+    console.log( ellipsoid )
+    // var cameraHeight = this.ellipsoid.cartesianToCartographic( this.camera.position ).height;
+    return
     var moveRate = cameraHeight / 100.0;
 
-    if ( this.flags.moveForward ) {
+    if ( flags.moveForward ) {
         this.camera.moveForward( moveRate );
     }
-    if ( this.flags.moveBackward ) {
+    if ( flags.moveBackward ) {
         this.camera.moveBackward( moveRate );
     }
-    if ( this.flags.moveUp ) {
+    if ( flags.moveUp ) {
         this.camera.moveUp( moveRate );
     }
-    if ( this.flags.moveDown ) {
+    if ( flags.moveDown ) {
         this.camera.moveDown( moveRate );
     }
-    if ( this.flags.moveLeft ) {
+    if ( flags.moveLeft ) {
         this.camera.moveLeft( moveRate );
     }
-    if ( this.flags.moveRight ) {
+    if ( flags.moveRight ) {
         this.camera.moveRight( moveRate );
     }
   })
