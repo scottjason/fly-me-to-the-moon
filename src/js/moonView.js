@@ -21,28 +21,24 @@ MoonView.prototype = {
     this.clock = this.viewer.clock;
     this.scene = this.viewer.scene;
     this.canvas = this.scene.canvas;
-    this.spinGlobe( 0.45 );
+    this.spinGlobe( 0.45, this.viewer, this.scene, this.clock );
     callback();
   },
-  spinGlobe : function( setRate ){
-    var viewer = this.viewer;
-    var scene = this.scene;
-    var clock = this.clock;
+  spinGlobe : function( setRate, viewer, scene, clock ){
     var previousTime = Date.now();
-
-    this.listener = function( clock ) {
-    var spinRate = setRate;
-    var currentTime = Date.now();
-    var delta = ( currentTime - previousTime ) / 1000;
-    previousTime = currentTime;
-    viewer.scene.camera.rotate( Cesium.Cartesian3.UNIT_Z, -spinRate * delta );
-  }
-    viewer.clock.onTick.addEventListener( this.listener );
-},
+    this.spinListener = function( clock ) {
+      var spinRate = setRate;
+      var currentTime = Date.now();
+      var delta = ( currentTime - previousTime ) / 1000;
+        previousTime = currentTime;
+        viewer.scene.camera.rotate( Cesium.Cartesian3.UNIT_Z, -spinRate * delta );
+    }
+        viewer.clock.onTick.addEventListener( this.spinListener );
+  },
   stopGlobe : function() {
-    if ( this.listener ) {
-   this.viewer.clock.onTick.removeEventListener(this.listener);
-}
+    if ( this.spinListener ) {
+   this.viewer.clock.onTick.removeEventListener( this.spinListener );
+    }
   },
   renderInstructions : function() {
     $( "#giveInstructions" ).html( "'U' moves up | 'D' moves down | 'L' moves left | 'R' moves right | 'B' moves backward | 'F' moves forward" )
