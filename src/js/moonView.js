@@ -21,38 +21,31 @@ MoonView.prototype = {
     this.clock = this.viewer.clock;
     this.scene = this.viewer.scene;
     this.canvas = this.scene.canvas;
+    this.spinGlobe( 0.45 );
     callback();
   },
-  spinGlobe : function( status ){
+  spinGlobe : function( setRate ){
     var viewer = this.viewer;
     var scene = this.scene;
     var clock = this.clock;
+    var previousTime = Date.now();
 
-    function rotate() {
-      Sandcastle.declare( rotate );
-       var vm = viewer.homeButton.viewModel;
-       vm.duration = 0.0;
-       vm.command();
-       vm.duration = 3.0;
-       clock.multiplier = 3 * 60 * 60;
-       scene.preRender.addEventListener( referenceFrame );
-       scene.globe.enableLighting = true;
-    }
-      rotate();
-      function referenceFrame( scene, time ) {
-        if ( document.status === null) { scene.preRender.removeEventListener( referenceFrame ) }
-        if ( scene.mode !== Cesium.SceneMode.SCENE3D ) { return; }
-        var icrfToFixed = Cesium.Transforms.computeIcrfToFixedMatrix( time );
-        if ( Cesium.defined( icrfToFixed )) {
-          scene.camera.transform = Cesium.Matrix4.fromRotationTranslation(icrfToFixed, Cesium.Cartesian3.ZERO);
-        }
-      }
+    this.listener = function( clock ) {
+    var spinRate = setRate;
+    var currentTime = Date.now();
+    var delta = ( currentTime - previousTime ) / 1000;
+    previousTime = currentTime;
+    viewer.scene.camera.rotate( Cesium.Cartesian3.UNIT_Z, -spinRate * delta );
+  }
+    viewer.clock.onTick.addEventListener( this.listener );
+},
+  stopGlobe : function() {
+    if ( this.listener ) {
+   this.viewer.clock.onTick.removeEventListener(this.listener);
+}
   },
   renderInstructions : function() {
     $( "#giveInstructions" ).html( "'U' moves up | 'D' moves down | 'L' moves left | 'R' moves right | 'B' moves backward | 'F' moves forward" )
-  },
-  spinStatus : function( status ){
-    document.status = status;
   }
 }
 
