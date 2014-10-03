@@ -28,9 +28,7 @@ MoonView.prototype = {
 
   },
   readyOrbit: function(){
-
   }
 }
-
 
 var View = new MoonView();

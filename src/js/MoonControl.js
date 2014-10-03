@@ -23,4 +23,3 @@ MoonControl.prototype = {
 }
 
 var controller = new MoonControl();
-
