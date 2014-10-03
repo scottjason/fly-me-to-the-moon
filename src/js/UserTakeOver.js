@@ -30,7 +30,7 @@ UserTakeOver.prototype = {
     this.setFlags() ;
   },
   setFlags : function () {
-    var flags = {
+    this.flags = {
       looking : false,
       moveForward : false,
       moveBackward : false,
@@ -39,13 +39,15 @@ UserTakeOver.prototype = {
       moveLeft : false,
       moveRight : false
      };
-     this.setActionHandler( flags );
+     this.setActionHandler();
   },
-  setActionHandler : function( flags ) {
+  setActionHandler : function() {
      var canvas = this.canvas;
+     var flags = this.flags;
+
      this.handler = new Cesium.ScreenSpaceEventHandler( canvas );
      this.handler.setInputAction(function( movement ) {
-    flags.looking = true;
+      flags.looking = true;
     this.mousePosition = startMousePosition = Cesium.Cartesian3.clone( movement.position );
     },
       Cesium.ScreenSpaceEventType.LEFT_DOWN );
@@ -58,9 +60,9 @@ UserTakeOver.prototype = {
     flags.looking = false;
     }, Cesium.ScreenSpaceEventType.LEFT_UP );
 
-    this.bindActionListeners( flags );
+    this.bindActionListeners();
   },
-  bindActionListeners : function( flags ) {
+  bindActionListeners : function() {
 
   function getFlagForKeyCode( keyCode ) {
     switch ( keyCode ) {
@@ -80,6 +82,7 @@ UserTakeOver.prototype = {
         return undefined;
     }
   }
+    var flags = this.flags;
     document.addEventListener('keydown', function( e ) {
       var flagName = getFlagForKeyCode( e.keyCode );
       if ( typeof flagName !== 'undefined' ) {
@@ -93,13 +96,14 @@ UserTakeOver.prototype = {
         flags[flagName] = false;
       }
     }, false );
-    this.setCamera( flags );
+    this.setCamera();
   },
-  setCamera : function( flags ) {
+  setCamera : function() {
     var viewer = this.viewer;
     var camera = this.camera;
     var scene = this.scene;
     var canvas = this.canvas;
+    var flags = this.flags;
 
     viewer.clock.onTick.addEventListener(function( clock ) {
     if ( flags.looking ) {
