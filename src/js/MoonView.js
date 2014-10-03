@@ -5,7 +5,7 @@ function MoonView() {
 };
 
 MoonView.prototype = {
-  initialize: function( callback ){
+  initialize : function( controller ){
     this.container = 'cesiumContainer';
     this.options = {
         animation: false,
@@ -17,17 +17,17 @@ MoonView.prototype = {
         navigationHelpButton: false,
         navigationInstructionsInitiallyVisible: false
      }
-     this.renderGlobe( callback );
+     this.renderGlobe( controller );
   },
-  renderGlobe: function( callback ){
+  renderGlobe : function( callback ){
     this.viewer = new Cesium.Viewer( this.container, this.options );
     this.clock = this.viewer.clock;
-    callback();
+    controller.earthReady();
   },
-  flyToMoon: function(){
+  flyToMoon : function(){
 
   },
-  readyOrbit: function(){
+  readyOrbit : function(){
   }
 }
 
