@@ -16,16 +16,16 @@ MoonModel.prototype = {
     canvas.onclick = function() {
       canvas.focus();
   };
-    // this.disableHandlers();
+    this.disableHandlers( canvas );
   },
-  disableHandlers : function() {
+  disableHandlers : function( canvas ) {
     this.ellipsoid = this.scene.globe.ellipsoid;
     this.scene.screenSpaceCameraController.enableRotate = false;
     this.scene.screenSpaceCameraController.enableTranslate = false;
     this.scene.screenSpaceCameraController.enableZoom = false;
     this.scene.screenSpaceCameraController.enableTilt = false;
     this.scene.screenSpaceCameraController.enableLook = false;
-    this.setFlags();
+    // this.setFlags();
   },
   setFlags : function() {
     this.startMousePosition;
