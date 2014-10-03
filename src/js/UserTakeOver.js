@@ -7,26 +7,27 @@ function UserTakeOver() {
 UserTakeOver.prototype = {
   initialize : function( viewer, clock, scene, canvas ){
     this.clock = clock;
+    this.canvas = canvas;
     this.viewer = viewer;
     this.camera = scene.camera;
-    this.userControl( canvas, scene );
+    this.userControl( scene, canvas );
   },
-  userControl : function( canvas, scene ) {
+  userControl : function( scene, canvas ) {
     canvas.setAttribute('tabindex', '0');
     canvas.onclick = function() {
       canvas.focus();
   };
-    this.disableHandlers( canvas, scene );
+    this.disableHandlers( scene );
   },
-  disableHandlers : function( canvas, scene ) {
+  disableHandlers : function( scene ) {
     scene.screenSpaceCameraController.enableRotate = false;
     scene.screenSpaceCameraController.enableTranslate = false;
     scene.screenSpaceCameraController.enableZoom = false;
     scene.screenSpaceCameraController.enableTilt = false;
     scene.screenSpaceCameraController.enableLook = false;
-    this.setFlags( canvas, scene );
+    this.setFlags( scene );
   },
-  setFlags : function( canvas, scene ) {
+  setFlags : function( scene ) {
     var flags = {
       looking : false,
       moveForward : false,
@@ -36,10 +37,10 @@ UserTakeOver.prototype = {
       moveLeft : false,
       moveRight : false
      };
-     this.setActionHandler( canvas, flags, scene );
+     this.setActionHandler( flags, scene );
   },
-  setActionHandler : function( canvas, flags, scene ) {
-
+  setActionHandler : function( flags, scene ) {
+     var canvas = this.canvas;
      this.handler = new Cesium.ScreenSpaceEventHandler( canvas );
      this.handler.setInputAction(function( movement ) {
     flags.looking = true;
@@ -55,9 +56,9 @@ UserTakeOver.prototype = {
     flags.looking = false;
     }, Cesium.ScreenSpaceEventType.LEFT_UP );
 
-    this.bindActionListeners( canvas, flags, scene );
+    this.bindActionListeners( flags, scene );
   },
-  bindActionListeners : function( canvas, flags, scene ) {
+  bindActionListeners : function( flags, scene ) {
 
   function getFlagForKeyCode( keyCode ) {
     switch ( keyCode ) {
@@ -90,11 +91,12 @@ UserTakeOver.prototype = {
         flags[flagName] = false;
       }
     }, false );
-    this.setCamera( canvas, flags, scene );
+    this.setCamera( flags, scene );
   },
-  setCamera : function( canvas, flags, scene ) {
-    var camera = this.camera;
+  setCamera : function( flags, scene ) {
     var viewer = this.viewer;
+    var camera = this.camera;
+    var canvas = this.canvas;
 
     viewer.clock.onTick.addEventListener(function( clock ) {
     if ( flags.looking ) {
