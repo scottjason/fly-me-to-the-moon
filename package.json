@@ -1,17 +1,23 @@
 {
-    "name": "fly-me-to-the-moon",
-    "author": "Scott Jason",
-    "version": "0.0.1",
-    "description": "A WebGL Experience.",
-    "license": "Apache-2.0",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/scottjason/fly-me-to-the-moon.git"
-    },
-    "devDependencies": {
-        "express": "4.4.4",
-        "compression": "1.0.8",
-        "request": "2.36.0",
-        "yargs": "1.2.6"
-    }
+  "name": "fly-me-to-the-moon",
+  "author": "Scott Jason",
+  "version": "0.0.1",
+  "description": "A WebGL Experience.",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/scottjason/fly-me-to-the-moon.git"
+  },
+  "devDependencies": {
+    "express": "^4.9.5",
+    "compression": "^1.1.0",
+    "request": "2.36.0",
+    "url": "^0.10.1"
+  },
+  "dependencies": {
+    "compression": "^1.1.0",
+    "express": "^4.9.5",
+    "request": "^2.44.0",
+    "url": "^0.10.1"
+  }
 }
