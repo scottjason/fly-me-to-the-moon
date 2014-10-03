@@ -1,3 +1,3 @@
 $( document ).ready(function(){
-    controller.initialize( Model, View );
+    controller.initialize( User, View );
 });
