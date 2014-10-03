@@ -9,25 +9,27 @@ UserTakeOver.prototype = {
     this.clock = clock;
     this.canvas = canvas;
     this.viewer = viewer;
+    this.scene = viewer.scene;
     this.camera = scene.camera;
-    this.userControl( scene, canvas );
+    this.userControl( canvas );
   },
-  userControl : function( scene, canvas ) {
+  userControl : function( canvas ) {
     canvas.setAttribute('tabindex', '0');
     canvas.onclick = function() {
       canvas.focus();
   };
-    this.disableHandlers( scene );
+    this.disableHandlers();
   },
-  disableHandlers : function( scene ) {
+  disableHandlers : function() {
+    var scene = this.scene;
     scene.screenSpaceCameraController.enableRotate = false;
     scene.screenSpaceCameraController.enableTranslate = false;
     scene.screenSpaceCameraController.enableZoom = false;
     scene.screenSpaceCameraController.enableTilt = false;
     scene.screenSpaceCameraController.enableLook = false;
-    this.setFlags( scene );
+    this.setFlags() ;
   },
-  setFlags : function( scene ) {
+  setFlags : function () {
     var flags = {
       looking : false,
       moveForward : false,
@@ -37,9 +39,9 @@ UserTakeOver.prototype = {
       moveLeft : false,
       moveRight : false
      };
-     this.setActionHandler( flags, scene );
+     this.setActionHandler( flags );
   },
-  setActionHandler : function( flags, scene ) {
+  setActionHandler : function( flags ) {
      var canvas = this.canvas;
      this.handler = new Cesium.ScreenSpaceEventHandler( canvas );
      this.handler.setInputAction(function( movement ) {
@@ -56,9 +58,9 @@ UserTakeOver.prototype = {
     flags.looking = false;
     }, Cesium.ScreenSpaceEventType.LEFT_UP );
 
-    this.bindActionListeners( flags, scene );
+    this.bindActionListeners( flags );
   },
-  bindActionListeners : function( flags, scene ) {
+  bindActionListeners : function( flags ) {
 
   function getFlagForKeyCode( keyCode ) {
     switch ( keyCode ) {
@@ -91,11 +93,12 @@ UserTakeOver.prototype = {
         flags[flagName] = false;
       }
     }, false );
-    this.setCamera( flags, scene );
+    this.setCamera( flags );
   },
-  setCamera : function( flags, scene ) {
+  setCamera : function( flags ) {
     var viewer = this.viewer;
     var camera = this.camera;
+    var scene = this.scene;
     var canvas = this.canvas;
 
     viewer.clock.onTick.addEventListener(function( clock ) {
