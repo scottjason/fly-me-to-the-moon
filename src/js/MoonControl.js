@@ -5,30 +5,22 @@ function MoonControl() {
 };
 
 MoonControl.prototype = {
-  initialize: function( model, view ) {
-    this.model = model;
-    this.view = view;
-    console.log( model, view );
-    // alert("controller works")
+  initialize : function( Model, View ) {
+    this.Model = Model;
+    this.View = View;
+    this.View.initialize( this.earthReady );
+  },
+  earthReady : function() {
+    console.log( "earth Ready");
+    console.log( this.View.viewer );
+  },
+  exploreEarth : function() {
 
-
-  // this.model = model;
-  // this.view = view;
-  // this.view.initialize();
+  },
+  sayGoodBye : function() {
+    // this.view.readyOrbit();
+  }
 }
-}
 
-// MoonFly.Controller.prototype.earthReady = function() {
-
-// }
-
-// MoonFly.Controller.prototype.sayGoodBye = function() {
-//   // this.view.readyOrbit();
-// }
-
-// MoonFly.Controller.prototype.exploreEarth = function() {
-
-// }
-
-var moonFly = new MoonControl();
+var controller = new MoonControl();
 

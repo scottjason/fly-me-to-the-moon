@@ -147,4 +147,4 @@ function MoonModel() {
 // //  }
 // // };
 
-var model = new MoonModel();
+var Model = new MoonModel();
