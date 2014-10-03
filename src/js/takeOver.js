@@ -104,8 +104,9 @@ TakeOver.prototype = {
     var scene = this.scene;
     var canvas = this.canvas;
     var flags = this.flags;
+    var clock = this.clock;
 
-    viewer.clock.onTick.addEventListener(function( clock ) {
+    this.controlListener = function( clock ) {
     if ( flags.looking ) {
         var width = canvas.clientWidth;
         var height = canvas.clientHeight;
@@ -115,7 +116,7 @@ TakeOver.prototype = {
         var lookFactor = 0.05;
         camera.lookRight( x * lookFactor );
         camera.lookUp( y * lookFactor );
-    }
+   }
   // changes movement speed based on the distance of the camera to the surface of the ellipsoid.
     var ellipsoid = scene.globe.ellipsoid;
     var cameraHeight = ellipsoid.cartesianToCartographic( camera.position ).height;
@@ -140,7 +141,13 @@ TakeOver.prototype = {
     if ( flags.moveRight ) {
         camera.moveRight( moveRate );
     }
-  });
+  }
+  viewer.clock.onTick.addEventListener( this.controlListener );
+ },
+ stopControl : function() {
+ if ( this.controlListener ) {
+   this.viewer.clock.onTick.removeEventListener( this.controlListener );
+  }
  }
 };
 
