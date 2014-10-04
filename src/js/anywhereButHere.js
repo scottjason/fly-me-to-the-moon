@@ -29,6 +29,7 @@ AnywhereElse.prototype = {
       var sumba = [-9.699344, 119.974053];
       var floresIsland = [-8.657382, 121.079370];
       var lombok = [-8.650979, 116.324944];
+
     this.paradiseArr.push( aucklandIslands, muKoAngThong, cocosIsland, phoenixIslands, mamanucaIslands, tetepareIsland, silkCaye, southWaterCaye, goffsCaye, tobaccoCaye, cayeCaulker, ambergrisCaye, alorIsland, westTimor, sumbawa, sumba, floresIsland, lombok );
     this.makeRandomSelection( sceneCamera );
   },
