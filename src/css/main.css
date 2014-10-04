@@ -40,3 +40,10 @@ a.navRightText {
     margin-left: 7%;
     color: #2e5291;
 }
+
+#paradiseLocation {
+    margin-top: 18px;
+    white-space: nowrap;
+    margin-left: 7%;
+    color: #2e5291;
+}

@@ -31,7 +31,7 @@ MoonControl.prototype = {
   },
   anywhereButHere : function() {
     this.initAnywhereEvents();
-    this.AnywhereElse.initialize( this.MoonView.viewer, this.MoonView.scene );
+    this.AnywhereElse.initialize( this.MoonView.viewer, this.MoonView.scene, this.initParadiseEvents.bind( this ) );
   },
   initHomeEvents : function() {
     this.MoonView.stopGlobe();
@@ -51,6 +51,9 @@ MoonControl.prototype = {
     this.MoonView.stopGlobe();
     this.TakeOver.stopControl();
     this.MoonView.renderAnywhereElems();
+  },
+  initParadiseEvents : function( content ) {
+    this.MoonView.renderParadiseElems( content );
   }
 }
 
