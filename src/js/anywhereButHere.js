@@ -36,7 +36,7 @@ AnywhereElse.prototype = {
   makeRandomSelection : function( sceneCamera ) {
     var count = 0;
     var alreadySelected = [];
-    var randomElem = this.paradiseArr[ Math.floor( Math.random() * 4) ];
+    var randomElem = this.paradiseArr[ Math.floor( Math.random() *  18 ) ];
       alreadySelected.push( randomElem );
 
       if( alreadySelected.length > 1 ) {
@@ -50,6 +50,7 @@ AnywhereElse.prototype = {
     this.makeRandomSelection( sceneCamera );
    }
    else {
+    console.log( randomElem, count )
     this.flyMeToParadise( randomElem, sceneCamera );
    }
  },
