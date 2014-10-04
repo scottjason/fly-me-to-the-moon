@@ -6,14 +6,10 @@ function AnywhereElse() {
 
 AnywhereElse.prototype = {
   initialize : function( viewer, clock, scene, canvas ) {
-    this.clock = clock;
-    this.canvas = canvas;
-    this.viewer = viewer;
-    this.scene = viewer.scene;
-    this.camera = scene.camera;
-    this.paradiseLocations();
+    var scene = viewer.scene;
+    this.paradiseLocations( scene.camera );
   },
-  paradiseLocations : function() {
+  paradiseLocations : function( sceneCamera ) {
     this.paradiseArr = [];
     var aucklandIslands = [-50.771492, 166.132858];
     var muKoAngThong = [9.626544, 99.674048];
@@ -34,24 +30,20 @@ AnywhereElse.prototype = {
     var floresIsland = [-8.657382, 121.079370];
     var lombok = [-8.650979, 116.324944];
     this.paradiseArr.push( aucklandIslands, muKoAngThong, cocosIsland, phoenixIslands, mamanucaIslands, tetepareIsland, silkCaye, southWaterCaye, goffsCaye, tobaccoCaye, cayeCaulker, ambergrisCaye, alorIsland, westTimor, sumbawa, sumba, floresIsland, lombok );
-    this.makeRandomSelection();
+    this.makeRandomSelection( sceneCamera );
   },
-  makeRandomSelection : function() {
-    console.log( this.paradiseArr )
+  makeRandomSelection : function( sceneCamera ) {
+    console.log( sceneCamera )
   },
-  flyMeToParadise : function() {
-    function flyParadise( coordsArr ) {
-    Sandcastle.declare(flyParadise);
-    scene.camera.flyTo({
-        destination : Cesium.Cartesian3.fromDegrees(-117.16, 32.71, 15000.0)
-    });
-}
+  flyMeToParadise : function( randomParadiseCoords, sceneCamera) {
+    function flyParadise( randomParadiseCoords ) {
+    Sandcastle.declare( flyParadise );
+    sceneCamera.flyTo({
+        destination : Cesium.Cartesian3.fromDegrees( randomParadiseCoords[0], randomParadiseCoords[1], 15000.0 );
+     })
+    }
+    flyParadise( randomParadiseCoords, sceneCamera );
   }
 }
-
-
-
-
-
 
 var anywhereElse = new AnywhereElse();
