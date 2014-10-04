@@ -34,7 +34,7 @@ AnywhereElse.prototype = {
     this.makeRandomSelection( sceneCamera );
   },
   makeRandomSelection : function( sceneCamera ) {
-    var count = 0
+    var count = 0;
     var alreadySelected = [];
     var randomElem = this.paradiseArr[ Math.floor( Math.random() * 4) ];
       alreadySelected.push( randomElem );
