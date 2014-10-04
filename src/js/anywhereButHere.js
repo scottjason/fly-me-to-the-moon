@@ -5,11 +5,11 @@ function AnywhereElse() {
 };
 
 AnywhereElse.prototype = {
-  initialize : function( viewer, scene ) {
+  initialize : function( viewer, scene, callback ) {
     var scene = viewer.scene;
-    this.paradiseLocations( scene.camera );
+    this.paradiseLocations( scene.camera, callback );
   },
-  paradiseLocations : function( sceneCamera ) {
+  paradiseLocations : function( sceneCamera, callback ) {
     this.paradiseArr = [];
       var aucklandIslands = [-50.771492, 166.132858];
       var muKoAngThong = [9.626544, 99.674048];
@@ -31,29 +31,22 @@ AnywhereElse.prototype = {
       var lombok = [-8.650979, 116.324944];
 
     this.paradiseArr.push( aucklandIslands, muKoAngThong, cocosIsland, phoenixIslands, mamanucaIslands, tetepareIsland, silkCaye, southWaterCaye, goffsCaye, tobaccoCaye, cayeCaulker, ambergrisCaye, alorIsland, westTimor, sumbawa, sumba, floresIsland, lombok );
-    this.makeRandomSelection( sceneCamera );
+    this.makeRandomSelection( sceneCamera, 1, callback );
   },
-  makeRandomSelection : function( sceneCamera ) {
-    var count = 0;
-    var alreadySelected = [];
-    var randomElem = this.paradiseArr[ Math.floor( Math.random() *  18 ) ];
-      alreadySelected.push( randomElem );
-
-      if( alreadySelected.length > 1 ) {
-       for ( var i=0; i < alreadySelected.length; i++ ) {
-        if( alreadySelected[i] == randomElem ) {
-          ++count;
-        }
-      }
-   }
-   if( count > 1 ) {
-    this.makeRandomSelection( sceneCamera );
-   }
-   else {
-    console.log( randomElem, count )
-    this.flyMeToParadise( randomElem, sceneCamera );
-   }
- },
+  makeRandomSelection : function(sceneCamera, numNeeded, callback ) {
+  var result = new Array( numNeeded ),
+        len = this.paradiseArr.length,
+        taken = new Array( len );
+    if ( numNeeded > len )
+        throw new RangeError("getRandom: more elements taken than available");
+    while ( numNeeded-- ) {
+        var x = Math.floor( Math.random() * len );
+        result[numNeeded] = this.paradiseArr[x in taken ? taken[x] : x];
+        taken[x] = --len;
+    }
+    this.reverseGeoCoords( result[0], callback );
+    this.flyMeToParadise( result[0], sceneCamera );
+  },
   flyMeToParadise : function( paradiseMe, sceneCamera) {
     function flyParadise( paradiseMe ) {
     Sandcastle.declare( flyParadise );
@@ -62,6 +55,21 @@ AnywhereElse.prototype = {
      })
     }
     flyParadise( paradiseMe, sceneCamera );
+  },
+  reverseGeoCoords : function( position, callback ) {
+    this.callback = callback;
+    var latLng = new google.maps.LatLng( position[0], position[1] );
+    var coder = new google.maps.Geocoder();
+    coder.geocode( { 'latLng': latLng }, this.formatAddress.bind( this  ), { maximumAge: 75000 }  );
+  },
+  formatAddress : function( results, status ) {
+   if ( status == google.maps.GeocoderStatus.OK ) {
+    var location = results[0].formatted_address;
+    }
+    this.renderLocation( location )
+  },
+  renderLocation : function( location ) {
+    this.callback( location );
   }
 }
 
