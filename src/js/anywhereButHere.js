@@ -14,6 +14,7 @@ AnywhereElse.prototype = {
     this.paradiseLocations();
   },
   paradiseLocations : function() {
+    this.paradiseArr = [];
     var aucklandIslands = [-50.771492, 166.132858];
     var muKoAngThong = [9.626544, 99.674048];
     var cocosIsland = [12.170874, 96.841739];
@@ -32,6 +33,19 @@ AnywhereElse.prototype = {
     var sumba = [-9.699344, 119.974053];
     var floresIsland = [-8.657382, 121.079370];
     var lombok = [-8.650979, 116.324944];
+    this.paradiseArr.push( aucklandIslands, muKoAngThong, cocosIsland, phoenixIslands, mamanucaIslands, tetepareIsland, silkCaye, southWaterCaye, goffsCaye, tobaccoCaye, cayeCaulker, ambergrisCaye, alorIsland, westTimor, sumbawa, sumba, floresIsland, lombok );
+    this.makeRandomSelection();
+  },
+  makeRandomSelection : function() {
+    console.log( this.paradiseArr )
+  },
+  flyMeToParadise : function() {
+    function flyParadise( coordsArr ) {
+    Sandcastle.declare(flyParadise);
+    scene.camera.flyTo({
+        destination : Cesium.Cartesian3.fromDegrees(-117.16, 32.71, 15000.0)
+    });
+}
   }
 }
 
