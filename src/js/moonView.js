@@ -37,12 +37,25 @@ MoonView.prototype = {
   },
   stopGlobe : function() {
     if ( this.spinListener ) {
-   this.viewer.clock.onTick.removeEventListener( this.spinListener );
+    this.viewer.clock.onTick.removeEventListener( this.spinListener );
     }
   },
-  renderInstructions : function() {
-    $( "#giveInstructions" ).html( "'U' moves up | 'D' moves down | 'L' moves left | 'R' moves right | 'B' moves backward | 'F' moves forward" )
+  renderHomeElems : function() {
+    $( "#giveInstructions" ).hide();
+    $( "#userLocation" ).show();
+  },
+  renderControlElems : function() {
+    $( "#userLocation" ).hide();
     $( "#giveInstructions" ).show();
+    $( "#giveInstructions" ).html( "'U' moves up | 'D' moves down | 'L' moves left | 'R' moves right | 'B' moves backward | 'F' moves forward" );
+  },
+  renderAnywhereElems : function() {
+    $( "#giveInstructions" ).hide();
+    $( "#userLocation" ).hide();
+  },
+  renderGoodByeElems : function() {
+    $( "#giveInstructions" ).hide();
+    $( "#userLocation" ).hide();
   }
 }
 
