@@ -19,43 +19,39 @@ MoonControl.prototype = {
     document.getElementById( "anywhereButHere" ).addEventListener("click", this.anywhereButHere.bind( this ), false );
   },
   takeMeHome : function() {
-    // remove event listeners
-    this.MoonView.stopGlobe();
-    this.TakeOver.stopControl();
-    // ensure text event is visible
-    $( "#userLocation" ).show();
-      // remove all other text events
-    $( "#giveInstructions" ).hide();
-    // init takeMeHome
+    this.initHomeEvents();
     this.TakeMeHome.initialize( this.MoonView.scene );
   },
   takeControl : function() {
-    // remove event listeners
-    this.MoonView.stopGlobe();
-    // remove current address
-    $( "#userLocation" ).hide();
-    // init takeControl
-    this.MoonView.renderInstructions();
+    this.initControlEvents();
     this.TakeOver.initialize( this.MoonView.viewer, this.MoonView.clock, this.MoonView.scene, this.MoonView.canvas );
   },
   sayGoodBye : function() {
-    // remove event listeners
-    this.MoonView.stopGlobe();
-    this.TakeOver.stopControl();
-    // remove instructions and current address
-    $( "#giveInstructions" ).hide();
-    $( "#userLocation" ).hide();
+    this.initGoodByeEvents();
   },
   anywhereButHere : function() {
-    // remove event listeners
+    this.initAnywhereEvents();
+    this.AnywhereElse.initialize( this.MoonView.viewer, this.MoonView.scene );
+  },
+  initHomeEvents : function() {
     this.MoonView.stopGlobe();
     this.TakeOver.stopControl();
-    // remove instructions and current address
-    $( "#giveInstructions" ).hide();
-    $( "#userLocation" ).hide();
-    // init anywhereButHere
-    this.AnywhereElse.initialize( this.MoonView.viewer, this.MoonView.clock, this.MoonView.scene, this.MoonView.canvas );
+    this.MoonView.renderHomeElems();
+  },
+  initControlEvents : function() {
+    this.MoonView.stopGlobe();
+    this.MoonView.renderControlElems();
+  },
+  initGoodByeEvents : function() {
+    this.MoonView.stopGlobe();
+    this.TakeOver.stopControl();
+    this.MoonView.renderGoodByeElems();
+  },
+  initAnywhereEvents : function() {
+    this.MoonView.stopGlobe();
+    this.TakeOver.stopControl();
+    this.MoonView.renderAnywhereElems();
   }
 }
-var controller = new MoonControl();
 
+var controller = new MoonControl();
