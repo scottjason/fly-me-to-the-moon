@@ -5,11 +5,13 @@ function MoonControl() {
 };
 
 MoonControl.prototype = {
-  initialize : function( TakeOver, TakeMeHome, AnywhereElse, MoonView ) {
+  initialize : function( TakeOver, TakeMeHome, AnywhereElse, NavControl, MoonView ) {
     this.TakeOver = TakeOver;
     this.TakeMeHome = TakeMeHome;
     this.AnywhereElse = AnywhereElse;
+    this.NavControl = navControl;
     this.MoonView = MoonView;
+    this.NavControl.initialize();
     this.MoonView.initialize( this.bindListeners.bind( this ) );
   },
   bindListeners : function() {

@@ -5,7 +5,6 @@ html, body {
     margin: 0;
     overflow: hidden;
     background-color: #86b1cc;
-    /*background-color: #5586c6;*/
     font-family: 'Gafata', sans-serif
 }
 #cesiumContainer {
@@ -24,7 +23,6 @@ a#siteTitle {
     text-decoration: none
 }
 a.navRightText {
-    /*color: #86b1cc !important;*/
     color: #5586c6 !important;
     font-size: 1.2em;
     text-decoration: none
