@@ -6,43 +6,58 @@ function NavControl() {
 
 NavControl.prototype = {
   initialize : function() {
-    var slideOptions = [ "slide", {direction : "right"}, 450 ];
-    this.homeClickEvent( slideOptions );
-    this.controlClickEvent( slideOptions );
-    this.anywhereClickEvent( slideOptions );
-    this.moonClickEvent( slideOptions );
+    this.outOptions = [ "slide", { direction : "right" }, 450 ];
+    this.bindListeners();
   },
-  homeClickEvent : function( slideOptions ) {
-    $( "#takeMeHome" ).click(function() {
-    $( "#toTheMoon" ).toggle( slideOptions[0], slideOptions[1], slideOptions[2] );
-    $( "#anywhereButHere" ).toggle( slideOptions[0], slideOptions[1], slideOptions[2]);
-    $( "#takeControl" ).toggle( slideOptions[0], slideOptions[1], slideOptions[2] );
-    $( "#takeMeHome" ).toggle( slideOptions[0], slideOptions[1], slideOptions[2] );
-   });
+  bindListeners : function() {
+    document.getElementById( "takeMeHome" ).addEventListener("click", this.homeSlideOut.bind( this, this.homeSlideIn.bind( this ) ), false );
+    document.getElementById( "takeControl" ).addEventListener("click", this.controlSlideOut.bind( this, this.controlSlideIn.bind( this ) ), false );
+    document.getElementById( "anywhereButHere" ).addEventListener("click", this.anywhereSlideOut.bind( this, this.anywhereSlideIn.bind( this ) ), false );
+    document.getElementById( "toTheMoon" ).addEventListener("click", this.moonSlideOut.bind( this, this.moonSlideIn.bind( this ) ), false );
   },
-  controlClickEvent : function( slideOptions ) {
-    $( "#takeControl" ).click(function() {
-    $( "#toTheMoon" ).toggle( slideOptions[0], slideOptions[1], slideOptions[2] );
-    $( "#anywhereButHere" ).toggle( slideOptions[0], slideOptions[1], slideOptions[2]);
-    $( "#takeControl" ).toggle( slideOptions[0], slideOptions[1], slideOptions[2] );
-    $( "#takeMeHome" ).toggle( slideOptions[0], slideOptions[1], slideOptions[2] );
-   });
+  homeSlideOut : function( callback ) {
+    $( "#toTheMoon" ).toggle( this.outOptions[0], this.outOptions[1], this.outOptions[2] );
+    $( "#anywhereButHere" ).toggle( this.outOptions[0], this.outOptions[1], this.outOptions[2] );
+    $( "#takeControl" ).toggle( this.outOptions[0], this.outOptions[1], this.outOptions[2] );
+    $( "#takeMeHome" ).toggle( this.outOptions[0], this.outOptions[1], this.outOptions[2] );
+
+      callback();
   },
-  anywhereClickEvent : function( slideOptions ) {
-    $( "#anywhereButHere" ).click(function() {
-    $( "#toTheMoon" ).toggle( slideOptions[0], slideOptions[1], slideOptions[2] );
-    $( "#anywhereButHere" ).toggle( slideOptions[0], slideOptions[1], slideOptions[2]);
-    $( "#takeControl" ).toggle( slideOptions[0], slideOptions[1], slideOptions[2] );
-    $( "#takeMeHome" ).toggle( slideOptions[0], slideOptions[1], slideOptions[2] );
-   });
+  homeSlideIn : function() {
+
   },
-  moonClickEvent : function( slideOptions ) {
-    $( "#toTheMoon" ).click(function() {
-    $( "#toTheMoon" ).toggle( slideOptions[0], slideOptions[1], slideOptions[2] );
-    $( "#anywhereButHere" ).toggle( slideOptions[0], slideOptions[1], slideOptions[2]);
-    $( "#takeControl" ).toggle( slideOptions[0], slideOptions[1], slideOptions[2] );
-    $( "#takeMeHome" ).toggle( slideOptions[0], slideOptions[1], slideOptions[2] );
-   });
+  controlSlideOut : function( callback ) {
+    $( "#toTheMoon" ).toggle( this.outOptions[0], this.outOptions[1], this.outOptions[2] );
+    $( "#anywhereButHere" ).toggle( this.outOptions[0], this.outOptions[1], this.outOptions[2] );
+    $( "#takeControl" ).toggle( this.outOptions[0], this.outOptions[1], this.outOptions[2] );
+    $( "#takeMeHome" ).toggle( this.outOptions[0], this.outOptions[1], this.outOptions[2] );
+
+      callback();
+  },
+  controlSlideIn : function() {
+
+  },
+  anywhereSlideOut : function( callback ) {
+    $( "#toTheMoon" ).toggle( this.outOptions[0], this.outOptions[1], this.outOptions[2] );
+    $( "#anywhereButHere" ).toggle( this.outOptions[0], this.outOptions[1], this.outOptions[2] );
+    $( "#takeControl" ).toggle( this.outOptions[0], this.outOptions[1], this.outOptions[2] );
+    $( "#takeMeHome" ).toggle( this.outOptions[0], this.outOptions[1], this.outOptions[2] );
+
+      callback();
+  },
+  anywhereSlideIn : function() {
+
+  },
+  moonSlideOut : function( callback ) {
+    $( "#toTheMoon" ).toggle( this.outOptions[0], this.outOptions[1], this.outOptions[2] );
+    $( "#anywhereButHere" ).toggle( this.outOptions[0], this.outOptions[1], this.outOptions[2] );
+    $( "#takeControl" ).toggle( this.outOptions[0], this.outOptions[1], this.outOptions[2] );
+    $( "#takeMeHome" ).toggle( this.outOptions[0], this.outOptions[1], this.outOptions[2] );
+
+      callback();
+  },
+  moonSlideIn : function() {
+
   }
 }
 
