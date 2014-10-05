@@ -13,7 +13,7 @@ MoonView.prototype = {
         sceneModePicker: false,
         selectionIndicator: false,
         baseLayerPicker: false,
-        timeline: true,
+        timeline: false,
         navigationHelpButton: false,
         navigationInstructionsInitiallyVisible: false
      }

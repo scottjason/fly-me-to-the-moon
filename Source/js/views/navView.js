@@ -12,25 +12,28 @@ NavView.prototype = {
   renderHomeElems : function( location ) {
    $( "#userLocation" ).show();
    $( "#userLocation" ).html( "flying you home to " + location );
-},
-  renderControlElems : function() {
+ },
+  hideElemsForControl : function() {
    $( "#userLocation" ).hide();
    $( "#paradiseLocation" ).hide();
+ },
+  renderControlElems : function() {
    $( "#giveInstructions" ).show();
    $( "#giveInstructions" ).html( "'U' moves up | 'D' moves down | 'L' moves left | 'R' moves right | 'B' moves backward | 'F' moves forward" );
-},
-  renderAnywhereElems : function() {
+ },
+  hideElemsForAnywhere : function() {
    $( "#giveInstructions" ).hide();
    $( "#userLocation" ).hide();
-   $( "#paradiseLocation" ).hide();
-},
-  renderParadiseElems : function( content ) {
-   $( "#paradiseLocation" ).html( "You are visiting paradise on Earth. Welcome to " + content );
-},
-  renderGoodByeElems : function() {
+  },
+  renderAnywhereElems : function( content ) {
+    $( "#paradiseLocation" ).html( "You are visiting paradise on Earth. Welcome to " + content );
+ },
+ hideElemsForMoon : function() {
    $( "#paradiseLocation" ).hide();
    $( "#giveInstructions" ).hide();
    $( "#userLocation" ).hide();
+ },
+  renderMoonElems : function() {
  }
 }
 

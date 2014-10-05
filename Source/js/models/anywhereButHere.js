@@ -8,7 +8,7 @@ AnywhereElse.prototype = {
     initialize: function( viewer, scene, callback ) {
         var scene = viewer.scene;
         var camera = scene.camera;
-        this.flyMeToParadise( [-151.741490,-16.500413], scene.camera );
+        this.flyMeToParadise( [-151.741490,-16.500413], scene.camera, callback );
         // this.paradiseLocations( scene.camera, callback );
     },
     paradiseLocations: function( sceneCamera, callback ) {
@@ -49,14 +49,15 @@ AnywhereElse.prototype = {
         this.reverseGeoCoords( result[0], callback );
         this.collectLocationData( result[0] );
     },
-    flyMeToParadise: function( paradiseMe, sceneCamera) {
-        function flyParadise( paradiseMe, sceneCamera ) {
-            Sandcastle.declare(flyParadise);
+    flyMeToParadise: function( position, sceneCamera, callback ) {
+        this.reverseGeoCoords( position, callback )
+        function flyParadise( position, sceneCamera ) {
+            Sandcastle.declare( flyParadise );
             sceneCamera.flyTo({
-                destination: Cesium.Cartesian3.fromDegrees( paradiseMe[0], paradiseMe[1], 1500.0 )
+                destination: Cesium.Cartesian3.fromDegrees( position[0], position[1], 1500.0 )
             })
         }
-        flyParadise( paradiseMe, sceneCamera );
+        flyParadise( position, sceneCamera );
     },
     reverseGeoCoords: function( position, callback ) {
         this.callback = callback;
@@ -66,13 +67,8 @@ AnywhereElse.prototype = {
     },
     formatAddress: function( results, status ) {
         if ( status == google.maps.GeocoderStatus.OK ) {
-            var location = results[0].formatted_address;
+            this.callback( results[0].formatted_address );
         }
-        this.renderLocation( location );
-    },
-    renderLocation: function( location ) {
-        console.log( location );
-        this.callback( location );
     },
     collectLocationData: function( lat, lng ) {
         $.ajax({
