@@ -5,19 +5,17 @@ function TakeMeHome() {
 }
 
 TakeMeHome.prototype = {
-  initialize : function( scene ) {
+  initialize : function( scene, callback ) {
     this.scene = scene;
-    this.flyHome();
+    this.flyHome( callback );
   },
-  flyHome : function() {
-    // remove instructions
-    $( "#giveInstructions" ).hide();
+  flyHome : function( callback ) {
     var scene = this.scene;
     function flyToLocation() {
       Sandcastle.declare( flyToLocation );
       // create callback for user's geolocation
       function fly( position ) {
-        TakeMeHome.prototype.createReverseGeo( position );
+        TakeMeHome.prototype.createReverseGeo( position, callback );
          scene.camera.flyTo({
           destination : Cesium.Cartesian3.fromDegrees( position.coords.longitude, position.coords.latitude, 1000.0 )
         });
@@ -33,20 +31,21 @@ TakeMeHome.prototype = {
   // initial call
   flyToLocation( scene );
  },
- createReverseGeo : function( position ) {
-  console.log( position )
+ createReverseGeo : function( position, callback ) {
+    this.callback = callback;
     var latLng = new google.maps.LatLng( position.coords.latitude, position.coords.longitude );
     var coder = new google.maps.Geocoder();
     coder.geocode( { 'latLng': latLng }, this.formatUserAddress.bind( this ), { maximumAge: 75000 }  );
  },
  formatUserAddress : function( results, status ) {
    if ( status == google.maps.GeocoderStatus.OK ) {
-    var location = results[1].formatted_address;
+     this.renderUserAddress( results[1].formatted_address )
+  } else {
+    return
   }
-  this.renderUserAddress( location );
  },
  renderUserAddress : function( location ) {
-  $( "#userLocation" ).html("flying you home to " + location );
+   this.callback( location );
   }
 }
 

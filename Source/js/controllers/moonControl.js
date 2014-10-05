@@ -5,11 +5,12 @@ function MoonControl() {
 };
 
 MoonControl.prototype = {
-  initialize : function( TakeOver, TakeMeHome, AnywhereElse, NavControl, MoonView ) {
+  initialize : function( TakeOver, TakeMeHome, AnywhereElse, NavControl, NavView, MoonView ) {
     this.TakeOver = TakeOver;
     this.TakeMeHome = TakeMeHome;
     this.AnywhereElse = AnywhereElse;
-    this.NavControl = navControl;
+    this.NavControl = NavControl;
+    this.NavView = NavView;
     this.MoonView = MoonView;
     this.NavControl.initialize();
     this.MoonView.initialize( this.bindListeners.bind( this ) );
@@ -22,7 +23,7 @@ MoonControl.prototype = {
   },
   takeMeHome : function() {
     this.initHomeEvents();
-    this.TakeMeHome.initialize( this.MoonView.scene );
+    this.TakeMeHome.initialize( this.MoonView.scene, this.initHomeElems.bind( this ) );
   },
   takeControl : function() {
     this.initControlEvents();
@@ -33,29 +34,35 @@ MoonControl.prototype = {
   },
   anywhereButHere : function() {
     this.initAnywhereEvents();
-    this.AnywhereElse.initialize( this.MoonView.viewer, this.MoonView.scene, this.initParadiseEvents.bind( this ) );
+    this.AnywhereElse.initialize( this.MoonView.viewer, this.MoonView.scene, this.initParadiseElems.bind( this ) );
   },
-  initHomeEvents : function() {
+  // remove event listeners and hide data
+  initHomeEvents : function( location ) {
     this.MoonView.stopGlobe();
     this.TakeOver.stopControl();
-    this.MoonView.renderHomeElems();
+    this.NavView.hideElemsForHome();
   },
   initControlEvents : function() {
     this.MoonView.stopGlobe();
-    this.MoonView.renderControlElems();
+    this.NavView.renderControlElems();
   },
   initGoodByeEvents : function() {
     this.MoonView.stopGlobe();
     this.TakeOver.stopControl();
-    this.MoonView.renderGoodByeElems();
+    this.NavView.renderGoodByeElems();
   },
   initAnywhereEvents : function() {
     this.MoonView.stopGlobe();
     this.TakeOver.stopControl();
-    this.MoonView.renderAnywhereElems();
+    this.NavView.renderAnywhereElems();
   },
-  initParadiseEvents : function( content ) {
-    this.MoonView.renderParadiseElems( content );
+  // render data
+  initHomeElems : function( location ) {
+    console.log( location )
+    this.NavView.renderHomeElems( location );
+  },
+  initParadiseElems : function( content ) {
+    this.NavView.renderParadiseElems( content );
   }
 }
 

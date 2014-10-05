@@ -39,30 +39,6 @@ MoonView.prototype = {
     if ( this.spinListener ) {
     this.viewer.clock.onTick.removeEventListener( this.spinListener );
     }
-  },
-  renderHomeElems : function() {
-    $( "#giveInstructions" ).hide();
-    $("#paradiseLocation").hide();
-    $( "#userLocation" ).show();
-  },
-  renderControlElems : function() {
-    $( "#userLocation" ).hide();
-    $("#paradiseLocation").hide();
-    $( "#giveInstructions" ).show();
-    $( "#giveInstructions" ).html( "'U' moves up | 'D' moves down | 'L' moves left | 'R' moves right | 'B' moves backward | 'F' moves forward" );
-  },
-  renderAnywhereElems : function() {
-    $( "#giveInstructions" ).hide();
-    $( "#userLocation" ).hide();
-    $("#paradiseLocation").hide();
-  },
-  renderParadiseElems : function( content ) {
-    $("#paradiseLocation").html( "You are visiting paradise on Earth. Welcome to " + content );
-  },
-  renderGoodByeElems : function() {
-    $("#paradiseLocation").hide();
-    $( "#giveInstructions" ).hide();
-    $( "#userLocation" ).hide();
   }
 }
 
