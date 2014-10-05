@@ -34,6 +34,7 @@ TakeMeHome.prototype = {
   flyToLocation( scene );
  },
  createReverseGeo : function( position ) {
+  console.log( position )
     var latLng = new google.maps.LatLng( position.coords.latitude, position.coords.longitude );
     var coder = new google.maps.Geocoder();
     coder.geocode( { 'latLng': latLng }, this.formatUserAddress.bind( this ), { maximumAge: 75000 }  );
