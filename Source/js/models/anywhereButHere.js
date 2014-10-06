@@ -47,7 +47,6 @@ AnywhereElse.prototype = {
         this.collectLocationData( result[0] );
     },
     flyMeToParadise: function( position ) {
-        this.reverseGeoCoords( position )
         function flyParadise( position ) {
             Sandcastle.declare( flyParadise );
             scene.camera.flyTo({
