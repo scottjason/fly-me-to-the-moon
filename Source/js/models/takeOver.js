@@ -5,15 +5,10 @@ function TakeOver() {
 }
 
 TakeOver.prototype = {
-  initialize : function( viewer, clock, scene, canvas ){
-    this.clock = clock;
-    this.canvas = canvas;
-    this.viewer = viewer;
-    this.scene = viewer.scene;
-    this.camera = scene.camera;
-    this.setCanvas( canvas );
+  initialize : function(){
+    this.setCanvas();
   },
-  setCanvas : function( canvas ) {
+  setCanvas : function() {
     canvas.setAttribute('tabindex', '0');
     canvas.onclick = function() {
       canvas.focus();
@@ -21,7 +16,6 @@ TakeOver.prototype = {
     this.disableHandlers();
   },
   disableHandlers : function() {
-    var scene = this.scene;
     scene.screenSpaceCameraController.enableRotate = false;
     scene.screenSpaceCameraController.enableTranslate = false;
     scene.screenSpaceCameraController.enableZoom = false;
@@ -42,7 +36,6 @@ TakeOver.prototype = {
      this.setActionHandler();
   },
   setActionHandler : function() {
-     var canvas = this.canvas;
      var flags = this.flags;
 
      this.handler = new Cesium.ScreenSpaceEventHandler( canvas );
@@ -99,13 +92,8 @@ TakeOver.prototype = {
     this.setCamera();
   },
   setCamera : function() {
-    var viewer = this.viewer;
-    var camera = this.camera;
-    var scene = this.scene;
-    var canvas = this.canvas;
     var flags = this.flags;
-    var clock = this.clock;
-
+    var camera = scene.camera;
     this.controlListener = function( clock ) {
     if ( flags.looking ) {
         var width = canvas.clientWidth;

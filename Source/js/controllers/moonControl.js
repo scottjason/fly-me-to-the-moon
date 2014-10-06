@@ -5,11 +5,12 @@ function MoonControl() {
 };
 
 MoonControl.prototype = {
-  initialize : function( TakeOver, TakeMeHome, AnywhereElse, NavControl, MoonView ) {
+  initialize : function( TakeOver, TakeMeHome, AnywhereElse, NavControl, NavView, MoonView ) {
     this.TakeOver = TakeOver;
     this.TakeMeHome = TakeMeHome;
     this.AnywhereElse = AnywhereElse;
-    this.NavControl = navControl;
+    this.NavControl = NavControl;
+    this.NavView = NavView;
     this.MoonView = MoonView;
     this.NavControl.initialize();
     this.MoonView.initialize( this.bindListeners.bind( this ) );
@@ -17,45 +18,56 @@ MoonControl.prototype = {
   bindListeners : function() {
     document.getElementById( "takeMeHome" ).addEventListener("click", this.takeMeHome.bind( this ), false );
     document.getElementById( "takeControl" ).addEventListener("click", this.takeControl.bind( this ), false );
-    document.getElementById( "toTheMoon" ).addEventListener("click", this.sayGoodBye.bind( this ), false );
     document.getElementById( "anywhereButHere" ).addEventListener("click", this.anywhereButHere.bind( this ), false );
+    document.getElementById( "toTheMoon" ).addEventListener("click", this.sayGoodBye.bind( this ), false );
   },
   takeMeHome : function() {
-    this.initHomeEvents();
-    this.TakeMeHome.initialize( this.MoonView.scene );
+    this.removeListenersForHome();
+    this.TakeMeHome.initialize( this.initHomeElems.bind( this ) );
   },
   takeControl : function() {
-    this.initControlEvents();
-    this.TakeOver.initialize( this.MoonView.viewer, this.MoonView.clock, this.MoonView.scene, this.MoonView.canvas );
+    this.removeListenersForControl();
+    this.TakeOver.initialize();
   },
   sayGoodBye : function() {
-    this.initGoodByeEvents();
+    this.removeListenersForMoon();
   },
   anywhereButHere : function() {
-    this.initAnywhereEvents();
-    this.AnywhereElse.initialize( this.MoonView.viewer, this.MoonView.scene, this.initParadiseEvents.bind( this ) );
+    this.removeListenersForAnywhere();
+    this.AnywhereElse.initialize( this.initAnywhereElems.bind( this ) );
   },
-  initHomeEvents : function() {
+  // remove event listeners and hide data
+  removeListenersForHome : function( location ) {
     this.MoonView.stopGlobe();
     this.TakeOver.stopControl();
-    this.MoonView.renderHomeElems();
+    this.NavView.hideElemsForHome();
   },
-  initControlEvents : function() {
+  removeListenersForControl : function() {
     this.MoonView.stopGlobe();
-    this.MoonView.renderControlElems();
+    this.NavView.hideElemsForControl();
   },
-  initGoodByeEvents : function() {
-    this.MoonView.stopGlobe();
-    this.TakeOver.stopControl();
-    this.MoonView.renderGoodByeElems();
-  },
-  initAnywhereEvents : function() {
+  removeListenersForAnywhere : function() {
     this.MoonView.stopGlobe();
     this.TakeOver.stopControl();
-    this.MoonView.renderAnywhereElems();
+    this.NavView.hideElemsForAnywhere();
   },
-  initParadiseEvents : function( content ) {
-    this.MoonView.renderParadiseElems( content );
+  removeListenersForMoon : function() {
+    this.MoonView.stopGlobe();
+    this.TakeOver.stopControl();
+    this.NavView.hideElemsForMoon();
+  },
+  // render data
+  initHomeElems : function( location ) {
+    this.NavView.renderHomeElems( location );
+  },
+  initControlElems : function() {
+    this.NavView.renderControlElems();
+  },
+  initAnywhereElems : function( content ) {
+    this.NavView.renderAnywhereElems( content );
+  },
+  initMoonElems : function() {
+    this.NavView.renderMoonElems();
   }
 }
 
