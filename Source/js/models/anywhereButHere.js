@@ -37,7 +37,7 @@ AnywhereElse.prototype = {
             len = this.paradiseArr.length,
             taken = new Array(len);
         if ( numNeeded > len )
-            throw new RangeError("getRandom: more elements taken than available");
+            throw new RangeError( "makeRandomSelection : more elements taken than available" );
         while ( numNeeded-- ) {
             var selectedLocation = Math.floor( Math.random() * len );
             result[numNeeded] = this.paradiseArr[selectedLocation in taken ? taken[selectedLocation] : selectedLocation];
@@ -50,7 +50,7 @@ AnywhereElse.prototype = {
         function flyParadise( position ) {
             Sandcastle.declare( flyParadise );
             scene.camera.flyTo({
-                destination: Cesium.Cartesian3.fromDegrees( position[0], position[1], 2500.0 )
+                destination: Cesium.Cartesian3.fromDegrees( position[0], position[1], 2325.0 )
             })
         }
         flyParadise( position );
@@ -62,7 +62,10 @@ AnywhereElse.prototype = {
         dataType: "JSONP",
         jsonp: "JSONP",
       success: function( data ) {
-        callback ( data.resourceSets[0].resources[0].address.formattedAddress )
+        if ( data.resourceSets[0].resources[0] == undefined ) { return }
+          else {
+        callback ( data.resourceSets[0].resources[0].address.formattedAddress );
+        }
        }
     })
   }

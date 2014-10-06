@@ -26,7 +26,7 @@ MoonControl.prototype = {
   takeMeHome : function() {
     this.MoonView.homeSlideOut();
     this.removeListenersForHome();
-    this.TakeMeHome.initialize( this.initHomeElems.bind( this ) );
+    this.TakeMeHome.flyHome( this.initHomeElems.bind( this ) );
   },
   takeControl : function() {
     this.MoonView.controlSlideOut();
