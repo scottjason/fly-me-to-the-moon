@@ -6,10 +6,10 @@ function AnywhereElse() {
 
 AnywhereElse.prototype = {
     initialize: function( callback ) {
+        this.paradiseArr = [];
         this.paradiseLocations( callback );
     },
     paradiseLocations: function( callback ) {
-        this.paradiseArr = [];
         var aucklandIslands = [166.132858, -50.771492];
         var muKoAngThong = [99.674048, 9.626544];
         var cocosIsland = [96.841739, 12.170874];
@@ -28,6 +28,7 @@ AnywhereElse.prototype = {
         var sumba = [119.974053, -9.699344];
         var floresIsland = [121.079370, -8.657382];
         var lombok = [116.324944, -8.650979];
+
         this.paradiseArr.push( aucklandIslands, muKoAngThong, cocosIsland, phoenixIslands, mamanucaIslands, tetepareIsland, silkCaye, southWaterCaye, goffsCaye, tobaccoCaye, cayeCaulker, ambergrisCaye, alorIsland, westTimor, sumbawa, sumba, floresIsland, lombok );
         this.makeRandomSelection( 1, callback );
     },
@@ -54,9 +55,9 @@ AnywhereElse.prototype = {
         }
         flyParadise( position );
     },
-    reverseGeoRequest : function( position, callback ) {
+    reverseGeoRequest : function( results, callback ) {
       $.ajax({
-        url: 'http://dev.virtualearth.net/REST/v1/Locations/' + position.coords.latitude + ',' + position.coords.longitude + '?o=json&key=AvCHv-7wjmYV1vqauXsrzTQRByL7b8t0F0yG6BhZh-TUjE3-VLvIYxVg4S7OMLMG',
+        url: 'http://dev.virtualearth.net/REST/v1/Locations/' + results[1] + ',' + results[0] + '?o=json&key=AvCHv-7wjmYV1vqauXsrzTQRByL7b8t0F0yG6BhZh-TUjE3-VLvIYxVg4S7OMLMG',
         type: "GET",
         dataType: "JSONP",
         jsonp: "JSONP",
