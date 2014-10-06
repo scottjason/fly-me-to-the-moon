@@ -21,71 +21,49 @@ MoonView.prototype = {
       viewer.clock.onTick.removeEventListener( this.spinListener );
     }
   },
-  homeSlideOut : function() {   // SLIDE OUT NAV ON USER SELECT
-      var outOptions = [ "slide", { direction: "right" }, 450 ];
-      $("#toTheMoon").toggle( outOptions[0], outOptions[1], outOptions[2] );
-      $("#anywhereButHere").toggle( outOptions[0], outOptions[1], outOptions[2] );
-      $("#takeControl").toggle( outOptions[0], outOptions[1], outOptions[2] );
-      $("#takeMeHome").toggle( outOptions[0], outOptions[1], outOptions[2] );
-    },
-  controlSlideOut : function() {  // SLIDE OUT NAV ON USER SELECT
-      var outOptions = [ "slide", { direction: "right" }, 450 ];
-      $("#toTheMoon").toggle( outOptions[0], outOptions[1], outOptions[2] );
-      $("#anywhereButHere").toggle( outOptions[0], outOptions[1], outOptions[2] );
-      $("#takeControl").toggle( outOptions[0], outOptions[1], outOptions[2] );
-      $("#takeMeHome").toggle( outOptions[0], outOptions[1], outOptions[2] );
-    },
-  anywhereSlideOut : function() {  // SLIDE OUT NAV ON USER SELECT
-      var outOptions = [ "slide", { direction: "right" }, 450 ];
-      $("#toTheMoon").toggle( outOptions[0], outOptions[1], outOptions[2] );
-      $("#anywhereButHere").toggle( outOptions[0], outOptions[1], outOptions[2] );
-      $("#takeControl").toggle( outOptions[0], outOptions[1], outOptions[2] );
-      $("#takeMeHome").toggle( outOptions[0], outOptions[1], outOptions[2] );
-    },
-  moonSlideOut : function() {  // SLIDE OUT NAV ON USER SELECT
-      var outOptions = [ "slide", { direction: "right" }, 450 ];
-      $( "#toTheMoon" ).toggle( outOptions[0], outOptions[1], outOptions[2] );
-      $( "#anywhereButHere" ).toggle( outOptions[0], outOptions[1], outOptions[2] );
-      $( "#takeControl" ).toggle( outOptions[0], outOptions[1], outOptions[2] );
-      $( "#takeMeHome" ).toggle( outOptions[0], outOptions[1], outOptions[2] );
-    },
-  slideInAll : function() {  // SLIDE IN NAV ON USER SELECT NEW
-        console.log( this );
-    },
-  hideElemsForHome : function() {   // HIDE ON USER-SELECT HOME
-      $( "#giveInstructions" ).hide();
-      $( "#paradiseLocation" ).hide();
-      $( "#userLocation" ).hide();
+  slideOutNav : function() {
+     $( ".navRightText" ).velocity("transition.perspectiveRightOut", {
+      duration : 600
+     })
+    $( ".loadingData" ).velocity( "transition.slideDownIn");
   },
-  renderHomeElems : function( location ) {   // RENDER ON USER-SELECT HOME
-      $( "#userLocation" ).show();
-      $( "#userLocation" ).html( "flying you home to " + location );
- },
-  hideElemsForControl : function() {   // HIDE ON USER-SELECT CONTROL
-      $( "#userLocation" ).hide();
-      $( "#paradiseLocation" ).hide();
-      $( "#giveInstructions" ).hide();
- },
-  renderControlElems : function() {   // RENDER ON USER-SELECT CONTROL
-      $( "#giveInstructions" ).show();
-      $( "#giveInstructions" ).html( "'U' moves up | 'D' moves down | 'L' moves left | 'R' moves right | 'B' moves backward | 'F' moves forward" );
- },
-  hideElemsForAnywhere : function() {   // HIDE ON USER-SELECT ANYWHERE
-      $( "#giveInstructions" ).hide();
-      $( "#userLocation" ).hide();
-      $( "#paradiseLocation" ).hide();
+  slideInNav : function() {
+    $( "#userLocation" ).hide();
+    $( "#giveInstructions" ).hide();
+    $( "#paradiseLocation" ).hide();
+    $( ".navRightText" ).velocity( "transition.flipBounceXIn", {
+      duration : 600
+     })
+    $( "#resetText" ).velocity("transition.perspectiveRightOut", {
+      visibility : "hidden",
+      display: null, visibility: 'hidden',
+      duration : 1200
+    })
   },
-  renderAnywhereElems : function( content ) {  // RENDER ON USER-SELECT ANYWHERE
-      $( "#paradiseLocation" ).show();
-      $( "#paradiseLocation" ).html( "You are visiting paradise on Earth. Welcome to " + content );
+  hideLoadingHome : function( callback, location ) {
+    this.location = location
+  $( ".loadingData").velocity("transition.slideDownOut", 250);
+    setTimeout( callback.bind( this ), 1000 );
+  },
+  renderHomeElems : function( location ) {
+    $( "#userLocation" ).velocity( "transition.slideDownIn", 900).delay( 1500 ).html( "flying you home to " + this.location )
+    this.showResetText();
+  },
+  renderControlElems : function() {
+    $( "#giveInstructions" ).html( "'U' moves up | 'D' moves down | 'L' moves left | 'R' moves right | 'B' moves backward | 'F' moves forward" ).slideDown( 600 );
+  },
+  renderAnywhereElems : function( content ) {
+    $( "#paradiseLocation" ).html( "Welcome to " + content ).slideDown( 600 );
+  },
+  renderMoonElems : function() {
  },
-  hideElemsForMoon : function() {   // HIDE ON USER-SELECT MOON
-      $( "#paradiseLocation" ).hide();
-      $( "#giveInstructions" ).hide();
-      $( "#userLocation" ).hide();
- },
-  renderMoonElems : function() {   // RENDER ON USER-SELECT MOON
- }
+ showResetText : function() {
+    $( "#resetText" ).velocity("transition.perspectiveRightIn", {
+      visibility : "visible",
+      delay : 3500,
+      duration : 600
+    })
+  }
 }
 
 var moonView = new MoonView();

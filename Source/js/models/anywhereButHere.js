@@ -1,5 +1,5 @@
 function AnywhereElse() {
-    if (!(this instanceof AnywhereElse)) {
+    if (!( this instanceof AnywhereElse )) {
         return new AnywhereElse();
     }
 };

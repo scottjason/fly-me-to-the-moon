@@ -7,7 +7,6 @@
     <meta name="Scott Jason">
 
     <title>fly me to the moon</title>
-    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css">
     <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Gafata" rel="stylesheet" type="text/css">
     <link href="Source/css/main.css" rel="stylesheet" type="text/css">
@@ -35,47 +34,51 @@
 
           <!-- BEGIN RIGHT NAV -->
           <ul class="nav navbar-nav navbar-right">
-            <li>
+            <li class="navSpacer">
               <p id="userLocation"><p>
             </li>
-            <li>
+            <li class="navSpacer">
               <p id="giveInstructions"><p>
             </li>
             <li>
               <p id="paradiseLocation"><p>
             </li>
-            <li>
+
+            <li class="navSpacer">
               <a id="takeMeHome" class="navRightText" href="#">take me home</a>
             </li>
 
-            <li>
+            <li class="navSpacer">
               <a id="takeControl" class="navRightText" href="#">take control</a>
             </li>
-            <li>
+            <li class="navSpacer">
               <a id="anywhereButHere" class="navRightText" href="#">anywhere but here</a>
             </li>
-            <li>
+            <li class="navSpacer">
               <a id="toTheMoon" class="navRightText" href="#">fly me to the moon&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            </li>
+            <li>
+              <p class="loadingData">one moment please</p>
             </li>
           </ul><!-- END RIGHT NAV -->
         </div><!-- END NAV COLLAPSE -->
       </div><!-- END NAV -->
 
-    <div id="cesiumContainer"></div>
-    <div id="toolbar">
-    <!-- <div id="terrainMenu"></div> -->
-    <!-- <div id="zoomButtons"></div> -->
-    <!-- <div id="sampleButtons"></div> -->
+    <div id="cesiumContainer">
+      <p id="resetText">click the home icon to reset the camera</p>
+    </div>
+    <div id="creditContainer"></div>
 
     <script src="https://code.jquery.com/jquery-1.11.1.min.js" type="text/javascript" ></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js" type="text/javascript" ></script>
+    <script src="http://cdn.jsdelivr.net/velocity/1.1.0/velocity.min.js"></script>
+    <script src="http://cdn.jsdelivr.net/velocity/1.1.0/velocity.ui.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js" type="text/javascript" ></script>
     <script src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0" type="text/javascript"></script>
     <script src="ThirdParty/Cesium/Cesium.js" type="text/javascript"></script>
     <script src="ThirdParty/Cesium/SandCastle.js" type="text/javascript" ></script>
     <script src="Source/js/init.js" type="text/javascript"></script>
     <script src="Source/js/controllers/moonControl.js" type="text/javascript"></script>
-    <script src="Source/js/models/globeTerrain.js" type="text/javascript"></script>
+    <script src="Source/js/models/createGlobe.js" type="text/javascript"></script>
     <script src="Source/js/models/takeMeHome.js" type="text/javascript"></script>
     <script src="Source/js/models/takeOver.js" type="text/javascript"></script>
     <script src="Source/js/models/anywhereButHere.js" type="text/javascript"></script>

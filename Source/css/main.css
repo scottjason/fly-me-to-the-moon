@@ -3,51 +3,102 @@ html, body {
     padding: 0;
     margin: 0;
     overflow: hidden;
-    background-color: #86b1cc;
-    font-family: 'Gafata', sans-serif
+    background-color: #000;
+    font-family: 'Gafata', sans-serif;
 }
-.cesium-button.cesium-toolbar-button.cesium-home-button {
-    background-color: transparent;
-    border: none;
+.cesium-home-button {
+    background-color: #000;
 }
-
+.cesium-viewer-geocoderContainer {
+    background-color: #000;
+}
+.cesium-geocoder-searchButton {
+    background-color: #000;
+    fill: #7BA5DB;
+    border-color: #000;
+}
+.cesium-sceneModePicker-button3D {
+    background-color: #000;
+}
+.cesium-navigation-help-button {
+    background-color: #000;
+}
+.cesium-button {
+    fill: #7BA5DB;
+}
 #cesiumContainer {
     position: absolute;
-    top: 60px;
-    left: 0;
+    top: 52.5px !important;
     height: 100%;
     width: 100%;
-    margin: 0;
     overflow: hidden;
     padding: 0;
-    font-family: sans-serif
 }
 a#siteTitle {
-    font-size: 1.8em;
+    font-size: 1.4em;
     text-decoration: none
 }
 a.navRightText {
     color: #5586c6 !important;
-    font-size: 1.2em;
+    font-size: 1.1em;
     text-decoration: none;
-    width: 100%;
     white-space: nowrap;
+    width: 100%;
+    word-spacing: -.2px;
 }
 #userLocation {
-    margin-top: 18px;
+    font-size: 1.1em;
+    margin-top: 15px;
     white-space: nowrap;
-    margin-left: 7%;
+    margin-left: -10% !important;
     color: #2e5291;
 }
 #giveInstructions {
-    margin-top: 18px;
+    font-size: 1.0em;
+    margin-top: 15px;
     white-space: nowrap;
-    margin-left: 7%;
+    margin-left: -10% !important;
     color: #2e5291;
 }
 #paradiseLocation {
-    margin-top: 18px;
+    font-size: 1.0em;
+    margin-top: 15px;
     white-space: nowrap;
-    margin-left: 7%;
+    margin-left: -10% !important;
     color: #2e5291;
+}
+#resetText {
+    visibility: hidden;
+    font-size: 0.9em;
+    float: right;
+    margin-bottom: 1px;
+    color: #F59E11;
+    padding-right: 8px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-pack: bottom;
+    -webkit-box-align: bottom;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-pack: bottom;
+    -moz-box-align: bottom;
+    display: box;
+    box-orient: vertical;
+    box-pack: bottom;
+    box-align: bottom;
+}
+.navbar-fixed-top {
+    height: 50px;
+    border-bottom: 1px solid green;
+}
+#creditContainer {
+    display: none;
+}
+.loadingData {
+    display: none;
+    font-size: 1.1em;
+    margin-top: 15px;
+    white-space: nowrap;
+    margin-right: 28px !important;
+    color: #F59E11;
 }

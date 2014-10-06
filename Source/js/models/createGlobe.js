@@ -9,10 +9,13 @@ var earthOptions = {
         baseLayerPicker: false,
         timeline: false,
         navigationHelpButton: true,
-        navigationInstructionsInitiallyVisible: false
+        navigationInstructionsInitiallyVisible: false,
+        fullscreenButton: false,
+        infoBox: false,
+        creditContainer: "creditContainer"
 }
-
   viewer = new Cesium.Viewer( 'cesiumContainer', earthOptions );
+
     scene = viewer.scene;
     globe = scene.globe;
     clock = viewer.clock;
@@ -22,6 +25,6 @@ var earthOptions = {
   cesiumTerrainProviderHeightmaps = new Cesium.CesiumTerrainProvider({
     url : 'http://cesiumjs.org/smallterrain',
 });
-
     scene.terrainProvider = cesiumTerrainProviderHeightmaps;
+
 }
