@@ -54,7 +54,7 @@
         var result = {};
         // filter out headers that are listed in the regex above
         Object.keys(headers).forEach(function( name ) {
-            if (!dontProxyHeaderRegex.test( name )) {
+            if ( !dontProxyHeaderRegex.test( name ) ) {
                 result[name] = headers[name];
             }
         });
