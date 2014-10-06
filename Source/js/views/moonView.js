@@ -42,22 +42,28 @@ MoonView.prototype = {
   },
   hideLoadingHome : function( callback, location ) {
     this.location = location
-  $( ".loadingData").velocity("transition.slideDownOut", 250);
+    $( ".loadingData" ).velocity( "transition.slideDownOut", 250 );
     setTimeout( callback.bind( this ), 1000 );
   },
   renderHomeElems : function( location ) {
     $( "#userLocation" ).velocity( "transition.slideDownIn", 900).delay( 1500 ).html( "flying you home to " + this.location )
-    this.showResetText();
+    this.renderCameraReset();
   },
   renderControlElems : function() {
     $( "#giveInstructions" ).html( "'U' moves up | 'D' moves down | 'L' moves left | 'R' moves right | 'B' moves backward | 'F' moves forward" ).slideDown( 600 );
   },
-  renderAnywhereElems : function( content ) {
-    $( "#paradiseLocation" ).html( "Welcome to " + content ).slideDown( 600 );
+  hideLoadingAnywhere : function( callback, anywhereContent ) {
+    this.anywhereContent = anywhereContent;
+    $( ".loadingData" ).velocity("transition.slideDownOut", 250 );
+    setTimeout( callback.bind( this ), 1000 );
+  },
+  renderAnywhereElems : function() {
+    $( "#paradiseLocation" ).html( "Welcome to " + this.anywhereContent ).slideDown( 600 );
+    this.renderCameraReset();
   },
   renderMoonElems : function() {
- },
- showResetText : function() {
+  },
+  renderCameraReset : function() {
     $( "#resetText" ).velocity("transition.perspectiveRightIn", {
       visibility : "visible",
       delay : 3500,
