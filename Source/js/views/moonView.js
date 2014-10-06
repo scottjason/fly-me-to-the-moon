@@ -27,7 +27,7 @@ MoonView.prototype = {
   },
   renderHomeElems : function() {
     $( "#giveInstructions" ).hide();
-    $("#paradiseLocation").hide();
+    $( "#paradiseLocation" ).hide();
     $( "#userLocation" ).show();
   },
   renderControlElems : function() {

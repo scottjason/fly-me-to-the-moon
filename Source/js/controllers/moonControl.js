@@ -18,12 +18,12 @@ MoonControl.prototype = {
   bindListeners : function() {
     document.getElementById( "takeMeHome" ).addEventListener("click", this.takeMeHome.bind( this ), false );
     document.getElementById( "takeControl" ).addEventListener("click", this.takeControl.bind( this ), false );
-    document.getElementById( "toTheMoon" ).addEventListener("click", this.sayGoodBye.bind( this ), false );
     document.getElementById( "anywhereButHere" ).addEventListener("click", this.anywhereButHere.bind( this ), false );
+    document.getElementById( "toTheMoon" ).addEventListener("click", this.sayGoodBye.bind( this ), false );
   },
   takeMeHome : function() {
     this.removeListenersForHome();
-    this.TakeMeHome.initialize( this.MoonView.scene, this.initHomeElems.bind( this ) );
+    this.TakeMeHome.initialize( this.initHomeElems.bind( this ) );
   },
   takeControl : function() {
     this.removeListenersForControl();
@@ -34,7 +34,7 @@ MoonControl.prototype = {
   },
   anywhereButHere : function() {
     this.removeListenersForAnywhere();
-    this.AnywhereElse.initialize( this.MoonView.viewer, this.MoonView.scene, this.initAnywhereElems.bind( this ) );
+    this.AnywhereElse.initialize( this.initAnywhereElems.bind( this ) );
   },
   // remove event listeners and hide data
   removeListenersForHome : function( location ) {

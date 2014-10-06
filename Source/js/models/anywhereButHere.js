@@ -5,13 +5,10 @@ function AnywhereElse() {
 };
 
 AnywhereElse.prototype = {
-    initialize: function( viewer, scene, callback ) {
-        var scene = viewer.scene;
-        var camera = scene.camera;
-        this.flyMeToParadise( [-151.741490,-16.500413], scene.camera, callback );
-        // this.paradiseLocations( scene.camera, callback );
+    initialize: function( callback ) {
+        this.paradiseLocations( callback );
     },
-    paradiseLocations: function( sceneCamera, callback ) {
+    paradiseLocations: function( callback ) {
         this.paradiseArr = [];
         var aucklandIslands = [166.132858, -50.771492];
         var muKoAngThong = [99.674048, 9.626544];
@@ -32,9 +29,9 @@ AnywhereElse.prototype = {
         var floresIsland = [121.079370, -8.657382];
         var lombok = [116.324944, -8.650979];
         this.paradiseArr.push( aucklandIslands, muKoAngThong, cocosIsland, phoenixIslands, mamanucaIslands, tetepareIsland, silkCaye, southWaterCaye, goffsCaye, tobaccoCaye, cayeCaulker, ambergrisCaye, alorIsland, westTimor, sumbawa, sumba, floresIsland, lombok );
-        this.makeRandomSelection( sceneCamera, 1, callback );
+        this.makeRandomSelection( 1, callback );
     },
-    makeRandomSelection: function(sceneCamera, numNeeded, callback) {
+    makeRandomSelection: function( numNeeded, callback ) {
         var result = new Array( numNeeded ),
             len = this.paradiseArr.length,
             taken = new Array(len);
@@ -45,34 +42,35 @@ AnywhereElse.prototype = {
             result[numNeeded] = this.paradiseArr[selectedLocation in taken ? taken[selectedLocation] : selectedLocation];
             taken[selectedLocation] = --len;
         }
-        this.flyMeToParadise( result[0], sceneCamera );
+        this.flyMeToParadise( result[0] );
         this.reverseGeoCoords( result[0], callback );
         this.collectLocationData( result[0] );
     },
-    flyMeToParadise: function( position, sceneCamera, callback ) {
-        this.reverseGeoCoords( position, callback )
-        function flyParadise( position, sceneCamera ) {
+    flyMeToParadise: function( position ) {
+        this.reverseGeoCoords( position )
+        function flyParadise( position ) {
             Sandcastle.declare( flyParadise );
-            sceneCamera.flyTo({
+            scene.camera.flyTo({
                 destination: Cesium.Cartesian3.fromDegrees( position[0], position[1], 2000.0 )
             })
         }
-        flyParadise( position, sceneCamera );
+        flyParadise( position );
     },
     reverseGeoCoords: function( position, callback ) {
-        this.callback = callback;
+        // this.callback = callback;
+        console.log( callback )
         var latLng = new google.maps.LatLng( position[0], position[1] );
         var coder = new google.maps.Geocoder();
         coder.geocode( { 'latLng': latLng }, this.formatAddress.bind( this ), { maximumAge: 75000 } );
     },
     formatAddress: function( results, status ) {
         if ( status == google.maps.GeocoderStatus.OK ) {
-            this.callback( results[0].formatted_address );
+            // this.callback( results[0].formatted_address );
         }
     },
     collectLocationData: function( lat, lng ) {
         $.ajax({
-            url: "http://dev.virtualearth.net/REST/v1/Locations/47.64054,-122.12934?o=json&key=AvCHv-7wjmYV1vqauXsrzTQRByL7b8t0F0yG6BhZh-TUjE3-VLvIYxVg4S7OMLMG",
+            url: "http://dev.virtualearth.net/REST/v1/Locations/" + lat + "," + lng + "?o=json&key=AvCHv-7wjmYV1vqauXsrzTQRByL7b8t0F0yG6BhZh-TUjE3-VLvIYxVg4S7OMLMG",
             type: "GET",
             dataType: "JSONP",
             jsonp: "JSONP",

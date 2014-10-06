@@ -5,12 +5,10 @@ function TakeMeHome() {
 }
 
 TakeMeHome.prototype = {
-  initialize : function( scene, callback ) {
-    this.scene = scene;
+  initialize : function( callback ) {
     this.flyHome( callback );
   },
   flyHome : function( callback ) {
-    var scene = this.scene;
     function flyToLocation() {
       Sandcastle.declare( flyToLocation );
       // create callback for user's geolocation

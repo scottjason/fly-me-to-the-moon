@@ -19,17 +19,17 @@ clock = viewer.clock;
 globe.depthTestAgainstTerrain = true;
 
 cesiumTerrainProviderHeightmaps = new Cesium.CesiumTerrainProvider({
-    url : '//cesiumjs.org/smallterrain'
+    url : 'http://cesiumjs.org/smallterrain'
 });
 
 cesiumTerrainProviderMeshes = new Cesium.CesiumTerrainProvider({
-    url : '//cesiumjs.org/stk-terrain/tilesets/world/tiles'
+    url : 'http://cesiumjs.org/stk-terrain/tilesets/world/tiles'
 });
 
 ellipsoidProvider = new Cesium.EllipsoidTerrainProvider();
 
 vrTheWorldProvider = new Cesium.VRTheWorldTerrainProvider({
-    url : '//www.vr-theworld.com/vr-theworld/tiles1.0.0/73/'
+    url : 'http://www.vr-theworld.com/vr-theworld/tiles1.0.0/73/'
 
 });
 
