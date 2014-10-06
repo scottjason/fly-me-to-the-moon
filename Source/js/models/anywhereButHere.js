@@ -54,7 +54,7 @@ AnywhereElse.prototype = {
         function flyParadise( position, sceneCamera ) {
             Sandcastle.declare( flyParadise );
             sceneCamera.flyTo({
-                destination: Cesium.Cartesian3.fromDegrees( position[0], position[1], 1500.0 )
+                destination: Cesium.Cartesian3.fromDegrees( position[0], position[1], 2000.0 )
             })
         }
         flyParadise( position, sceneCamera );

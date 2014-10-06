@@ -8,6 +8,7 @@ NavView.prototype = {
   hideElemsForHome : function() {
    $( "#giveInstructions" ).hide();
    $( "#paradiseLocation" ).hide();
+   $( "#userLocation" ).hide();
   },
   renderHomeElems : function( location ) {
    $( "#userLocation" ).show();
@@ -16,6 +17,7 @@ NavView.prototype = {
   hideElemsForControl : function() {
    $( "#userLocation" ).hide();
    $( "#paradiseLocation" ).hide();
+   $( "#giveInstructions" ).hide();
  },
   renderControlElems : function() {
    $( "#giveInstructions" ).show();
@@ -24,8 +26,10 @@ NavView.prototype = {
   hideElemsForAnywhere : function() {
    $( "#giveInstructions" ).hide();
    $( "#userLocation" ).hide();
+   $( "#paradiseLocation" ).hide();
   },
   renderAnywhereElems : function( content ) {
+    $( "#paradiseLocation" ).show();
     $( "#paradiseLocation" ).html( "You are visiting paradise on Earth. Welcome to " + content );
  },
  hideElemsForMoon : function() {
