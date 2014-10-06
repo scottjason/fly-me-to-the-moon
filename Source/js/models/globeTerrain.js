@@ -16,6 +16,7 @@ viewer = new Cesium.Viewer( 'cesiumContainer', earthOptions );
 scene = viewer.scene;
 globe = scene.globe;
 clock = viewer.clock;
+canvas = scene.canvas;
 globe.depthTestAgainstTerrain = true;
 
 cesiumTerrainProviderHeightmaps = new Cesium.CesiumTerrainProvider({

@@ -57,25 +57,25 @@ AnywhereElse.prototype = {
         flyParadise( position );
     },
     reverseGeoCoords: function( position, callback ) {
-        // this.callback = callback;
-        console.log( callback )
+        this.callback = callback;
         var latLng = new google.maps.LatLng( position[0], position[1] );
         var coder = new google.maps.Geocoder();
         coder.geocode( { 'latLng': latLng }, this.formatAddress.bind( this ), { maximumAge: 75000 } );
     },
     formatAddress: function( results, status ) {
         if ( status == google.maps.GeocoderStatus.OK ) {
-            // this.callback( results[0].formatted_address );
+            this.callback( results[0].formatted_address );
         }
     },
-    collectLocationData: function( lat, lng ) {
+    collectLocationData: function( position ) {
+        console.log( position )
         $.ajax({
-            url: "http://dev.virtualearth.net/REST/v1/Locations/" + lat + "," + lng + "?o=json&key=AvCHv-7wjmYV1vqauXsrzTQRByL7b8t0F0yG6BhZh-TUjE3-VLvIYxVg4S7OMLMG",
+            url: 'http://dev.virtualearth.net/REST/v1/Locations/' + position[0] + ',' + position[1] + '?o=json&key=AvCHv-7wjmYV1vqauXsrzTQRByL7b8t0F0yG6BhZh-TUjE3-VLvIYxVg4S7OMLMG',
             type: "GET",
             dataType: "JSONP",
             jsonp: "JSONP",
             success: function( data ) {
-            console.log( data.resourceSets[0].resources[0] );
+            console.log( data );
             }
         })
     }

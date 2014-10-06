@@ -27,7 +27,7 @@ MoonControl.prototype = {
   },
   takeControl : function() {
     this.removeListenersForControl();
-    this.TakeOver.initialize( this.MoonView.viewer, this.MoonView.clock, this.MoonView.scene, this.MoonView.canvas );
+    this.TakeOver.initialize();
   },
   sayGoodBye : function() {
     this.removeListenersForMoon();
