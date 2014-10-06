@@ -5,69 +5,76 @@ function MoonControl() {
 };
 
 MoonControl.prototype = {
-  initialize : function( TakeOver, TakeMeHome, AnywhereElse, NavControl, NavView, MoonView ) {
+  initialize : function( TakeOver, TakeMeHome, AnywhereElse, MoonView ) {
     this.TakeOver = TakeOver;
     this.TakeMeHome = TakeMeHome;
     this.AnywhereElse = AnywhereElse;
-    this.NavControl = NavControl;
-    this.NavView = NavView;
     this.MoonView = MoonView;
-    this.NavControl.initialize();
-    this.MoonView.initialize( this.bindListeners.bind( this ) );
+    this.bindListeners();
+    this.MoonView.startRotation( 0.65 );
   },
   bindListeners : function() {
     document.getElementById( "takeMeHome" ).addEventListener("click", this.takeMeHome.bind( this ), false );
     document.getElementById( "takeControl" ).addEventListener("click", this.takeControl.bind( this ), false );
     document.getElementById( "anywhereButHere" ).addEventListener("click", this.anywhereButHere.bind( this ), false );
     document.getElementById( "toTheMoon" ).addEventListener("click", this.sayGoodBye.bind( this ), false );
+
+    var homeButton = document.getElementsByClassName( "cesium-viewer-toolbar" )
+        homeButton[0].addEventListener( "click", this.MoonView.slideInAll.bind( this.MoonView ), false );
   },
+    // init MoonView onClick events, init remove listeners and data, invoke user-selcted behavior
   takeMeHome : function() {
+    this.MoonView.homeSlideOut();
     this.removeListenersForHome();
     this.TakeMeHome.initialize( this.initHomeElems.bind( this ) );
   },
   takeControl : function() {
+    this.MoonView.controlSlideOut();
     this.removeListenersForControl();
     this.TakeOver.initialize();
   },
-  sayGoodBye : function() {
-    this.removeListenersForMoon();
-  },
   anywhereButHere : function() {
+    this.MoonView.anywhereSlideOut();
     this.removeListenersForAnywhere();
     this.AnywhereElse.initialize( this.initAnywhereElems.bind( this ) );
   },
-  // remove event listeners and hide data
+  sayGoodBye : function() {
+    this.MoonView.moonSlideOut();
+    this.removeListenersForMoon();
+    // invoke fly to moon
+  },
+    // remove event listeners and hide data
   removeListenersForHome : function( location ) {
-    this.MoonView.stopGlobe();
+    this.MoonView.stopRotation();
     this.TakeOver.stopControl();
-    this.NavView.hideElemsForHome();
+    this.MoonView.hideElemsForHome();
   },
   removeListenersForControl : function() {
-    this.MoonView.stopGlobe();
-    this.NavView.hideElemsForControl();
+    this.MoonView.stopRotation();
+    this.MoonView.hideElemsForControl();
   },
   removeListenersForAnywhere : function() {
-    this.MoonView.stopGlobe();
+    this.MoonView.stopRotation();
     this.TakeOver.stopControl();
-    this.NavView.hideElemsForAnywhere();
+    this.MoonView.hideElemsForAnywhere();
   },
   removeListenersForMoon : function() {
-    this.MoonView.stopGlobe();
+    this.MoonView.stopRotation();
     this.TakeOver.stopControl();
-    this.NavView.hideElemsForMoon();
+    this.MoonView.hideElemsForMoon();
   },
-  // render data
+    // render MoonView new data for user selected behavior
   initHomeElems : function( location ) {
-    this.NavView.renderHomeElems( location );
+    this.MoonView.renderHomeElems( location );
   },
   initControlElems : function() {
-    this.NavView.renderControlElems();
+    this.MoonView.renderControlElems();
   },
   initAnywhereElems : function( content ) {
-    this.NavView.renderAnywhereElems( content );
+    this.MoonView.renderAnywhereElems( content );
   },
   initMoonElems : function() {
-    this.NavView.renderMoonElems();
+    this.MoonView.renderMoonElems();
   }
 }
 
