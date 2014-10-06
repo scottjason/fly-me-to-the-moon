@@ -38,14 +38,11 @@ TakeMeHome.prototype = {
  },
  formatUserAddress : function( results, status ) {
    if ( status == google.maps.GeocoderStatus.OK ) {
-     this.renderUserAddress( results[1].formatted_address )
+     this.callback( results[1].formatted_address )
   } else {
     return
   }
  },
- renderUserAddress : function( location ) {
-   this.callback( location );
-  },
    collectLocationData: function( position ) {
         console.log( position )
         $.ajax({
