@@ -1,6 +1,4 @@
 @import url("../../ThirdParty/Cesium/Widgets/widgets.css");
-
-
 html, body {
     padding: 0;
     margin: 0;
@@ -8,19 +6,16 @@ html, body {
     background-color: #86b1cc;
     font-family: 'Gafata', sans-serif
 }
-.cesium-viewer-toolbar {
-    color: red !important;
-    /*margin-top: 50px;*/
-}
 .cesium-button.cesium-toolbar-button.cesium-home-button {
-    background-color: purple;
-}
-/*.cesium-viewer-toolbar > button {
-    z-index: 2000;
-    background-color: #000;
+    background-color: transparent;
     border: none;
-    color: #000;
-}*/
+}
+#cesiumContainer > div > div.cesium-viewer-toolbar > div {
+    background-color: transparent !important;
+}
+#cesiumContainer > div > div.cesium-viewer-toolbar > div > form > span > svg:svg {
+    background-color: transparent !important;
+}
 #cesiumContainer {
     position: absolute;
     top: 60px;
@@ -55,34 +50,9 @@ a.navRightText {
     margin-left: 7%;
     color: #2e5291;
 }
-
 #paradiseLocation {
     margin-top: 18px;
     white-space: nowrap;
     margin-left: 7%;
     color: #2e5291;
-}
-
-.logo{
-    font-family: "Pacifico";
-    font-size: 2em;
-    text-align: center;
-    color: #eee;
-    width: 960px;
-    z-index: 10;
-    position: fixed;
-    top:0px;
-    left:50%;
-    margin-left: -480px;
-    padding: 10px;
-}
-
-#space{
-    float: left;
-    margin-left: 30px;
-}
-
-#nasa {
-    float: right;
-    margin-right: 30px;
 }
