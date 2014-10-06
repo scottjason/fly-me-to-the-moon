@@ -4,15 +4,18 @@ Cesium.BingMapsApi.defaultKey = 'AvCHv-7wjmYV1vqauXsrzTQRByL7b8t0F0yG6BhZh-TUjE3
 var earthOptions = {
         animation: false,
         homeButton: true,
-        sceneModePicker: false,
+        sceneModePicker: true,
         selectionIndicator: false,
         baseLayerPicker: false,
         timeline: false,
-        navigationHelpButton: false,
-        navigationInstructionsInitiallyVisible: false
+        navigationHelpButton: true,
+        navigationInstructionsInitiallyVisible: false,
+        fullscreenButton: false,
+        infoBox: false,
+        creditContainer: "creditContainer"
 }
-
   viewer = new Cesium.Viewer( 'cesiumContainer', earthOptions );
+
     scene = viewer.scene;
     globe = scene.globe;
     clock = viewer.clock;
@@ -20,18 +23,8 @@ var earthOptions = {
     globe.depthTestAgainstTerrain = true;
 
   cesiumTerrainProviderHeightmaps = new Cesium.CesiumTerrainProvider({
-    url : 'http://cesiumjs.org/smallterrain'
+    url : 'http://cesiumjs.org/smallterrain',
 });
+    scene.terrainProvider = cesiumTerrainProviderHeightmaps;
 
-  cesiumTerrainProviderMeshes = new Cesium.CesiumTerrainProvider({
-    url : 'http://cesiumjs.org/stk-terrain/tilesets/world/tiles'
-});
-
-  ellipsoidProvider = new Cesium.EllipsoidTerrainProvider();
-
-  vrTheWorldProvider = new Cesium.VRTheWorldTerrainProvider({
-    url : 'http://www.vr-theworld.com/vr-theworld/tiles1.0.0/73/'
-
-});
-    scene.terrainProvider = cesiumTerrainProviderMeshes;
 }

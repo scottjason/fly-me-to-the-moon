@@ -1,15 +1,15 @@
 function AnywhereElse() {
-    if (!(this instanceof AnywhereElse)) {
+    if (!( this instanceof AnywhereElse )) {
         return new AnywhereElse();
     }
 };
 
 AnywhereElse.prototype = {
     initialize: function( callback ) {
+        this.paradiseArr = [];
         this.paradiseLocations( callback );
     },
     paradiseLocations: function( callback ) {
-        this.paradiseArr = [];
         var aucklandIslands = [166.132858, -50.771492];
         var muKoAngThong = [99.674048, 9.626544];
         var cocosIsland = [96.841739, 12.170874];
@@ -28,6 +28,7 @@ AnywhereElse.prototype = {
         var sumba = [119.974053, -9.699344];
         var floresIsland = [121.079370, -8.657382];
         var lombok = [116.324944, -8.650979];
+
         this.paradiseArr.push( aucklandIslands, muKoAngThong, cocosIsland, phoenixIslands, mamanucaIslands, tetepareIsland, silkCaye, southWaterCaye, goffsCaye, tobaccoCaye, cayeCaulker, ambergrisCaye, alorIsland, westTimor, sumbawa, sumba, floresIsland, lombok );
         this.makeRandomSelection( 1, callback );
     },
@@ -36,48 +37,38 @@ AnywhereElse.prototype = {
             len = this.paradiseArr.length,
             taken = new Array(len);
         if ( numNeeded > len )
-            throw new RangeError("getRandom: more elements taken than available");
+            throw new RangeError( "makeRandomSelection : more elements taken than available" );
         while ( numNeeded-- ) {
             var selectedLocation = Math.floor( Math.random() * len );
             result[numNeeded] = this.paradiseArr[selectedLocation in taken ? taken[selectedLocation] : selectedLocation];
             taken[selectedLocation] = --len;
         }
         this.flyMeToParadise( result[0] );
-        this.reverseGeoCoords( result[0], callback );
-        // this.collectLocationData( result[0] );
+        this.reverseGeoRequest( result[0], callback );
     },
     flyMeToParadise: function( position ) {
         function flyParadise( position ) {
             Sandcastle.declare( flyParadise );
             scene.camera.flyTo({
-                destination: Cesium.Cartesian3.fromDegrees( position[0], position[1], 2500.0 )
+                destination: Cesium.Cartesian3.fromDegrees( position[0], position[1], 2325.0 )
             })
         }
         flyParadise( position );
     },
-    reverseGeoCoords: function( position, callback ) {
-        this.callback = callback;
-        var latLng = new google.maps.LatLng( position[0], position[1] );
-        var coder = new google.maps.Geocoder();
-        coder.geocode( { 'latLng': latLng }, this.formatAddress.bind( this ), { maximumAge: 75000 } );
-    },
-    formatAddress: function( results, status ) {
-        if ( status == google.maps.GeocoderStatus.OK ) {
-            this.callback( results[0].formatted_address );
+    reverseGeoRequest : function( results, callback ) {
+      $.ajax({
+        url: 'http://dev.virtualearth.net/REST/v1/Locations/' + results[1] + ',' + results[0] + '?o=json&key=AvCHv-7wjmYV1vqauXsrzTQRByL7b8t0F0yG6BhZh-TUjE3-VLvIYxVg4S7OMLMG',
+        type: "GET",
+        dataType: "JSONP",
+        jsonp: "JSONP",
+      success: function( data ) {
+        if ( data.resourceSets[0].resources[0] == undefined ) { return }
+          else {
+        callback ( data.resourceSets[0].resources[0].address.formattedAddress );
         }
-    },
-    collectLocationData: function( position ) {
-        console.log( position )
-        $.ajax({
-            url: 'http://dev.virtualearth.net/REST/v1/Locations/' + position[0] + ',' + position[1] + '?o=json&key=AvCHv-7wjmYV1vqauXsrzTQRByL7b8t0F0yG6BhZh-TUjE3-VLvIYxVg4S7OMLMG',
-            type: "GET",
-            dataType: "JSONP",
-            jsonp: "JSONP",
-            success: function( data ) {
-            console.log( data );
-            }
-        })
-    }
+       }
+    })
+  }
 }
 
 var anywhereElse = new AnywhereElse();

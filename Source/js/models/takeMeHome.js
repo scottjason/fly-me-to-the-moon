@@ -5,21 +5,17 @@ function TakeMeHome() {
 }
 
 TakeMeHome.prototype = {
-  initialize : function( callback ) {
-    this.flyHome( callback );
-  },
   flyHome : function( callback ) {
-    function flyToLocation() {
+    function flyToLocation( makeRequest, callback ) {
       Sandcastle.declare( flyToLocation );
       // create callback for user's geolocation
       function fly( position ) {
-        TakeMeHome.prototype.createReverseGeo( position, callback );
-        // TakeMeHome.prototype.collectLocationData( position );
+        makeRequest( position, callback );
           scene.camera.flyTo({
             destination : Cesium.Cartesian3.fromDegrees( position.coords.longitude, position.coords.latitude, 1000.0 )
           });
        }
-    // collect user's geolocation, invoke fly() on complete
+    // collect user's geolocation, invoke fly on complete
     if ( navigator.geolocation && typeof ( navigator.geolocation.getCurrentPosition ) == "function") {
          navigator.geolocation.getCurrentPosition( fly );
     }
@@ -28,36 +24,19 @@ TakeMeHome.prototype = {
     }
   }
   // initial call
-  flyToLocation( scene );
+  flyToLocation( this.reverseGeoRequest, callback );
  },
- createReverseGeo : function( position, callback ) {
-    this.callback = callback;
-    var latLng = new google.maps.LatLng( position.coords.latitude, position.coords.longitude );
-    var coder = new google.maps.Geocoder();
-    coder.geocode( { 'latLng': latLng }, this.formatUserAddress.bind( this ), { maximumAge: 75000 }  );
- },
- formatUserAddress : function( results, status ) {
-   if ( status == google.maps.GeocoderStatus.OK ) {
-     this.renderUserAddress( results[1].formatted_address )
-  } else {
-    return
+  reverseGeoRequest : function( position, callback ) {
+    $.ajax({
+      url: 'http://dev.virtualearth.net/REST/v1/Locations/' + position.coords.latitude + ',' + position.coords.longitude + '?o=json&key=AvCHv-7wjmYV1vqauXsrzTQRByL7b8t0F0yG6BhZh-TUjE3-VLvIYxVg4S7OMLMG',
+      type: 'GET',
+      dataType: 'JSONP',
+      jsonp: 'JSONP',
+      success: function( data ) {
+        callback ( data.resourceSets[0].resources[0].address.formattedAddress );
+       }
+    })
   }
- },
- renderUserAddress : function( location ) {
-   this.callback( location );
-  },
-   collectLocationData: function( position ) {
-        console.log( position )
-        $.ajax({
-            url: 'http://dev.virtualearth.net/REST/v1/Locations/' + position[0] + position[1] + '?o=json&key=AvCHv-7wjmYV1vqauXsrzTQRByL7b8t0F0yG6BhZh-TUjE3-VLvIYxVg4S7OMLMG',
-            type: "GET",
-            dataType: "JSONP",
-            jsonp: "JSONP",
-            success: function( data ) {
-            console.log( data );
-            }
-        })
-    }
 }
 
 var takeMeHome = new TakeMeHome();
