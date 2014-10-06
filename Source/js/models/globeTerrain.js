@@ -19,23 +19,19 @@ var earthOptions = {
     canvas = scene.canvas;
     globe.depthTestAgainstTerrain = true;
 
-cesiumTerrainProviderHeightmaps = new Cesium.CesiumTerrainProvider({
+  cesiumTerrainProviderHeightmaps = new Cesium.CesiumTerrainProvider({
     url : 'http://cesiumjs.org/smallterrain'
 });
 
-cesiumTerrainProviderMeshes = new Cesium.CesiumTerrainProvider({
+  cesiumTerrainProviderMeshes = new Cesium.CesiumTerrainProvider({
     url : 'http://cesiumjs.org/stk-terrain/tilesets/world/tiles'
 });
 
-ellipsoidProvider = new Cesium.EllipsoidTerrainProvider();
+  ellipsoidProvider = new Cesium.EllipsoidTerrainProvider();
 
-vrTheWorldProvider = new Cesium.VRTheWorldTerrainProvider({
+  vrTheWorldProvider = new Cesium.VRTheWorldTerrainProvider({
     url : 'http://www.vr-theworld.com/vr-theworld/tiles1.0.0/73/'
 
 });
-
-scene.terrainProvider = cesiumTerrainProviderMeshes;
-
-
-
+    scene.terrainProvider = cesiumTerrainProviderMeshes;
 }
