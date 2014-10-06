@@ -44,13 +44,13 @@ AnywhereElse.prototype = {
         }
         this.flyMeToParadise( result[0] );
         this.reverseGeoCoords( result[0], callback );
-        this.collectLocationData( result[0] );
+        // this.collectLocationData( result[0] );
     },
     flyMeToParadise: function( position ) {
         function flyParadise( position ) {
             Sandcastle.declare( flyParadise );
             scene.camera.flyTo({
-                destination: Cesium.Cartesian3.fromDegrees( position[0], position[1], 2000.0 )
+                destination: Cesium.Cartesian3.fromDegrees( position[0], position[1], 2500.0 )
             })
         }
         flyParadise( position );

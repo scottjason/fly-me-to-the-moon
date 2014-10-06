@@ -10,12 +10,7 @@ html, body {
     background-color: transparent;
     border: none;
 }
-#cesiumContainer > div > div.cesium-viewer-toolbar > div {
-    background-color: transparent !important;
-}
-#cesiumContainer > div > div.cesium-viewer-toolbar > div > form > span > svg:svg {
-    background-color: transparent !important;
-}
+
 #cesiumContainer {
     position: absolute;
     top: 60px;

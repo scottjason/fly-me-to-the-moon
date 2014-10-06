@@ -6,7 +6,7 @@ function MoonView() {
 
 MoonView.prototype = {
   initialize : function( callback ){
-    this.spinGlobe( 0.45 );
+    this.spinGlobe( 0.65 );
     callback();
   },
   spinGlobe : function( setRate ){

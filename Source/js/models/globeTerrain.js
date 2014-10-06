@@ -11,13 +11,13 @@ var earthOptions = {
         navigationHelpButton: false,
         navigationInstructionsInitiallyVisible: false
 }
-viewer = new Cesium.Viewer( 'cesiumContainer', earthOptions );
 
-scene = viewer.scene;
-globe = scene.globe;
-clock = viewer.clock;
-canvas = scene.canvas;
-globe.depthTestAgainstTerrain = true;
+  viewer = new Cesium.Viewer( 'cesiumContainer', earthOptions );
+    scene = viewer.scene;
+    globe = scene.globe;
+    clock = viewer.clock;
+    canvas = scene.canvas;
+    globe.depthTestAgainstTerrain = true;
 
 cesiumTerrainProviderHeightmaps = new Cesium.CesiumTerrainProvider({
     url : 'http://cesiumjs.org/smallterrain'
@@ -35,5 +35,7 @@ vrTheWorldProvider = new Cesium.VRTheWorldTerrainProvider({
 });
 
 scene.terrainProvider = cesiumTerrainProviderMeshes;
+
+
 
 }

@@ -14,7 +14,7 @@ TakeMeHome.prototype = {
       // create callback for user's geolocation
       function fly( position ) {
         TakeMeHome.prototype.createReverseGeo( position, callback );
-        TakeMeHome.prototype.collectLocationData( position );
+        // TakeMeHome.prototype.collectLocationData( position );
           scene.camera.flyTo({
             destination : Cesium.Cartesian3.fromDegrees( position.coords.longitude, position.coords.latitude, 1000.0 )
           });
