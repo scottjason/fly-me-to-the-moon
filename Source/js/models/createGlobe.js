@@ -17,6 +17,7 @@ var earthOptions = {
   viewer = new Cesium.Viewer( 'cesiumContainer', earthOptions );
 
     scene = viewer.scene;
+    primitives = scene.primitives;
     globe = scene.globe;
     clock = viewer.clock;
     canvas = scene.canvas;
@@ -26,5 +27,4 @@ var earthOptions = {
     url : 'http://cesiumjs.org/smallterrain',
 });
     scene.terrainProvider = cesiumTerrainProviderHeightmaps;
-
 }

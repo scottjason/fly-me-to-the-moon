@@ -21,7 +21,7 @@ TakeOver.prototype = {
     scene.screenSpaceCameraController.enableZoom = false;
     scene.screenSpaceCameraController.enableTilt = false;
     scene.screenSpaceCameraController.enableLook = false;
-    this.setFlags() ;
+    this.setFlags();
   },
   setFlags : function () {
     this.flags = {
