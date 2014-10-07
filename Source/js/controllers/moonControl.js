@@ -5,30 +5,31 @@ function MoonControl() {
 };
 
 MoonControl.prototype = {
-  initialize : function( TakeOver, TakeMeHome, AnywhereElse, MoonView ) {
+  initialize : function( TakeOver, TakeMeHome, AnywhereElse, MoonFlyer, MoonView ) {
     this.TakeOver = TakeOver;
     this.TakeMeHome = TakeMeHome;
     this.AnywhereElse = AnywhereElse;
+    this.MoonFlyer = MoonFlyer;
     this.MoonView = MoonView;
     this.bindListeners();
-    this.MoonView.startRotation( 0.65 );
+    this.MoonView.startRotation( 0.55 );
   },
   bindListeners : function() {
     document.getElementById( "takeMeHome" ).addEventListener( "click", this.takeMeHome.bind( this ), false );
     document.getElementById( "takeControl" ).addEventListener( "click", this.takeControl.bind( this ), false );
     document.getElementById( "anywhereButHere" ).addEventListener( "click", this.anywhereButHere.bind( this ), false );
-    document.getElementById( "toTheMoon" ).addEventListener( "click", this.sayGoodBye.bind( this ), false );
+    document.getElementById( "toTheMoon" ).addEventListener( "click", this.flyToMoon.bind( this ), false );
     document.getElementsByClassName( "cesium-home-button" )[0].addEventListener( "click", this.globeReset.bind( this ), false );
     document.getElementsByClassName( "cesium-viewer-geocoderContainer" )[0].addEventListener( "submit", this.searchGlobe.bind( this ), false );
    },
   globeReset : function() {
-    this.TakeOver.stopControl();
     this.MoonView.slideInNav();
+    this.TakeOver.stopControl();
   },
   searchGlobe : function() {
+    this.MoonView.slideInNav();
     this.MoonView.stopRotation();
     this.TakeOver.stopControl();
-    this.MoonView.slideInNav();
   },
   takeMeHome : function() {
     this.MoonView.slideOutNav();
@@ -47,10 +48,10 @@ MoonControl.prototype = {
     this.TakeOver.stopControl();
     this.AnywhereElse.initialize( this.initAnywhereElems.bind( this ) );
   },
-  sayGoodBye : function() {
+  flyToMoon : function() {
     this.MoonView.slideOutNav();
-    this.MoonView.stopRotation();
     this.TakeOver.stopControl();
+    this.MoonFlyer.goodByeAtmosphere( 1.0, this.initMoonElems );
   },
   initHomeElems : function( location ) {
     this.MoonView.hideLoadingHome( this.MoonView.renderHomeElems, location );
@@ -61,8 +62,8 @@ MoonControl.prototype = {
   initAnywhereElems : function( content ) {
     this.MoonView.hideLoadingAnywhere( this.MoonView.renderAnywhereElems, content );
   },
-  initMoonElems : function() {
-    this.MoonView.renderMoonElems();
+  initMoonElems : function( moonData ) {
+    this.MoonView.renderMoonElems( moonData );
   }
 }
 

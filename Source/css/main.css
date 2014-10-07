@@ -6,6 +6,15 @@ html, body {
     background-color: #000;
     font-family: 'Gafata', sans-serif;
 }
+.preload * {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -ms-transition: none !important;
+  -o-transition: none !important;
+}
+#moon {
+    z-index: 3000;
+}
 .cesium-home-button {
     background-color: #000;
 }
