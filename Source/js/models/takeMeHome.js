@@ -6,9 +6,7 @@ function TakeMeHome() {
 
 TakeMeHome.prototype = {
   flyHome : function( callback ) {
-    function flyToLocation( makeRequest, callback ) {
-      Sandcastle.declare( flyToLocation );
-      // create callback for user's geolocation
+      var makeRequest = this.reverseGeoRequest;
       function fly( position ) {
         makeRequest( position, callback );
           scene.camera.flyTo({
@@ -22,10 +20,7 @@ TakeMeHome.prototype = {
     else {
       alert( "Unable to collect your current location. Please check your browser settings.")
     }
-  }
-  // initial call
-  flyToLocation( this.reverseGeoRequest, callback );
- },
+  },
   reverseGeoRequest : function( position, callback ) {
     $.ajax({
       url: 'http://dev.virtualearth.net/REST/v1/Locations/' + position.coords.latitude + ',' + position.coords.longitude + '?o=json&key=AvCHv-7wjmYV1vqauXsrzTQRByL7b8t0F0yG6BhZh-TUjE3-VLvIYxVg4S7OMLMG',

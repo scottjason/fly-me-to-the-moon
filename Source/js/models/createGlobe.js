@@ -26,5 +26,5 @@ var earthOptions = {
   cesiumTerrainProviderHeightmaps = new Cesium.CesiumTerrainProvider({
     url : 'http://cesiumjs.org/smallterrain',
 });
-    scene.terrainProvider = cesiumTerrainProviderHeightmaps;
+    // scene.terrainProvider = cesiumTerrainProviderHeightmaps;
 }

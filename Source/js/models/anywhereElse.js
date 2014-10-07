@@ -47,14 +47,11 @@ AnywhereElse.prototype = {
         this.reverseGeoRequest( result[0], callback );
     },
     flyMeToParadise: function( position ) {
-        function flyParadise( position ) {
-            Sandcastle.declare( flyParadise );
             scene.camera.flyTo({
-                destination: Cesium.Cartesian3.fromDegrees( position[0], position[1], 2325.0 )
+                destination: Cesium.Cartesian3.fromDegrees( position[0], position[1], 15000.0),
+                duration : 4,
             })
-        }
-        flyParadise( position );
-    },
+        },
     reverseGeoRequest : function( results, callback ) {
       $.ajax({
         url: 'http://dev.virtualearth.net/REST/v1/Locations/' + results[1] + ',' + results[0] + '?o=json&key=AvCHv-7wjmYV1vqauXsrzTQRByL7b8t0F0yG6BhZh-TUjE3-VLvIYxVg4S7OMLMG',
