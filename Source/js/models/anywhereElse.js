@@ -23,8 +23,9 @@ AnywhereElse.prototype = {
         var kalalauHw = [22.1902180, -159.6325990];
         var crocusAnguilla = [18.2205540, -63.0686150];
         var newZealand = [-50.7714920, 166.1328580];
-        var santaElena = [-2.2322970,-80.8568330];
-        var placenciaBeliz = [16.5152450,-88.3663520];
+        var santaElena = [-2.2322970, -80.8568330];
+        var placenciaBeliz = [16.5152450, -88.3663520];
+
         this.paradiseArr.push( kiheiHw, jalanIndo, coastBelize, eparchiakiGreece, eparchiakiGreece, frenchPolynesia, saintKitts, ganMaldives, caymanIslands, kingsRoadFiji, kubuIndo, kalalauHw, crocusAnguilla, newZealand, santaElena, placenciaBeliz )
         this.makeRandomSelection( 1, callback );
     },

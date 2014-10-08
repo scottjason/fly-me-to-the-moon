@@ -134,7 +134,7 @@ TakeOver.prototype = {
  },
  stopControl : function() {
  if ( this.controlListener ) {
-   this.viewer.clock.onTick.removeEventListener( this.controlListener );
+   viewer.clock.onTick.removeEventListener( this.controlListener );
   }
  }
 };
