@@ -6,12 +6,12 @@
 
 MoonFlyer.prototype = {
 
-  initialize : function( callbackFarewell, callbackAnimate ) {
-    this.requestMoonData();
+  initialize : function( callbackData, callbackFarewell, callbackAnimate ) {
+    this.requestMoonData( callbackData );
     $( "#cesiumContainer" ).velocity( "fadeOut", { duration: 3800 } );
       setTimeout( callbackFarewell.bind( this, callbackAnimate ), 3800 )
     },
-    requestMoonData : function() {
+    requestMoonData : function( callback ) {
         function makeRequest( position ){
          var requestData = $.ajax({
           url: 'http://api.wunderground.com/api/ce0438b612e6c4b1/astronomy/q/' + position.coords.latitude + ',' + position.coords.longitude + '.json',
@@ -19,11 +19,7 @@ MoonFlyer.prototype = {
           dataType: 'JSONP'
         });
         requestData.done(function( data ) {
-          var ageOfMoon = data.moon_phase.ageOfMoon + ' days old';
-          var phaseOfMoon = data.moon_phase.phaseofMoon;
-          var currentMoonTime = data.moon_phase.current_time.hour + ':' + data.moon_phase.current_time.minute;
-          var percentIllum = data.moon_phase.percentIlluminated + ' percent';
-          console.log( ageOfMoon, phaseOfMoon, currentMoonTime, percentIllum )
+          callback( data.moon_phase.ageOfMoon, data.moon_phase.phaseofMoon, data.moon_phase.percentIlluminated );
         });
         requestData.fail(function( textStatus ) {
         console.log( "Request failed: " + textStatus );

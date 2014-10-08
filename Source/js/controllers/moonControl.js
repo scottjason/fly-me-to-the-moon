@@ -53,7 +53,7 @@ MoonControl.prototype = {
     this.MoonView.stopRotation();
     this.MoonView.slideOutNav();
     this.TakeOver.stopControl();
-    this.MoonFlyer.initialize( this.MoonFlyer.sayGoodbye, this.MoonFlyer.animate );
+    this.MoonFlyer.initialize( this.initMoonElems.bind( this ), this.MoonFlyer.sayGoodbye, this.MoonFlyer.animate );
   },
   initHomeElems : function( location, currentTemp, summary, chanceOfRain ) {
     this.MoonView.hideLoadingHome( this.MoonView.renderHomeElems, location, currentTemp, summary, chanceOfRain );
@@ -64,8 +64,8 @@ MoonControl.prototype = {
   initAnywhereElems : function( location, currentTemp, summary, chanceOfRain ) {
     this.MoonView.hideLoadingAnywhere( this.MoonView.renderAnywhereElems, location, currentTemp, summary, chanceOfRain );
   },
-  initMoonElems : function( moonData ) {
-    this.MoonView.renderMoonElems( moonData );
+  initMoonElems : function( moonAge, moonPhase, moonIllumination ) {
+    this.MoonView.hideMoonElems( this.MoonView.renderMoonElems, moonAge, moonPhase, moonIllumination );
   }
 }
 

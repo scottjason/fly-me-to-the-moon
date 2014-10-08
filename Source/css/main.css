@@ -79,6 +79,14 @@ a.navRightText {
     color: #5586c6;
     width: 100%;
 }
+#moonData {
+    font-size: 1.1em;
+    margin-top: 4px;
+    white-space: nowrap;
+    margin-left: -10% !important;
+    color: #5586c6;
+    width: 100%;
+}
 #resetText {
     visibility: hidden;
     font-size: 0.9em;

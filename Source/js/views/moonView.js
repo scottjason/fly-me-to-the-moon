@@ -64,7 +64,19 @@ MoonView.prototype = {
     $( "#paradiseLocation" ).velocity( "transition.slideDownIn", 900).delay( 1500 ).html( "Welcome to " + location + "<br>" + "<span style=color:#777>" +  "the current weather: " + summary.toLowerCase() + ' with a temperate of ' + currentTemp + '.' + ' The chance of rain is ' + chanceOfRain + ' percent.' + '</span>' )
     this.renderCameraReset();
   },
-  renderMoonElems : function() {
+    hideMoonElems : function( callback, moonAge, moonPhase, moonIllumination ) {
+    $( ".loadingData" ).velocity("transition.slideDownOut", 250 );
+    setTimeout( callback.bind( this, moonAge, moonPhase, moonIllumination ), 1000 );
+  },
+  renderMoonElems : function( moonAge, moonPhase, moonIllumination ) {
+    if( moonAge > 2 ) {
+      var daysOld = "day old.";
+    }
+    else {
+      var daysOld = "days old.";
+    }
+    $( "#moonData" ).velocity( "transition.slideDownIn", 900).delay( 1500 ).html( "At this moment, it's a " + moonAge + " " + daysOld + moonPhase.toLowerCase() + " moon. From your perspective it's currently " + moonIllumination + " percent illuminated." + "<br>"  + " The moon we share is 238,900 miles away. One day on the moon is equivalent to approximately 30 Earth days.")
+    this.renderCameraReset();
   },
   renderCameraReset : function() {
     $( "#resetText" ).velocity("transition.perspectiveRightIn", {
