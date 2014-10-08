@@ -77,7 +77,7 @@ a.navRightText {
 }
 #moonData {
     font-size: 1.1em;
-    margin-top: 4px;
+    margin-top: 15px;
     white-space: nowrap;
     margin-left: -10% !important;
     color: #5586c6;
@@ -105,7 +105,7 @@ a.navRightText {
 }
 .navbar-fixed-top {
     height: 50px;
-    border-bottom: 1px solid green;
+    border-bottom: 1px solid #7BA5DB;
 }
 #creditContainer {
     display: none;
@@ -116,5 +116,5 @@ a.navRightText {
     margin-top: 15px;
     white-space: nowrap;
     margin-right: 28px !important;
-    color: #F59E11;
+    color: #ef6334;
 }

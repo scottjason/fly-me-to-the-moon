@@ -8,8 +8,12 @@ MoonFlyer.prototype = {
 
   initialize : function( callbackData, callbackFarewell, callbackAnimate ) {
     this.requestMoonData( callbackData );
-    $( "#cesiumContainer" ).velocity( "fadeOut", { duration: 3800 } );
       setTimeout( callbackFarewell.bind( this, callbackAnimate ), 3800 )
+
+    $( "#cesiumContainer" ).velocity( "fadeOut", { duration: 3800 } );
+    $(".navbar-fixed-top").velocity( { backgroundColor: "#000" } );
+    $("#siteTitle").velocity( { color: "#ef6334" } );
+
     },
     requestMoonData : function( callback ) {
         function makeRequest( position ){
@@ -65,7 +69,7 @@ MoonFlyer.prototype = {
       })
 
       // set center sphere for starField
-      var geometry = new THREE.SphereGeometry( 200, 100, 32 );
+      var geometry = new THREE.SphereGeometry( 120, 100, 22 );
       var starField = new THREE.Mesh( geometry, material );
 
       // init starField rotation on x-axis
@@ -95,34 +99,34 @@ MoonFlyer.prototype = {
       scene.add( light );
 
     // initiate animation of starfield
-      callbackAnimate();
-    },
-
-    animate : function() {
+      moonAnimate();
+    }
+  }
     // animate and render
     var count = 0;
-    function moonAnimte() {
-    requestAnimationFrame( moonAnimte );
+    function moonAnimate() {
+      window.requestAnimationFrame( moonAnimate );
       ++count
     // set negative offset to give the effect of user moving forward through space
-    texture.offset.y  -= 0.008;
-    texture.offset.y  %= 1;
+      texture.offset.y  -= 0.008;
+      texture.offset.y  %= 1;
 
-    if ( count === 450 ) {
-    $( canvas ).velocity( "fadeOut", { duration: 2000 } );
-
-      setTimeout( renderMoon, 2000 )
+      if ( count === 550 ) {
+      $( canvas ).velocity( "fadeOut", { duration: 1500 } );
+        setTimeout( renderMoon, 1950 )
+        setTimeout( cancelScene, 2000 )
     }
     // render scene
     renderer.render( scene, camera );
-  }
    // initial call
-   moonAnimte();
   }
- }
+
+  function cancelScene( moonAnimate ) {
+    window.cancelAnimationFrame( moonAnimate );
+  }
 
  function renderMoon() {
-    // create moonmesh, ( radius, width, height )
+      // create moonmesh, ( radius, width, height )
       var geometry = new THREE.SphereGeometry( 5, 300, 200 );
       var material = new THREE.MeshPhongMaterial({
           map: THREE.ImageUtils.loadTexture('../../Source/img/moonmapscott.jpg'),
@@ -148,11 +152,11 @@ MoonFlyer.prototype = {
       scene.add( spotLight );
 
       // fade in window and invoke final scene
-    $( canvas ).velocity( "fadeIn", { duration: 2500 } );
-      finialScene()
+    $( canvas ).velocity( "fadeIn", { duration: 3000 } );
+      finalScene()
  }
 
-function finialScene(){
+function finalScene(){
     function animateFinal() {
     requestAnimationFrame( animateFinal );
 

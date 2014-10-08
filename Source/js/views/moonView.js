@@ -24,6 +24,7 @@ MoonView.prototype = {
   slideOutNav : function() {
      $( ".navRightText" ).velocity( "transition.perspectiveRightOut", { duration : 600 } );
     $( ".loadingData" ).velocity( "transition.slideDownIn");
+
   },
   slideInNav : function() {
     $( "#userLocation" ).hide();
@@ -60,14 +61,42 @@ MoonView.prototype = {
     $( "#paradiseLocation" ).velocity( "transition.slideDownIn", 900).delay( 1500 ).html( "Welcome to " + location + "<br>" + "<span style=color:#777>" +  "the current weather: " + summary.toLowerCase() + ' with a temperate of ' + currentTemp + '.' + ' The chance of rain is ' + chanceOfRain + ' percent.' + '</span>' )
     this.renderCameraReset();
   },
-    hideMoonElems : function( callback, moonAge, moonPhase, moonIllumination ) {
+  hideMoonElems : function( callback, moonAge, moonPhase, moonIllumination ) {
     $( ".loadingData" ).velocity("transition.slideDownOut", 250 );
-
     setTimeout( callback.bind( this, moonAge, moonPhase, moonIllumination ), 1000 );
   },
   renderMoonElems : function( moonAge, moonPhase, moonIllumination ) {
-    $( "#moonData" ).velocity( "transition.slideDownIn", 900).delay( 1500 ).html( "At this moment, it's a " + moonAge + " " + "day old " + moonPhase.toLowerCase() + " moon. From your perspective it's currently " + moonIllumination + " percent illuminated." + "<br>"  + " The moon we share is 238,900 miles away. There is no atmosphere and no sound.");
-    this.renderCameraReset();
+    setTimeout( fadeMoment, 14000 );
+    $( "#moonData" ).velocity( "fadeIn", 1600 ).html( "At this moment, it's a " + moonAge + " " + "day old " + moonPhase.toLowerCase() + " moon." );
+
+    function fadeMoment() {
+        setTimeout( illuminateMoon, 1600 );
+      $( "#moonData" ).velocity( "fadeOut", 1600 );
+     }
+
+    function illuminateMoon() {
+      setTimeout( fadeIlluminate, 5500 );
+      $( "#moonData" ).velocity( "fadeIn", 1600 ).html( "From your perspective, it's currently " + moonIllumination + " percent illuminated." );
+     }
+
+    function fadeIlluminate() {
+      setTimeout( shareScene, 1600 );
+      $( "#moonData" ).velocity( "fadeOut", 1600 );
+     }
+
+    function shareScene() {
+      setTimeout( fadeShare, 5500 );
+      $( "#moonData" ).velocity( "fadeIn", 1600 ).html( "The moon we share is 238,900 miles away.");
+     }
+
+    function fadeShare(){
+      setTimeout( atmosphereScene, 1600 );
+      $( "#moonData" ).velocity( "fadeOut", 1600 );
+     }
+
+    function atmosphereScene() {
+      $( "#moonData" ).velocity( "fadeIn", 1600 ).html("There is no atmosphere and no sound.")
+     }
   },
   renderCameraReset : function() {
     $( "#resetText" ).velocity("transition.perspectiveRightIn", {
@@ -75,6 +104,9 @@ MoonView.prototype = {
       delay : 3500,
       duration : 600
     })
+  },
+  renderMoonReset : function() {
+
   }
 }
 
