@@ -62,7 +62,6 @@ MoonControl.prototype = {
     this.MoonView.renderControlElems();
   },
   initAnywhereElems : function( location, currentTemp, summary, chanceOfRain ) {
-    console.log( location, currentTemp, summary, chanceOfRain )
     this.MoonView.hideLoadingAnywhere( this.MoonView.renderAnywhereElems, location, currentTemp, summary, chanceOfRain );
   },
   initMoonElems : function( moonData ) {
