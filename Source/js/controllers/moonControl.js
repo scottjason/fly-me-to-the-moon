@@ -50,7 +50,7 @@ MoonControl.prototype = {
     this.AnywhereElse.initialize( this.initAnywhereElems.bind( this ) );
   },
   flyToMoon : function() {
-        this.MoonView.stopRotation();
+    this.MoonView.stopRotation();
     this.MoonView.slideOutNav();
     this.TakeOver.stopControl();
     this.MoonFlyer.goodByeAtmosphere( 1.0, this.initMoonElems, this.MoonCreate.initialize, this.MoonCreate.animate );

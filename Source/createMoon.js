@@ -15,7 +15,9 @@ MoonCreate.prototype = {
         "canvas": canvas
       });
       renderer.setSize(window.innerWidth, window.innerHeight);
-      $( canvas ).velocity("fadeIn", { duration: 1500 });
+      $(canvas).velocity("fadeIn", {
+        duration: 1500
+      });
 
       // create starfield
       var texture = THREE.ImageUtils.loadTexture('../../Source/img/galaxy_starfield.png')
@@ -24,8 +26,8 @@ MoonCreate.prototype = {
         side: THREE.BackSide
       })
       var geometry = new THREE.SphereGeometry(100, 32, 32)
-      var starField = new THREE.Mesh( geometry, material )
-      scene.add( starField );
+      var starField = new THREE.Mesh(geometry, material)
+      scene.add(starField)
 
       // create moonmesh
       geometry = new THREE.SphereGeometry(5, 300, 200);
@@ -35,7 +37,7 @@ MoonCreate.prototype = {
           bumpScale: 0.002,
         })
         // add moon to sccene
-      moon = new THREE.Mesh( geometry, material );
+      moon = new THREE.Mesh(geometry, material);
       scene.add(moon);
 
       // create ambient light and add to scene

@@ -17,7 +17,6 @@ MoonFlyer.prototype = {
       var currentTime = Date.now();
       var delta = ( currentTime - previousTime ) / 1000;
         previousTime = currentTime;
-        // console.log( -spinRate * delta )
         viewer.scene.camera.rotate( Cesium.Cartesian3.UNIT_X, -spinRate * delta );
         viewer.scene.camera.rotate( Cesium.Cartesian3.UNIT_Y, -spinRate * delta );
     }
