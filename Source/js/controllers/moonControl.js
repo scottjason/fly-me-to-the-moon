@@ -55,8 +55,8 @@ MoonControl.prototype = {
     this.TakeOver.stopControl();
     this.MoonFlyer.goodByeAtmosphere( 1.0, this.initMoonElems, this.MoonCreate.initialize, this.MoonCreate.animate );
   },
-  initHomeElems : function( location ) {
-    this.MoonView.hideLoadingHome( this.MoonView.renderHomeElems, location );
+  initHomeElems : function( location, currentTemp, summary, chanceOfRain ) {
+    this.MoonView.hideLoadingHome( this.MoonView.renderHomeElems, location, currentTemp, summary, chanceOfRain );
   },
   initControlElems : function() {
     this.MoonView.renderControlElems();

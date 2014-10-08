@@ -40,13 +40,13 @@ MoonView.prototype = {
       duration : 1200
     })
   },
-  hideLoadingHome : function( callback, location ) {
-    this.location = location
+  hideLoadingHome : function( callback, location, currentTemp, summary, chanceOfRain ) {
+    // this.location = location
     $( ".loadingData" ).velocity( "transition.slideDownOut", 250 );
-    setTimeout( callback.bind( this ), 1000 );
+    setTimeout( callback.bind( this, location, currentTemp, summary, chanceOfRain ), 1000 );
   },
-  renderHomeElems : function( location ) {
-    $( "#userLocation" ).velocity( "transition.slideDownIn", 900).delay( 1500 ).html( "flying you home to " + this.location )
+  renderHomeElems : function( location, currentTemp, summary, chanceOfRain ) {
+    $( "#userLocation" ).velocity( "transition.slideDownIn", 900).delay( 1500 ).html( "flying you home to " + location + "<br>" + "<span style=color:#777>" +  "the current weather is " + summary.toLowerCase() + ' with a temperate of ' + currentTemp + '.' + ' The chance of rain is ' + chanceOfRain + ' percent.' + '</span>' )
     this.renderCameraReset();
   },
   renderControlElems : function() {

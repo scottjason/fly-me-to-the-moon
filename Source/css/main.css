@@ -57,24 +57,25 @@ a.navRightText {
 }
 #userLocation {
     font-size: 1.1em;
-    margin-top: 15px;
+    margin-top: 4px;
     white-space: nowrap;
     margin-left: -10% !important;
-    color: #2e5291;
+    color: #5586c6;
+    width: 100%;
 }
 #giveInstructions {
     font-size: 1.1em;
     margin-top: 15px;
     white-space: nowrap;
     margin-left: -10% !important;
-    color: #2e5291;
+    color: #5586c6;
 }
 #paradiseLocation {
     font-size: 1.1em;
     margin-top: 15px;
     white-space: nowrap;
     margin-left: -10% !important;
-    color: #2e5291;
+    color: #5586c6;
 }
 #resetText {
     visibility: hidden;
