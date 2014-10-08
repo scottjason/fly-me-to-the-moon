@@ -7,13 +7,10 @@ html, body {
     font-family: 'Gafata', sans-serif;
 }
 .preload * {
-  -webkit-transition: none !important;
-  -moz-transition: none !important;
-  -ms-transition: none !important;
-  -o-transition: none !important;
-}
-#moon {
-    z-index: 3000;
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -ms-transition: none !important;
+    -o-transition: none !important;
 }
 .cesium-home-button {
     background-color: #000;
@@ -57,24 +54,34 @@ a.navRightText {
 }
 #userLocation {
     font-size: 1.1em;
-    margin-top: 15px;
+    margin-top: 4px;
     white-space: nowrap;
     margin-left: -10% !important;
-    color: #2e5291;
+    color: #5586c6;
+    width: 100%;
 }
 #giveInstructions {
     font-size: 1.1em;
     margin-top: 15px;
     white-space: nowrap;
     margin-left: -10% !important;
-    color: #2e5291;
+    color: #5586c6;
 }
 #paradiseLocation {
     font-size: 1.1em;
-    margin-top: 15px;
+    margin-top: 4px;
     white-space: nowrap;
     margin-left: -10% !important;
-    color: #2e5291;
+    color: #5586c6;
+    width: 100%;
+}
+#moonData {
+    font-size: 1.1em;
+    margin-top: 4px;
+    white-space: nowrap;
+    margin-left: -10% !important;
+    color: #5586c6;
+    width: 100%;
 }
 #resetText {
     visibility: hidden;

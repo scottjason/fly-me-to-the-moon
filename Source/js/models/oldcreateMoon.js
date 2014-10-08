@@ -6,40 +6,13 @@
 
 MoonFlyer.prototype = {
 
-  initialize : function( callbackData, callbackFarewell, callbackAnimate ) {
-    this.requestMoonData( callbackData );
-    $( "#cesiumContainer" ).velocity( "fadeOut", { duration: 3800 } );
-      setTimeout( callbackFarewell.bind( this, callbackAnimate ), 3800 )
-    },
-    requestMoonData : function( callback ) {
-        function makeRequest( position ){
-         var requestData = $.ajax({
-          url: 'http://api.wunderground.com/api/ce0438b612e6c4b1/astronomy/q/' + position.coords.latitude + ',' + position.coords.longitude + '.json',
-          type: 'GET',
-          dataType: 'JSONP'
-        });
-        requestData.done(function( data ) {
-          callback( data.moon_phase.ageOfMoon, data.moon_phase.phaseofMoon, data.moon_phase.percentIlluminated );
-        });
-        requestData.fail(function( textStatus ) {
-        console.log( "Request failed: " + textStatus );
-      });
-     }
-
-  if ( navigator.geolocation && typeof ( navigator.geolocation.getCurrentPosition ) == "function") {
-         navigator.geolocation.getCurrentPosition( makeRequest );
-    }
-    else {
-      alert( "Unable to collect your current location. Please check your browser settings.")
-      }
-    },
-    sayGoodbye : function( callbackAnimate ){
+  initialize : function( callback ) {
       // create the scene
       scene = new THREE.Scene();
       camera = new THREE.PerspectiveCamera( 400, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
       // init camera position
-      camera.position.set( 0, 0, 4 );
+      camera.position.set(0, 0, 7);
       camera.lookAt( scene.position )
 
       // add camera to scene
@@ -65,7 +38,7 @@ MoonFlyer.prototype = {
       })
 
       // set center sphere for starField
-      var geometry = new THREE.SphereGeometry( 200, 100, 32 );
+      var geometry = new THREE.SphereGeometry( 100, 32, 32 );
       var starField = new THREE.Mesh( geometry, material );
 
       // init starField rotation on x-axis
@@ -94,8 +67,12 @@ MoonFlyer.prototype = {
       light.position.set( 3, 3, 0 );
       scene.add( light );
 
+    // initial camera location, sets distance perspective on z-axis
+      camera.position.z = 10;
+
     // initiate animation of starfield
-      callbackAnimate();
+      this.animate()
+      // callback();
     },
 
     animate : function() {
@@ -108,22 +85,21 @@ MoonFlyer.prototype = {
     texture.offset.y  -= 0.008;
     texture.offset.y  %= 1;
 
-    if ( count === 450 ) {
+    if ( count === 100 ) {
     $( canvas ).velocity( "fadeOut", { duration: 2000 } );
-
       setTimeout( renderMoon, 2000 )
     }
     // render scene
-    renderer.render( scene, camera );
+    renderer.render(scene, camera);
   }
-   // initial call
-   moonAnimte();
-  }
+  // initial call
+  moonAnimte();
  }
 
+}
  function renderMoon() {
-    // create moonmesh, ( radius, width, height )
-      var geometry = new THREE.SphereGeometry( 5, 300, 200 );
+ // create moonmesh, ( radius, width, height )
+      var geometry = new THREE.SphereGeometry(5, 300, 200);
       var material = new THREE.MeshPhongMaterial({
           map: THREE.ImageUtils.loadTexture('../../Source/img/moonmapscott.jpg'),
           bumpMap: THREE.ImageUtils.loadTexture('../../Source/img/moonbumpscott.jpg'),
@@ -147,6 +123,12 @@ MoonFlyer.prototype = {
       // add spotlight to scene
       scene.add( spotLight );
 
+      // stop star field
+      texture.offset.y = 0;
+
+      // set new camera position for finalscene
+      camera.position.z = 30;
+
       // fade in window and invoke final scene
     $( canvas ).velocity( "fadeIn", { duration: 2500 } );
       finialScene()
@@ -156,22 +138,16 @@ function finialScene(){
     function animateFinal() {
     requestAnimationFrame( animateFinal );
 
-        // stop star field
-        texture.offset.y = 0;
-
-      // set new camera position
-        camera.position.z = 28;
-
         moon.rotation.x += 0.003;
         moon.rotation.y += 0.007;
 
-        var time = Date.now() * 0.0005;
-        spotLight.position.x = Math.sin( time * 0.7 ) * 12.3;
-        spotLight.position.y = Math.cos( time * 0.2 ) * 14.2;
-        spotLight.position.z = Math.cos( time * 0.5 ) * 16;
+      var time = Date.now() * 0.0005;
+        spotLight.position.x = Math.sin(time * 0.7) * 15;
+        spotLight.position.y = Math.cos(time * 0.2) * 20;
+        spotLight.position.z = Math.cos(time * 0.5) * 15;
 
       // render scene
-     renderer.render( scene, camera );
+     renderer.render(scene, camera);
   }
   // initial call on final scene
   animateFinal();

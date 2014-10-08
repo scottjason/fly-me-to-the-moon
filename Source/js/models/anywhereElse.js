@@ -10,26 +10,23 @@ AnywhereElse.prototype = {
         this.paradiseLocations( callback );
     },
     paradiseLocations: function( callback ) {
-        var aucklandIslands = [166.132858, -50.771492];
-        var muKoAngThong = [99.674048, 9.626544];
-        var cocosIsland = [96.841739, 12.170874];
-        var phoenixIslands = [-171.244968, -4.453148];
-        var mamanucaIslands = [177.083333, -17.666667];
-        var tetepareIsland = [157.558933, -8.741283];
-        var silkCaye = [-88.303272, 16.510085];
-        var southWaterCaye = [-60.850000, 14.666667];
-        var goffsCaye = [-88.037222, 17.348889];
-        var tobaccoCaye = [-88.061673, 16.898333];
-        var cayeCaulker = [-88.027749, 17.761158];
-        var ambergrisCaye = [-87.943284, 18.001592];
-        var alorIsland = [124.729877, -8.275403];
-        var westTimor = [125.101408, -9.095135];
-        var sumbawa = [117.361648, -8.652933];
-        var sumba = [119.974053, -9.699344];
-        var floresIsland = [121.079370, -8.657382];
-        var lombok = [116.324944, -8.650979];
+        var kiheiHw = [20.7882940,-156.4596650];
+        var jalanIndo = [-5.3256660,123.5439320];
+        var coastBelize = [17.0963230,-88.3377970];
+        var eparchiakiGreece = [36.3931560,25.4615090];
+        var frenchPolynesia = [-17.7559830,-149.5111940];
+        var saintKitts = [17.3578220,-62.7829980];
+        var ganMaldives = [1.9772470, 73.5361030];
+        var caymanIslands = [19.3133000, -81.2546000];
+        var kingsRoadFiji = [-17.4015930, 178.2584190];
+        var kubuIndo = [-8.3090120, 115.5652490];
+        var kalalauHw = [22.1902180, -159.6325990];
+        var crocusAnguilla = [18.2205540, -63.0686150];
+        var newZealand = [-50.7714920, 166.1328580];
+        var santaElena = [-2.2322970, -80.8568330];
+        var placenciaBeliz = [16.5152450, -88.3663520];
 
-        this.paradiseArr.push( aucklandIslands, muKoAngThong, cocosIsland, phoenixIslands, mamanucaIslands, tetepareIsland, silkCaye, southWaterCaye, goffsCaye, tobaccoCaye, cayeCaulker, ambergrisCaye, alorIsland, westTimor, sumbawa, sumba, floresIsland, lombok );
+        this.paradiseArr.push( kiheiHw, jalanIndo, coastBelize, eparchiakiGreece, eparchiakiGreece, frenchPolynesia, saintKitts, ganMaldives, caymanIslands, kingsRoadFiji, kubuIndo, kalalauHw, crocusAnguilla, newZealand, santaElena, placenciaBeliz )
         this.makeRandomSelection( 1, callback );
     },
     makeRandomSelection: function( numNeeded, callback ) {
@@ -44,28 +41,39 @@ AnywhereElse.prototype = {
             taken[selectedLocation] = --len;
         }
         this.flyMeToParadise( result[0] );
-        this.reverseGeoRequest( result[0], callback );
+        this.requestLocationData( result[0], callback );
     },
     flyMeToParadise: function( position ) {
             scene.camera.flyTo({
-                destination: Cesium.Cartesian3.fromDegrees( position[0], position[1], 15000.0),
+                destination: Cesium.Cartesian3.fromDegrees( position[1], position[0], 12500.0),
                 duration : 4,
             })
         },
-    reverseGeoRequest : function( results, callback ) {
-      $.ajax({
-        url: 'http://dev.virtualearth.net/REST/v1/Locations/' + results[1] + ',' + results[0] + '?o=json&key=AvCHv-7wjmYV1vqauXsrzTQRByL7b8t0F0yG6BhZh-TUjE3-VLvIYxVg4S7OMLMG',
-        type: "GET",
-        dataType: "JSONP",
-        jsonp: "JSONP",
-      success: function( data ) {
-        if ( data.resourceSets[0].resources[0] == undefined ) { return }
-          else {
-        callback ( data.resourceSets[0].resources[0].address.formattedAddress );
-        }
-       }
-    })
-  }
+   requestLocationData : function( position, callback ) {
+    function formatAddress( results, status ){
+      if ( status == google.maps.GeocoderStatus.OK ) {
+        getLocationData( results[0].formatted_address, position, callback )
+     }
+    }
+
+    function getLocationData( address, position, callback ) {
+      var requestData = $.ajax({
+          url: 'https://api.forecast.io/forecast/076b3550601b4d80a74763b15e71b64d/' + position[0] + ',' + position[1],
+          type: 'GET',
+          dataType: 'JSONP'
+        });
+        requestData.done(function( data ) {
+          callback( address, data.currently.temperature, data.currently.summary, data.currently.precipProbability );
+        });
+        requestData.fail(function( textStatus ) {
+        console.log( "Request failed: " + textStatus );
+      });
+    }
+
+    var latLng = new google.maps.LatLng( position[0], position[1] );
+    var coder = new google.maps.Geocoder();
+      coder.geocode( { 'latLng': latLng }, formatAddress );
+ }
 }
 
 var anywhereElse = new AnywhereElse();
