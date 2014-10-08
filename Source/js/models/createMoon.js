@@ -34,32 +34,34 @@ MoonCreate.prototype = {
       var starField = new THREE.Mesh(geometry, material)
       starField.rotation.x = Math.PI/2;
       scene.add( starField );
-starField.flipSided  = true;
-      // create moonmesh
-      geometry = new THREE.SphereGeometry(5, 300, 200);
-      var material = new THREE.MeshPhongMaterial({
-          map: THREE.ImageUtils.loadTexture('../../Source/img/moonmapscott.jpg'),
-          bumpMap: THREE.ImageUtils.loadTexture('../../Source/img/moonbumpscott.jpg'),
-          bumpScale: 0.002,
-        })
-        // add moon to sccene
-      moon = new THREE.Mesh(geometry, material);
-      scene.add(moon);
+      starField.flipSided  = true;
+
+
+      // create moonmesh, ( radius, width, height )
+      // geometry = new THREE.SphereGeometry(5, 300, 200);
+      // var material = new THREE.MeshPhongMaterial({
+      //     map: THREE.ImageUtils.loadTexture('../../Source/img/moonmapscott.jpg'),
+      //     bumpMap: THREE.ImageUtils.loadTexture('../../Source/img/moonbumpscott.jpg'),
+      //     bumpScale: 0.002,
+      //   })
+      //   // add moon to sccene
+      // moon = new THREE.Mesh(geometry, material);
+      // scene.add(moon);
 
       // create ambient light and add to scene
       scene.add( new THREE.AmbientLight( 0x000000 ) );
 
       // create spotightlight
-      spotLight = new THREE.SpotLight( 0xffffff );
-      spotLight.position.set( 256, 1000, 100 );
-      spotLight.castShadow = true;
-      spotLight.shadowMapWidth = 256;
-      spotLight.shadowMapHeight = 256;
-      spotLight.shadowCameraNear = 110;
-      spotLight.shadowCameraFar = 400;
-      spotLight.add( new THREE.Mesh( moon, new THREE.MeshBasicMaterial({ color: 0xffffff })));
-      spotLight.shadowCameraFov = 30;
-      scene.add(spotLight);
+      // spotLight = new THREE.SpotLight( 0xffffff );
+      // spotLight.position.set( 256, 1000, 100 );
+      // spotLight.castShadow = true;
+      // spotLight.shadowMapWidth = 256;
+      // spotLight.shadowMapHeight = 256;
+      // spotLight.shadowCameraNear = 110;
+      // spotLight.shadowCameraFar = 400;
+      // spotLight.add( new THREE.Mesh( moon, new THREE.MeshBasicMaterial({ color: 0xffffff })));
+      // spotLight.shadowCameraFov = 30;
+      // scene.add(spotLight);
 
       var light = new THREE.DirectionalLight( 0xff8000, 1.5 );
       light.position.set( 1, 1, 0 ).normalize();
@@ -77,11 +79,10 @@ starField.flipSided  = true;
       light.position.set( 3, 3, 0 );
       scene.add( light );
 
-      // scene.fog = new THREE.FogExp2( 0x000000, 0.15 );
 
 
-      // add spotlight to scene
-      camera.position.z = 27;
+    // initial camera location
+      camera.position.z = 100;
 
       this.animate()
       // callback();
@@ -91,25 +92,18 @@ starField.flipSided  = true;
     // animate and render
     function moonAnimte() {
     requestAnimationFrame( moonAnimte );
-      texture.offset.y  += 0.008;
+      texture.offset.y  -= 0.008;
       texture.offset.y  %= 1;
-      // texture.needsUpdate = true;
-var seconds   = Date.now() / 1000;
-      var radius    = 0.70;
-      var angle   = Math.sin(0.75 * seconds * Math.PI) / 4;
-    moon.rotation.x += 0.003;
-    moon.rotation.y += 0.001;
-camera.position.x = Math.cos(angle - Math.PI/2) * radius;
-      camera.position.y = Math.sin(angle - Math.PI/2) * radius;
-      camera.rotation.z = angle;
-    var time = Date.now() * 0.0005;
-      spotLight.position.x = Math.sin(time * 0.7) * 15;
-      spotLight.position.y = Math.cos(time * 0.2) * 20;
-      spotLight.position.z = Math.cos(time * 0.5) * 15;
-// texture.offset.y += 0.1 * seconds;
+
+      var time = Date.now() * 0.0005;
+        // spotLight.position.x = Math.sin(time * 0.7) * 15;
+        // spotLight.position.y = Math.cos(time * 0.2) * 20;
+        // spotLight.position.z = Math.cos(time * 0.5) * 15;
+
     // render scene
     renderer.render(scene, camera);
   }
+
   // initial call
   moonAnimte();
  }
