@@ -41,7 +41,6 @@ MoonView.prototype = {
     })
   },
   hideLoadingHome : function( callback, location, currentTemp, summary, chanceOfRain ) {
-    // this.location = location
     $( ".loadingData" ).velocity( "transition.slideDownOut", 250 );
     setTimeout( callback.bind( this, location, currentTemp, summary, chanceOfRain ), 1000 );
   },
@@ -53,12 +52,11 @@ MoonView.prototype = {
     $( "#giveInstructions" ).html( "'U' moves up | 'D' moves down | 'L' moves left | 'R' moves right | 'B' moves backward | 'F' moves forward" ).slideDown( 600 );
   },
   hideLoadingAnywhere : function( callback, anywhereContent ) {
-    this.anywhereContent = anywhereContent;
     $( ".loadingData" ).velocity("transition.slideDownOut", 250 );
-    setTimeout( callback.bind( this ), 1000 );
+    setTimeout( callback.bind( this, anywhereContent ), 1000 );
   },
-  renderAnywhereElems : function() {
-    $( "#paradiseLocation" ).html( "Welcome to " + this.anywhereContent ).slideDown( 600 );
+  renderAnywhereElems : function( anywhereContent ) {
+    $( "#paradiseLocation" ).html( "Welcome to " + anywhereContent ).slideDown( 600 );
     this.renderCameraReset();
   },
   renderMoonElems : function() {

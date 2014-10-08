@@ -44,7 +44,7 @@ AnywhereElse.prototype = {
             taken[selectedLocation] = --len;
         }
         this.flyMeToParadise( result[0] );
-        this.reverseGeoRequest( result[0], callback );
+        this.requestLocationData( result[0], callback );
     },
     flyMeToParadise: function( position ) {
             scene.camera.flyTo({
@@ -52,20 +52,31 @@ AnywhereElse.prototype = {
                 duration : 4,
             })
         },
-    reverseGeoRequest : function( results, callback ) {
-      $.ajax({
-        url: 'http://dev.virtualearth.net/REST/v1/Locations/' + results[1] + ',' + results[0] + '?o=json&key=AvCHv-7wjmYV1vqauXsrzTQRByL7b8t0F0yG6BhZh-TUjE3-VLvIYxVg4S7OMLMG',
-        type: "GET",
-        dataType: "JSONP",
-        jsonp: "JSONP",
-      success: function( data ) {
-        if ( data.resourceSets[0].resources[0] == undefined ) { return }
-          else {
-        callback ( data.resourceSets[0].resources[0].address.formattedAddress );
-        }
-       }
-    })
-  }
+   requestLocationData : function( position, callback ) {
+    function formatAddress( results, status ){
+      if ( status == google.maps.GeocoderStatus.OK ) {
+        getLocationData( results[0].formatted_address, position, callback )
+     }
+    }
+
+    function getLocationData( address, position, callback ) {
+      var requestData = $.ajax({
+          url: 'https://api.forecast.io/forecast/076b3550601b4d80a74763b15e71b64d/' + position[1] + ',' + position[0],
+          type: 'GET',
+          dataType: 'JSONP'
+        });
+        requestData.done(function( data ) {
+          console.log( address, data.currently.temperature, data.currently.summary, data.currently.precipProbability );
+        });
+        requestData.fail(function( textStatus ) {
+        console.log( "Request failed: " + textStatus );
+      });
+    }
+
+    var latLng = new google.maps.LatLng( position[0], position[1] );
+    var coder = new google.maps.Geocoder();
+      coder.geocode( { 'latLng': latLng }, formatAddress );
+ }
 }
 
 var anywhereElse = new AnywhereElse();

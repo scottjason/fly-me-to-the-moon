@@ -6,7 +6,7 @@ function TakeMeHome() {
 
 TakeMeHome.prototype = {
   flyHome : function( callback ) {
-      getReverseGeo = this.createReverseGeo;
+      makeRequest = this.requestLocationData;
       function errorHandler( error ){
         if ( error.code == 1 ) {
         alert( 'We were unable to collect your location. You many need to modify your browser settings.' );
@@ -14,7 +14,7 @@ TakeMeHome.prototype = {
     }
 
       function fly( position ) {
-        getReverseGeo( position, callback );
+        makeRequest( position, callback );
           scene.camera.flyTo({
             destination : Cesium.Cartesian3.fromDegrees( position.coords.longitude, position.coords.latitude, 1000.0 )
           });
@@ -27,7 +27,7 @@ TakeMeHome.prototype = {
       alert( "Unable to collect your current location. Please check your browser settings.")
     }
   },
-   createReverseGeo : function( position, callback ) {
+   requestLocationData : function( position, callback ) {
 
     function formatAddress( results, status ){
       if ( status == google.maps.GeocoderStatus.OK ) {
