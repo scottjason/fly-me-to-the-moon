@@ -45,14 +45,6 @@ MoonView.prototype = {
     $( "#userLocation" ).velocity( "transition.slideDownIn", 900 ).delay( 1500 ).html( "Flying you home to " + location + "<br>" + "<span style=color:#777>" +  "The current weather : " + summary.toLowerCase() + ' with a temperate of ' + currentTemp + '.' + ' The chance of rain is ' + chanceOfRain + ' percent.' + '</span>' )
     this.renderCameraReset();
   },
-    hideControlElems : function( callback) {
-    $( ".loadingData" ).velocity( "transition.slideDownOut", 150 );
-    setTimeout( callback.bind( this ), 1200 );
-  },
-  renderControlElems : function() {
-    $( "#giveInstructions" ).html( "'U' moves up - 'D' moves down - 'L' moves left - 'R' moves right - 'B' moves backward - 'F' moves forward" ).slideDown( 600 );
-    this.renderCameraReset();
-  },
   hideLoadingAnywhere : function( callback, location, currentTemp, summary, chanceOfRain ) {
     $( ".loadingData" ).velocity( "transition.slideDownOut", 250 );
     setTimeout( callback.bind( this, location, currentTemp, summary, chanceOfRain ), 1000 );
