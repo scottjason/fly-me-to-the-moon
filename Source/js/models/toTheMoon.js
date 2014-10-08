@@ -7,8 +7,35 @@
 MoonFlyer.prototype = {
 
   initialize : function( callbackFarewell, callbackAnimate ) {
+    this.requestMoonData();
     $( "#cesiumContainer" ).velocity( "fadeOut", { duration: 3800 } );
-    setTimeout( callbackFarewell.bind( this, callbackAnimate ), 3800 )
+      setTimeout( callbackFarewell.bind( this, callbackAnimate ), 3800 )
+    },
+    requestMoonData : function() {
+        function makeRequest( position ){
+         var requestData = $.ajax({
+          url: 'http://api.wunderground.com/api/ce0438b612e6c4b1/astronomy/q/' + position.coords.latitude + ',' + position.coords.longitude + '.json',
+          type: 'GET',
+          dataType: 'JSONP'
+        });
+        requestData.done(function( data ) {
+          var ageOfMoon = data.moon_phase.ageOfMoon + ' days old';
+          var phaseOfMoon = data.moon_phase.phaseofMoon;
+          var currentMoonTime = data.moon_phase.current_time.hour + ':' + data.moon_phase.current_time.minute;
+          var percentIllum = data.moon_phase.percentIlluminated + ' percent';
+          console.log( ageOfMoon, phaseOfMoon, currentMoonTime, percentIllum )
+        });
+        requestData.fail(function( textStatus ) {
+        console.log( "Request failed: " + textStatus );
+      });
+     }
+
+  if ( navigator.geolocation && typeof ( navigator.geolocation.getCurrentPosition ) == "function") {
+         navigator.geolocation.getCurrentPosition( makeRequest );
+    }
+    else {
+      alert( "Unable to collect your current location. Please check your browser settings.")
+      }
     },
     sayGoodbye : function( callbackAnimate ){
       // create the scene
