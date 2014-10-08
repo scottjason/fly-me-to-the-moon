@@ -66,6 +66,7 @@ MoonView.prototype = {
   },
     hideMoonElems : function( callback, moonAge, moonPhase, moonIllumination ) {
     $( ".loadingData" ).velocity("transition.slideDownOut", 250 );
+
     setTimeout( callback.bind( this, moonAge, moonPhase, moonIllumination ), 1000 );
   },
   renderMoonElems : function( moonAge, moonPhase, moonIllumination ) {
@@ -75,10 +76,11 @@ MoonView.prototype = {
     else {
       var daysOld = "days old.";
     }
-    $( "#moonData" ).velocity( "transition.slideDownIn", 900).delay( 1500 ).html( "At this moment, it's a " + moonAge + " " + daysOld + moonPhase.toLowerCase() + " moon. From your perspective it's currently " + moonIllumination + " percent illuminated." + "<br>"  + " The moon we share is 238,900 miles away. One day on the moon is equivalent to approximately 30 Earth days.")
+    $( "#moonData" ).velocity( "transition.slideDownIn", 900).delay( 1500 ).html( "At this moment, it's a " + moonAge + " " + daysOld + moonPhase.toLowerCase() + " moon. From your perspective it's currently " + moonIllumination + " percent illuminated." + "<br>"  + " The moon we share is 238,900 miles away. One day on the moon is equivalent to approximately 30 Earth days.");
     this.renderCameraReset();
   },
   renderCameraReset : function() {
+    console.log("made it to reset")
     $( "#resetText" ).velocity("transition.perspectiveRightIn", {
       visibility : "visible",
       delay : 3500,
