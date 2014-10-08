@@ -45,7 +45,7 @@ MoonView.prototype = {
     setTimeout( callback.bind( this, location, currentTemp, summary, chanceOfRain ), 1000 );
   },
   renderHomeElems : function( location, currentTemp, summary, chanceOfRain ) {
-    $( "#userLocation" ).velocity( "transition.slideDownIn", 900).delay( 1500 ).html( "Flying you home to " + location + "<br>" + "<span style=color:#777>" +  "the current weather is " + summary.toLowerCase() + ' with a temperate of ' + currentTemp + '.' + ' The chance of rain is ' + chanceOfRain + ' percent.' + '</span>' )
+    $( "#userLocation" ).velocity( "transition.slideDownIn", 900).delay( 1500 ).html( "Flying you home to " + location + "<br>" + "<span style=color:#777>" +  "The current weather : " + summary.toLowerCase() + ' with a temperate of ' + currentTemp + '.' + ' The chance of rain is ' + chanceOfRain + ' percent.' + '</span>' )
     this.renderCameraReset();
   },
     hideControlElems : function( callback) {
@@ -61,7 +61,7 @@ MoonView.prototype = {
     setTimeout( callback.bind( this, location, currentTemp, summary, chanceOfRain ), 1000 );
   },
   renderAnywhereElems : function( location, currentTemp, summary, chanceOfRain ) {
-    $( "#paradiseLocation" ).velocity( "transition.slideDownIn", 900).delay( 1500 ).html( "Welcome to " + location + "<br>" + "<span style=color:#777>" +  "the current weather is " + summary.toLowerCase() + ' with a temperate of ' + currentTemp + '.' + ' The chance of rain is ' + chanceOfRain + ' percent.' + '</span>' )
+    $( "#paradiseLocation" ).velocity( "transition.slideDownIn", 900).delay( 1500 ).html( "Welcome to " + location + "<br>" + "<span style=color:#777>" +  "the current weather: " + summary.toLowerCase() + ' with a temperate of ' + currentTemp + '.' + ' The chance of rain is ' + chanceOfRain + ' percent.' + '</span>' )
     this.renderCameraReset();
   },
   renderMoonElems : function() {

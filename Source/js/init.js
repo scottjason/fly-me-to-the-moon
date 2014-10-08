@@ -1,8 +1,9 @@
 $( document ).ready(function(){
-  createGlobe();
+  // createGlobe();
 });
 
 window.onload = function(){
   $("body").removeClass("preload");
-   controller.initialize( takeOver, takeMeHome, anywhereElse, moonFlyer, moonCreate, moonView );
+    MoonCreate.prototype.initialize()
+   // controller.initialize( takeOver, takeMeHome, anywhereElse, moonFlyer, moonCreate, moonView );
 }
