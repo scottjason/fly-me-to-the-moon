@@ -7,7 +7,7 @@ Live Site
 
 **Description**
 
-**fly me to the moon** is a fully 3D-animated driven applicatin using webGL technologies from Cesium and Three.js. It is a client-side app that attempts to provide both a visual and technical experience.
+**fly me to the moon** is a 3D-animated driven application using webGL technologies from Cesium and Three.js. It is a client-side app that attempts to provide both a visual and technical experience.
 
 This application uses a large extent of the webGL camera. A user can fly to anywhere on Earth. Or they can select "anywhere but here" and fly to 25-handpicked destinations, many considered the most beautful on our planet. There is also an option to fly home where the user's current location is collected using the Navigator API.
 
