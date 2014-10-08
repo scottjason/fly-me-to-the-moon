@@ -66,27 +66,27 @@ MoonView.prototype = {
     setTimeout( callback.bind( this, moonAge, moonPhase, moonIllumination ), 1000 );
   },
   renderMoonElems : function( moonAge, moonPhase, moonIllumination ) {
-    setTimeout( fadeMoment, 14000 );
-    $( "#moonData" ).velocity( "fadeIn", 1600 ).html( "At this moment, it's a " + moonAge + " " + "day old " + moonPhase.toLowerCase() + " moon." );
+    setTimeout( fadeMoment, 12750 );
+    $( "#moonData" ).velocity( "fadeIn", 1600 ).html( "At this moment, it's a " + moonAge + " " + "day-old " + moonPhase.toLowerCase() + " moon." );
 
     function fadeMoment() {
-        setTimeout( illuminateMoon, 1600 );
+        setTimeout( satelitteScene, 1600 );
       $( "#moonData" ).velocity( "fadeOut", 1600 );
      }
 
-    function illuminateMoon() {
-      setTimeout( fadeIlluminate, 5500 );
-      $( "#moonData" ).velocity( "fadeIn", 1600 ).html( "From your perspective, it's currently " + moonIllumination + " percent illuminated." );
+    function satelitteScene() {
+      setTimeout( fadeSatelitte, 5500 );
+      $( "#moonData" ).velocity( "fadeIn", 1600 ).html( "The moon is Earth's only natural satellite." );
      }
 
-    function fadeIlluminate() {
+    function fadeSatelitte() {
       setTimeout( shareScene, 1600 );
       $( "#moonData" ).velocity( "fadeOut", 1600 );
      }
 
     function shareScene() {
       setTimeout( fadeShare, 5500 );
-      $( "#moonData" ).velocity( "fadeIn", 1600 ).html( "The moon we share is 238,900 miles away.");
+      $( "#moonData" ).velocity( "fadeIn", 1600 ).html( "The moon we share is 238,900 miles away." );
      }
 
     function fadeShare(){
@@ -95,7 +95,17 @@ MoonView.prototype = {
      }
 
     function atmosphereScene() {
-      $( "#moonData" ).velocity( "fadeIn", 1600 ).html("There is no atmosphere and no sound.")
+      setTimeout( fadeAtmosphere, 7500 );
+      $( "#moonData" ).velocity( "fadeIn", 1600 ).html( "There is no atmosphere and no sound." );
+     }
+
+     function fadeAtmosphere() {
+      setTimeout( resetHomeScene, 1600 );
+      $( "#moonData" ).velocity( "fadeOut", 1600 );
+     }
+
+     function resetHomeScene() {
+      $( "#moonData" ).velocity( "fadeIn", 1600 ).html( "<a href=http://scottleejason.com/fly-me-to-the-moon>" + "click to reset when you're ready." + "</a>" );
      }
   },
   renderCameraReset : function() {

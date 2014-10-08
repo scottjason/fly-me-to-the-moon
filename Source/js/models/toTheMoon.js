@@ -59,6 +59,7 @@ MoonFlyer.prototype = {
 
       // create starfield texture
       texture = THREE.ImageUtils.loadTexture('../../Source/img/galaxy_starfield.png')
+      // texture = THREE.ImageUtils.loadTexture('http://scottleejason.com/fly-me-to-the-moon/Source/img/galaxy_starfield.png')
 
       // set texture repeat options
       texture.wrapT = THREE.RepeatWrapping;
@@ -129,7 +130,9 @@ MoonFlyer.prototype = {
       // create moonmesh, ( radius, width, height )
       var geometry = new THREE.SphereGeometry( 5, 300, 200 );
       var material = new THREE.MeshPhongMaterial({
+          // map: THREE.ImageUtils.loadTexture('http://scottleejason.com/fly-me-to-the-moon/Source/img/moonmapscott.jpg'),
           map: THREE.ImageUtils.loadTexture('../../Source/img/moonmapscott.jpg'),
+          // bumpMap: THREE.ImageUtils.loadTexture('http://scottleejason.com/fly-me-to-the-moon/Source/img/moonbumpscott.jpg'),
           bumpMap: THREE.ImageUtils.loadTexture('../../Source/img/moonbumpscott.jpg'),
           bumpScale: 0.002,
         })

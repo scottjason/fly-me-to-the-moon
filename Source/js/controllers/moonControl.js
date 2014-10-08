@@ -5,8 +5,7 @@ function MoonControl() {
 };
 
 MoonControl.prototype = {
-  initialize : function( TakeOver, TakeMeHome, AnywhereElse, MoonFlyer, MoonView ) {
-    this.TakeOver = TakeOver;
+  initialize : function( TakeMeHome, AnywhereElse, MoonFlyer, MoonView ) {
     this.TakeMeHome = TakeMeHome;
     this.AnywhereElse = AnywhereElse;
     this.MoonFlyer = MoonFlyer;
@@ -16,43 +15,39 @@ MoonControl.prototype = {
   },
   bindListeners : function() {
     document.getElementById( "takeMeHome" ).addEventListener( "click", this.takeMeHome.bind( this ), false );
-    document.getElementById( "takeControl" ).addEventListener( "click", this.takeControl.bind( this ), false );
     document.getElementById( "anywhereButHere" ).addEventListener( "click", this.anywhereButHere.bind( this ), false );
     document.getElementById( "toTheMoon" ).addEventListener( "click", this.flyToMoon.bind( this ), false );
     document.getElementsByClassName( "cesium-home-button" )[0].addEventListener( "click", this.globeReset.bind( this ), false );
     document.getElementsByClassName( "cesium-viewer-geocoderContainer" )[0].addEventListener( "submit", this.searchGlobe.bind( this ), false );
    },
-  globeReset : function() {
+  globeReset : function(e) {
+    event.preventDefault();
     this.MoonView.slideInNav();
-    this.TakeOver.stopControl();
   },
-  searchGlobe : function() {
+  searchGlobe : function(e) {
+    event.preventDefault();
     this.MoonView.slideInNav();
     this.MoonView.stopRotation();
-    this.TakeOver.stopControl();
+
   },
-  takeMeHome : function() {
+  takeMeHome : function(e) {
+    event.preventDefault();
     this.MoonView.slideOutNav();
     this.MoonView.stopRotation();
-    this.TakeOver.stopControl();
     this.TakeMeHome.flyHome( this.initHomeElems.bind( this ) );
+
   },
-  takeControl : function() {
+  anywhereButHere : function(e) {
+    event.preventDefault();
     this.MoonView.slideOutNav();
     this.MoonView.stopRotation();
-    this.TakeOver.initialize();
-    this.initControlElems();
-  },
-  anywhereButHere : function() {
-    this.MoonView.slideOutNav();
-    this.MoonView.stopRotation();
-    this.TakeOver.stopControl();
     this.AnywhereElse.initialize( this.initAnywhereElems.bind( this ) );
+
   },
-  flyToMoon : function() {
+  flyToMoon : function(e) {
+    event.preventDefault();
     this.MoonView.stopRotation();
     this.MoonView.slideOutNav();
-    this.TakeOver.stopControl();
     this.MoonFlyer.initialize( this.initMoonElems.bind( this ), this.MoonFlyer.sayGoodbye, this.MoonFlyer.animate );
   },
   initHomeElems : function( location, currentTemp, summary, chanceOfRain ) {
