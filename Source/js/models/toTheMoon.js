@@ -178,8 +178,3 @@ function finialScene(){
 }
 
 var moonFlyer = new MoonFlyer();
-
-
-
-
-

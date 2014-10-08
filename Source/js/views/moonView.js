@@ -66,13 +66,7 @@ MoonView.prototype = {
     setTimeout( callback.bind( this, moonAge, moonPhase, moonIllumination ), 1000 );
   },
   renderMoonElems : function( moonAge, moonPhase, moonIllumination ) {
-    if( moonAge < 2 ) {
-      var daysOld = "day old.";
-    }
-    else {
-      var daysOld = "days old.";
-    }
-    $( "#moonData" ).velocity( "transition.slideDownIn", 900).delay( 1500 ).html( "At this moment, it's a " + moonAge + " " + daysOld + moonPhase.toLowerCase() + " moon. From your perspective it's currently " + moonIllumination + " percent illuminated." + "<br>"  + " The moon we share is 238,900 miles away.");
+    $( "#moonData" ).velocity( "transition.slideDownIn", 900).delay( 1500 ).html( "At this moment, it's a " + moonAge + " " + "day old " + moonPhase.toLowerCase() + " moon. From your perspective it's currently " + moonIllumination + " percent illuminated." + "<br>"  + " The moon we share is 238,900 miles away. There is no atmosphere and no sound.");
     this.renderCameraReset();
   },
   renderCameraReset : function() {
