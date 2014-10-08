@@ -5,11 +5,12 @@ function MoonControl() {
 };
 
 MoonControl.prototype = {
-  initialize : function( TakeOver, TakeMeHome, AnywhereElse, MoonFlyer, MoonView ) {
+  initialize : function( TakeOver, TakeMeHome, AnywhereElse, MoonFlyer, MoonCreate, MoonView ) {
     this.TakeOver = TakeOver;
     this.TakeMeHome = TakeMeHome;
     this.AnywhereElse = AnywhereElse;
     this.MoonFlyer = MoonFlyer;
+    this.MoonCreate = MoonCreate;
     this.MoonView = MoonView;
     this.bindListeners();
     this.MoonView.startRotation( 0.55 );
@@ -49,9 +50,10 @@ MoonControl.prototype = {
     this.AnywhereElse.initialize( this.initAnywhereElems.bind( this ) );
   },
   flyToMoon : function() {
+        this.MoonView.stopRotation();
     this.MoonView.slideOutNav();
     this.TakeOver.stopControl();
-    this.MoonFlyer.goodByeAtmosphere( 1.0, this.initMoonElems );
+    this.MoonFlyer.goodByeAtmosphere( 1.0, this.initMoonElems, this.MoonCreate.initialize, this.MoonCreate.animate );
   },
   initHomeElems : function( location ) {
     this.MoonView.hideLoadingHome( this.MoonView.renderHomeElems, location );
