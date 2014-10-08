@@ -18,7 +18,8 @@ MoonCreate.prototype = {
       $(canvas).velocity("fadeIn", {
         duration: 1500
       });
-      // create starFiled
+
+      // create starfield
       var texture = THREE.ImageUtils.loadTexture('../../Source/img/galaxy_starfield.png')
       var material = new THREE.MeshBasicMaterial({
         map: texture,
@@ -27,14 +28,15 @@ MoonCreate.prototype = {
       var geometry = new THREE.SphereGeometry(100, 32, 32)
       var starField = new THREE.Mesh(geometry, material)
       scene.add(starField)
-        // create moonmesh
+
+      // create moonmesh
       geometry = new THREE.SphereGeometry(5, 300, 200);
       var material = new THREE.MeshPhongMaterial({
           map: THREE.ImageUtils.loadTexture('../../Source/img/moonmapscott.jpg'),
           bumpMap: THREE.ImageUtils.loadTexture('../../Source/img/moonbumpscott.jpg'),
           bumpScale: 0.002,
         })
-        // add mmon to sccene
+        // add moon to sccene
       moon = new THREE.Mesh(geometry, material);
       scene.add(moon);
 
