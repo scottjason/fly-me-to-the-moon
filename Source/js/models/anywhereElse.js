@@ -66,7 +66,7 @@ AnywhereElse.prototype = {
           dataType: 'JSONP'
         });
         requestData.done(function( data ) {
-          console.log( address, data.currently.temperature, data.currently.summary, data.currently.precipProbability );
+          callback( address, data.currently.temperature, data.currently.summary, data.currently.precipProbability );
         });
         requestData.fail(function( textStatus ) {
         console.log( "Request failed: " + textStatus );

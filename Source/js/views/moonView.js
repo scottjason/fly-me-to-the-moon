@@ -45,18 +45,18 @@ MoonView.prototype = {
     setTimeout( callback.bind( this, location, currentTemp, summary, chanceOfRain ), 1000 );
   },
   renderHomeElems : function( location, currentTemp, summary, chanceOfRain ) {
-    $( "#userLocation" ).velocity( "transition.slideDownIn", 900).delay( 1500 ).html( "flying you home to " + location + "<br>" + "<span style=color:#777>" +  "the current weather is " + summary.toLowerCase() + ' with a temperate of ' + currentTemp + '.' + ' The chance of rain is ' + chanceOfRain + ' percent.' + '</span>' )
+    $( "#userLocation" ).velocity( "transition.slideDownIn", 900).delay( 1500 ).html( "Flying you home to " + location + "<br>" + "<span style=color:#777>" +  "the current weather is " + summary.toLowerCase() + ' with a temperate of ' + currentTemp + '.' + ' The chance of rain is ' + chanceOfRain + ' percent.' + '</span>' )
     this.renderCameraReset();
   },
   renderControlElems : function() {
     $( "#giveInstructions" ).html( "'U' moves up | 'D' moves down | 'L' moves left | 'R' moves right | 'B' moves backward | 'F' moves forward" ).slideDown( 600 );
   },
-  hideLoadingAnywhere : function( callback, anywhereContent ) {
+  hideLoadingAnywhere : function( callback, location, currentTemp, summary, chanceOfRain ) {
     $( ".loadingData" ).velocity("transition.slideDownOut", 250 );
-    setTimeout( callback.bind( this, anywhereContent ), 1000 );
+    setTimeout( callback.bind( this, location, currentTemp, summary, chanceOfRain ), 1000 );
   },
-  renderAnywhereElems : function( anywhereContent ) {
-    $( "#paradiseLocation" ).html( "Welcome to " + anywhereContent ).slideDown( 600 );
+  renderAnywhereElems : function( location, currentTemp, summary, chanceOfRain ) {
+    $( "#paradiseLocation" ).velocity( "transition.slideDownIn", 900).delay( 1500 ).html( "Welcome to " + location + "<br>" + "<span style=color:#777>" +  "the current weather is " + summary.toLowerCase() + ' with a temperate of ' + currentTemp + '.' + ' The chance of rain is ' + chanceOfRain + ' percent.' + '</span>' )
     this.renderCameraReset();
   },
   renderMoonElems : function() {
