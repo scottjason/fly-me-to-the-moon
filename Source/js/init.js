@@ -4,5 +4,5 @@ $( document ).ready(function(){
 
 window.onload = function(){
   $("body").removeClass("preload");
-   controller.initialize( takeOver, takeMeHome, anywhereElse, moonFlyer, moonView );
+   controller.initialize( takeOver, takeMeHome, anywhereElse, moonFlyer, moonCreate, moonView );
 }
