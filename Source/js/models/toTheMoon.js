@@ -63,14 +63,19 @@ MoonFlyer.prototype = {
     // create moonlight
     scene.add(new THREE.AmbientLight( 0x000000 ));
 
-    var spotLight = new THREE.SpotLight( 0xffffff ); spotLight.position.set( 100, 1000, 100 ); spotLight.castShadow = true; spotLight.shadowMapWidth = 1024; spotLight.shadowMapHeight = 1024; spotLight.shadowCameraNear = 110; spotLight.shadowCameraFar = 400;
+      spotLight = new THREE.SpotLight( 0xffffff ); spotLight.position.set( 100, 1000, 100 ); spotLight.castShadow = true; spotLight.shadowMapWidth = 1024; spotLight.shadowMapHeight = 1024; spotLight.shadowCameraNear = 110; spotLight.shadowCameraFar = 400;
         spotLight.add( new THREE.Mesh( moon, new THREE.MeshBasicMaterial( { color: 0xffffff } ) ) );
         spotLight.shadowCameraFov = 30; scene.add( spotLight );
         camera.position.z = 23;
+        animate()
 
+}
 
     // rotate and render
-        function requestAnimationFrame( render ) {
+      function animate() {
+
+        requestAnimationFrame( animate );
+
         moon.rotation.x += 0.03;
         moon.rotation.y += 0.01;
         var time = Date.now() * 0.0005;
@@ -79,9 +84,10 @@ MoonFlyer.prototype = {
         spotLight.position.y = Math.cos( time * 0.4 ) * 20;
         spotLight.position.z = Math.cos( time * 0.7 ) * 15;
 
-  }
+
         renderer.render( scene, camera );
 
-}
+    }
+
 
 var moonFlyer = new MoonFlyer();
