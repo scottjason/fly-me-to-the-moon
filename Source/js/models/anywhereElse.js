@@ -72,7 +72,7 @@ AnywhereElse.prototype = {
 
     var latLng = new google.maps.LatLng( position[0], position[1] );
     var coder = new google.maps.Geocoder();
-      coder.geocode( { 'latLng': latLng }, formatAddress );
+        coder.geocode( { 'latLng': latLng }, formatAddress );
  }
 }
 

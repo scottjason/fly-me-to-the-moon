@@ -84,11 +84,11 @@ a.navRightText {
     width: 100%;
 }
 #resetText {
-    visibility: hidden;
+    visibility: visible;
     font-size: 0.9em;
     float: right;
     margin-bottom: 1px;
-    color: #F59E11;
+    color: #ef6334;
     padding-right: 8px;
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -103,6 +103,7 @@ a.navRightText {
     box-pack: bottom;
     box-align: bottom;
 }
+
 .navbar-fixed-top {
     height: 50px;
     border-bottom: 1px solid #7BA5DB;
@@ -118,3 +119,23 @@ a.navRightText {
     margin-right: 28px !important;
     color: #ef6334;
 }
+#aboutContainer {
+    background-color: transparent;
+    margin-top: -265px;
+    margin-right: 55% !important;
+
+}
+.aboutText {
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    margin-top: -245px;
+}
+.aboutTextMoveRight {
+    color: #fff;
+    padding: 10px;
+    text-align: center !important;
+    margin-top: -245px;
+    margin-left: 160px !important;
+}
+

@@ -97,7 +97,7 @@ MoonView.prototype = {
      }
 
      function resetHomeScene() {
-      $( "#moonData" ).velocity( "fadeIn", 2000 ).html( "<a href=http://scottleejason.com/fly-me-to-the-moon>" + "click to reset when you're ready." + "</a>" );
+      $( "#moonData" ).velocity( "fadeIn", 2000 ).html( "<a href=http://scottleejason.com/fly-me-to-the-moon>" + "click to reset when you're ready." + "&nbsp;&nbsp;" + "</a>" );
      }
   },
   renderCameraReset : function() {
