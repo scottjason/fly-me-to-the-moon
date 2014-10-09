@@ -103,7 +103,6 @@ a.navRightText {
     box-pack: bottom;
     box-align: bottom;
 }
-
 .navbar-fixed-top {
     height: 50px;
     border-bottom: 1px solid #7BA5DB;
@@ -120,22 +119,22 @@ a.navRightText {
     color: #ef6334;
 }
 #aboutContainer {
-    background-color: transparent;
-    margin-top: -265px;
-    margin-right: 55% !important;
-
+    background: rgba(18, 17, 17, 0.8);
+    border-radius: 4px;
+    position: relative;
+    /*margin-top: -261px !important;*/
 }
 .aboutText {
     color: #fff;
     padding: 10px;
     text-align: center;
-    margin-top: -245px;
 }
 .aboutTextMoveRight {
     color: #fff;
     padding: 10px;
     text-align: center !important;
-    margin-top: -245px;
     margin-left: 160px !important;
 }
-
+.tbox {
+top: 42px !important; left: 470px; opacity: 1; display: block;
+}

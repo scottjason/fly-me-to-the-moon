@@ -17,7 +17,7 @@ MoonControl.prototype = {
     document.getElementById( "takeMeHome" ).addEventListener( "click", this.takeMeHome.bind( this ), false );
     document.getElementById( "anywhereButHere" ).addEventListener( "click", this.anywhereButHere.bind( this ), false );
     document.getElementById( "toTheMoon" ).addEventListener( "click", this.flyToMoon.bind( this ), false );
-    document.getElementById( "aboutSite" ).addEventListener( "click", this.aboutSite.bind( this ), false );
+    document.getElementById( "aboutSite" ).addEventListener( "click", this.openAbout.bind( this ), false );
     document.getElementsByClassName( "cesium-home-button" )[0].addEventListener( "click", this.globeReset.bind( this ), false );
     document.getElementsByClassName( "cesium-viewer-geocoderContainer" )[0].addEventListener( "submit", this.searchGlobe.bind( this ), false );
    },
@@ -51,13 +51,19 @@ MoonControl.prototype = {
     this.MoonView.slideOutNav();
     this.MoonFlyer.initialize( this.initMoonElems.bind( this ), this.MoonFlyer.sayGoodbye );
   },
-  aboutSite : function(e){
-    $( "#cesiumContainer" ).velocity( "fadeOut", { duration: 3800 } );
-
-    setTimeout( showAbout, 500 );
+  openAbout : function(e){
+    event.preventDefault();
+    // $( "#cesiumContainer" ).velocity( "fadeOut", { duration: 3800 } );
+    setTimeout( showAbout, 750 );
     function showAbout() {
       TINY.box.show({url:'advanced.html',width:500,height:150})
     }
+
+  },
+  closeAbout : function(e){
+    event.preventDefault();
+    console.log( "heard the event")
+    $( "#cesiumContainer" ).velocity( "fadeIn", { duration: 3800 } );
   },
   initHomeElems : function( location, currentTemp, summary, chanceOfRain ) {
     this.MoonView.hideLoadingHome( this.MoonView.renderHomeElems, location, currentTemp, summary, chanceOfRain );
