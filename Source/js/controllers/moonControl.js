@@ -53,10 +53,9 @@ MoonControl.prototype = {
   },
   openAbout : function(e){
     event.preventDefault();
-    // $( "#cesiumContainer" ).velocity( "fadeOut", { duration: 3800 } );
     setTimeout( showAbout, 750 );
     function showAbout() {
-      TINY.box.show({url:'advanced.html',width:500,height:150})
+      TINY.box.show({url:'about.html',width:500,height:150})
     }
 
   },
