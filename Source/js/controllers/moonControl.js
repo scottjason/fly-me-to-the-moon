@@ -48,7 +48,7 @@ MoonControl.prototype = {
     event.preventDefault();
     this.MoonView.stopRotation();
     this.MoonView.slideOutNav();
-    this.MoonFlyer.initialize( this.initMoonElems.bind( this ), this.MoonFlyer.sayGoodbye, this.MoonFlyer.animate );
+    this.MoonFlyer.initialize( this.initMoonElems.bind( this ), this.MoonFlyer.sayGoodbye );
   },
   initHomeElems : function( location, currentTemp, summary, chanceOfRain ) {
     this.MoonView.hideLoadingHome( this.MoonView.renderHomeElems, location, currentTemp, summary, chanceOfRain );

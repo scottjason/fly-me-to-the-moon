@@ -6,9 +6,9 @@
 
 MoonFlyer.prototype = {
 
-  initialize : function( callbackData, callbackFarewell, callbackAnimate ) {
+  initialize : function( callbackData, callbackFarewell ) {
     this.requestMoonData( callbackData );
-      setTimeout( callbackFarewell.bind( this, callbackAnimate ), 3800 )
+      setTimeout( callbackFarewell, 3800 )
 
     $( "#cesiumContainer" ).velocity( "fadeOut", { duration: 3800 } );
     $(".navbar-fixed-top").velocity( { backgroundColor: "#000" } );
@@ -37,7 +37,8 @@ MoonFlyer.prototype = {
       alert( "Unable to collect your current location. Please check your browser settings.")
       }
     },
-    sayGoodbye : function( callbackAnimate ){
+    sayGoodbye : function(){
+      console.log("in say sayGoodbye")
       // create the scene
       scene = new THREE.Scene();
       camera = new THREE.PerspectiveCamera( 400, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -112,9 +113,9 @@ MoonFlyer.prototype = {
       texture.offset.y  -= 0.008;
       texture.offset.y  %= 1;
 
-      if ( count === 550 ) {
+      if ( count === 650 ) {
       $( canvas ).velocity( "fadeOut", { duration: 1500 } );
-        setTimeout( renderMoon, 1950 )
+        setTimeout( renderMoon, 1700 )
         setTimeout( cancelScene, 2000 )
     }
     // render scene
@@ -124,6 +125,7 @@ MoonFlyer.prototype = {
 
   function cancelScene( moonAnimate ) {
     window.cancelAnimationFrame( moonAnimate );
+
   }
 
  function renderMoon() {
@@ -155,7 +157,7 @@ MoonFlyer.prototype = {
       scene.add( spotLight );
 
       // fade in window and invoke final scene
-    $( canvas ).velocity( "fadeIn", { duration: 3000 } );
+    $( canvas ).velocity( "fadeIn", { duration: 5500 } );
       finalScene()
  }
 
