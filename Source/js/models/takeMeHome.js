@@ -13,12 +13,12 @@ TakeMeHome.prototype = {
       }
     }
 
-      function fly( position ) {
-        makeRequest( position, callback );
-          scene.camera.flyTo({
-            destination : Cesium.Cartesian3.fromDegrees( position.coords.longitude, position.coords.latitude, 1000.0 )
-          });
-       }
+    function fly( position ) {
+      makeRequest( position, callback );
+        scene.camera.flyTo({
+          destination : Cesium.Cartesian3.fromDegrees( position.coords.longitude, position.coords.latitude, 1000.0 )
+        });
+     }
     // collect user's geolocation, invoke fly on complete
     if ( navigator.geolocation && typeof ( navigator.geolocation.getCurrentPosition ) == "function") {
          navigator.geolocation.getCurrentPosition( fly, errorHandler, { maximumAge: 75000 } );

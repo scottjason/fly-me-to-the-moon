@@ -29,21 +29,18 @@ MoonControl.prototype = {
     event.preventDefault();
     this.MoonView.slideInNav();
     this.MoonView.stopRotation();
-
   },
   takeMeHome : function(e) {
     event.preventDefault();
     this.MoonView.slideOutNav();
     this.MoonView.stopRotation();
     this.TakeMeHome.flyHome( this.initHomeElems.bind( this ) );
-
   },
   anywhereButHere : function(e) {
     event.preventDefault();
     this.MoonView.slideOutNav();
     this.MoonView.stopRotation();
     this.AnywhereElse.initialize( this.initAnywhereElems.bind( this ) );
-
   },
   flyToMoon : function(e) {
     event.preventDefault();
@@ -54,14 +51,13 @@ MoonControl.prototype = {
   openAbout : function(e){
     event.preventDefault();
     setTimeout( showAbout, 750 );
-    function showAbout() {
-      TINY.box.show({url:'about.html',width:500,height:150})
-    }
 
+    function showAbout() {
+      TINY.box.show( { url:'about.html',width:500,height:150 } )
+    }
   },
   closeAbout : function(e){
     event.preventDefault();
-    console.log( "heard the event")
     $( "#cesiumContainer" ).velocity( "fadeIn", { duration: 3800 } );
   },
   initHomeElems : function( location, currentTemp, summary, chanceOfRain ) {
