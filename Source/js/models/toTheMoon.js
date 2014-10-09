@@ -8,13 +8,12 @@ MoonFlyer.prototype = {
 
   initialize : function( callbackData, callbackFarewell ) {
     this.requestMoonData( callbackData );
-      setTimeout( callbackFarewell, 3800 )
+    setTimeout( callbackFarewell, 3800 )
 
     $( "#cesiumContainer" ).velocity( "fadeOut", { duration: 3800 } );
     $(".navbar-fixed-top").velocity( { backgroundColor: "#000" } );
     $("#siteTitle").velocity( { color: "#ef6334" } );
-
-    },
+  },
     requestMoonData : function( callback ) {
         function makeRequest( position ){
          var requestData = $.ajax({
@@ -31,7 +30,7 @@ MoonFlyer.prototype = {
      }
 
   if ( navigator.geolocation && typeof ( navigator.geolocation.getCurrentPosition ) == "function") {
-         navigator.geolocation.getCurrentPosition( makeRequest );
+       navigator.geolocation.getCurrentPosition( makeRequest );
     }
     else {
       alert( "Unable to collect your current location. Please check your browser settings.")
@@ -124,8 +123,7 @@ MoonFlyer.prototype = {
   }
 
   function cancelScene( moonAnimate ) {
-    window.cancelAnimationFrame( moonAnimate );
-
+  window.cancelAnimationFrame( moonAnimate );
   }
 
  function renderMoon() {
@@ -164,17 +162,16 @@ MoonFlyer.prototype = {
 function finalScene(){
     function animateFinal() {
     requestAnimationFrame( animateFinal );
-
         // stop star field
         texture.offset.y = 0;
-
-      // set new camera position
+        // set new camera position
         camera.position.z = 28;
-
         moon.rotation.x += 0.003;
         moon.rotation.y += 0.007;
 
         var time = Date.now() * 0.0005;
+
+        // init spotlight location and rotate params
         spotLight.position.x = Math.sin( time * 0.7 ) * 12.3;
         spotLight.position.y = Math.cos( time * 0.2 ) * 14.2;
         spotLight.position.z = Math.cos( time * 0.5 ) * 16;
