@@ -1,5 +1,6 @@
 ## **fly me to the moon** 
 
+**NOTE** Please use Google Chrome, no other browser is currently supported at this time. Also, please use the fastest laptop or desktop computer you have. Not intended for mobile or tablet use.
 
 Live Site : http://flymetothemoon-30674.onmodulus.net/
 
