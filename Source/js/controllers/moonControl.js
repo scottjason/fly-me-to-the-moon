@@ -50,8 +50,7 @@ MoonControl.prototype = {
   },
   openAbout : function(e){
     event.preventDefault();
-    setTimeout( showAbout, 750 );
-
+    showAbout();
     function showAbout() {
       TINY.box.show( { url:'about.html',width:500,height:150 } )
     }
